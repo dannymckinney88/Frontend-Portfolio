@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import type { TodoInputProps } from "./types";
 import { Plus } from "lucide-react";
@@ -17,20 +18,31 @@ const TodoInput = ({ addTodo }: TodoInputProps) => {
     setText("");
   };
 
-  return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2">
-      <Input
-        placeholder="Enter a new todo item"
-        className="flex-1"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
 
-      <Button type="submit">
-        {" "}
-        <Plus className="h-4 w-4" />
-        Add
-      </Button>
+  return (
+    <form onSubmit={handleSubmit}>
+      <Label htmlFor="todo-input" className="sr-only">
+        Add a new task
+      </Label>
+
+      <div className="flex items-center gap-2">
+        <Input
+          id="todo-input"
+          type="text"
+          placeholder="Enter a new todo item"
+          className="flex-1"
+          value={text}
+          onChange={handleChange}
+        />
+
+        <Button type="submit" disabled={!text.trim()}>
+          <Plus className="h-4 w-4" aria-hidden="true" />
+          <span>Add</span>
+        </Button>
+      </div>
     </form>
   );
 };

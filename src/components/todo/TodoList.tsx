@@ -1,11 +1,27 @@
-import Todo from "./TodoItem";
+import TodoItem from "./TodoItem";
 import type { TodoListProps } from "./types";
+import { Separator } from "@/components/ui/separator";
 
-const TodoList = ({ todos }: TodoListProps) => {
+const TodoList = ({ todos, toggleTodo, deleteTodo }: TodoListProps) => {
+  if (todos.length === 0) {
+    return (
+      <div className="text-sm text-muted-foreground text-center py-6">
+        No todos yet. Add one above.
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
+    <div className="space-y-2">
+      {todos.map((todo, index) => (
+        <div key={todo.id}>
+          <TodoItem
+            todo={todo}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
+          />
+          {index !== todos.length - 1 && <Separator className="mt-2" />}
+        </div>
       ))}
     </div>
   );
