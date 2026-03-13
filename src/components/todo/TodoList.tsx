@@ -1,10 +1,12 @@
-import TodoInput from "./TodoInput";
+import Todo from "./TodoItem";
+import type { TodoListProps } from "./types";
 
-const TodoList = () => {
+const TodoList = ({ todos }: TodoListProps) => {
   return (
     <div>
-      To Do List
-      <TodoInput />
+      {todos.map((todo) => (
+        <Todo key={todo.id} todo={todo} />
+      ))}
     </div>
   );
 };
