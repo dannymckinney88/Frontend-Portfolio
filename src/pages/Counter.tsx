@@ -37,7 +37,7 @@ const Counter = () => {
           <CounterDisplay count={count} />
 
           <p className="text-sm text-muted-foreground">
-            Min: {MIN_COUNT} · Max: {MAX_COUNT}
+            Range: {MIN_COUNT} - {MAX_COUNT}
           </p>
         </CardContent>
 
