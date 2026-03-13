@@ -1,23 +1,26 @@
 import type { CounterControlsProps } from "./types";
+import { Button } from "@/components/ui/button";
 
-const CounterControls = ({
+export default function CounterControls({
   onIncrement,
   onDecrement,
   onReset,
   isMin,
   isMax,
-}: CounterControlsProps) => {
+}: CounterControlsProps) {
   return (
-    <div>
-      <button onClick={onIncrement} disabled={isMax}>
+    <div className="flex flex-wrap justify-center gap-3">
+      <Button onClick={onIncrement} disabled={isMax}>
         Increment
-      </button>
-      <button onClick={onDecrement} disabled={isMin}>
+      </Button>
+
+      <Button onClick={onDecrement} disabled={isMin} variant="outline">
         Decrement
-      </button>
-      <button onClick={onReset}>Reset</button>
+      </Button>
+
+      <Button onClick={onReset} variant="outline">
+        Reset
+      </Button>
     </div>
   );
-};
-
-export default CounterControls;
+}
