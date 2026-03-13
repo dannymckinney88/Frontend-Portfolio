@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "@/components/todo/TodoInput";
 import TodoList from "@/components/todo/TodoList";
 import type { TodoInputProps } from "@/components/todo/types";
@@ -12,21 +12,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const initialTodos: TodoType[] = [
-  {
-    id: "1",
-    text: "Learn React state management",
-    completed: false,
-  },
-  {
-    id: "2",
-    text: "Build Todo app for portfolio",
-    completed: true,
-  },
-];
-
 const Todo = () => {
-  const [todos, setTodos] = useState<TodoType[]>(initialTodos);
+  const [todos, setTodos] = useState<TodoType[]>(() => {
+    try {
+      const savedTodos = localStorage.getItem("todos");
+      return savedTodos ? JSON.parse(savedTodos) : [];
+    } catch (error) {
+      console.error("Failed to load todos from localStorage:", error);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    } catch (error) {
+      console.error("Failed to save todos to localStorage:", error);
+    }
+  }, [todos]);
 
   const addTodo: TodoInputProps["addTodo"] = (text) => {
     const newTodo: TodoType = {
@@ -49,6 +52,12 @@ const Todo = () => {
 
   const deleteTodo = (id: string) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
+  const editTodo = (id: string, text: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? { ...todo, text } : todo)),
+    );
   };
 
   return (
@@ -75,6 +84,7 @@ const Todo = () => {
               todos={todos}
               toggleTodo={toggleTodo}
               deleteTodo={deleteTodo}
+              editTodo={editTodo}
             />
           </CardContent>
         </Card>

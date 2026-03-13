@@ -7,11 +7,13 @@ export type Todo = {
 export type AddTodo = (text: string) => void;
 export type ToggleTodo = (id: string) => void;
 export type DeleteTodo = (id: string) => void;
+export type EditTodo = (id: string, text: string) => void;
 
 export interface TodoListProps {
   todos: Todo[];
   toggleTodo: ToggleTodo;
   deleteTodo: DeleteTodo;
+  editTodo: EditTodo;
 }
 
 export interface TodoInputProps {
@@ -22,4 +24,5 @@ export interface TodoItemProps {
   todo: Todo;
   toggleTodo: ToggleTodo;
   deleteTodo: DeleteTodo;
+  editTodo: EditTodo;
 }

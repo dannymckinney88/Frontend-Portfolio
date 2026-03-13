@@ -2,7 +2,12 @@ import TodoItem from "./TodoItem";
 import type { TodoListProps } from "./types";
 import { Separator } from "@/components/ui/separator";
 
-const TodoList = ({ todos, toggleTodo, deleteTodo }: TodoListProps) => {
+const TodoList = ({
+  todos,
+  toggleTodo,
+  deleteTodo,
+  editTodo,
+}: TodoListProps) => {
   if (todos.length === 0) {
     return (
       <div className="text-sm text-muted-foreground text-center py-6">
@@ -19,6 +24,7 @@ const TodoList = ({ todos, toggleTodo, deleteTodo }: TodoListProps) => {
             todo={todo}
             toggleTodo={toggleTodo}
             deleteTodo={deleteTodo}
+            editTodo={editTodo}
           />
           {index !== todos.length - 1 && <Separator className="mt-2" />}
         </div>
