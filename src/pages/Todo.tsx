@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import TodoInput from "@/components/todo/TodoInput";
 import TodoList from "@/components/todo/TodoList";
-import type { TodoInputProps } from "@/components/todo/types";
-import type { Todo as TodoType } from "@/components/todo/types";
+import TodoFilter from "@/components/todo/TodoFilter";
+import type {
+  Filter,
+  Todo as TodoType,
+  AddTodo,
+} from "@/components/todo/types";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -31,8 +35,9 @@ const Todo = () => {
       console.error("Failed to save todos to localStorage:", error);
     }
   }, [todos]);
+  const [filter, setFilter] = useState<Filter>("all");
 
-  const addTodo: TodoInputProps["addTodo"] = (text) => {
+  const addTodo: AddTodo = (text) => {
     const newTodo: TodoType = {
       id: crypto.randomUUID(),
       text,
@@ -60,6 +65,18 @@ const Todo = () => {
     );
   };
 
+  const clearCompleted = () => {
+    setTodos((previousTodos) =>
+      previousTodos.filter((todo) => !todo.completed),
+    );
+  };
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  });
+
   const hasCompletedTodos = todos.some((todo) => todo.completed);
 
   return (
@@ -74,45 +91,47 @@ const Todo = () => {
         </div>
 
         <Card className="w-full border-border/60 shadow-sm">
-          <CardHeader className="flex flex-row items-start justify-between gap-4 pb-3">
+          <CardHeader className="flex flex-col gap-3 pb-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="space-y-1">
               <CardTitle className="text-lg">Tasks ({todos.length})</CardTitle>
               <CardDescription className="text-sm">
                 Manage your current todos
               </CardDescription>
-              <p className="text-sm text-muted-foreground/80">
-                React • TypeScript • Shadcn UI
-              </p>
             </div>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() =>
-                setTodos((previousTodos) =>
-                  previousTodos.filter((todo) => !todo.completed),
-                )
-              }
-              disabled={!hasCompletedTodos}
-              className="text-destructive hover:text-destructive"
-              aria-label="Clear completed tasks"
-            >
-              Clear Completed
-            </Button>
+            <div className="flex flex-col items-start gap-2 sm:items-end">
+              <TodoFilter filter={filter} setFilter={setFilter} />
+
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearCompleted}
+                disabled={!hasCompletedTodos}
+                className="h-auto px-0 text-destructive hover:text-destructive"
+                aria-label="Clear completed tasks"
+              >
+                Clear Completed
+              </Button>
+            </div>
           </CardHeader>
 
           <CardContent className="space-y-6">
             <TodoInput addTodo={addTodo} />
 
-            {todos.length === 0 ? (
+            {filteredTodos.length === 0 ? (
               <div className="rounded-md border border-dashed px-4 py-8 text-center">
                 <p className="text-sm text-muted-foreground">
-                  No tasks yet. Add your first todo to get started.
+                  {filter === "all" &&
+                    "No tasks yet. Add your first todo to get started."}
+                  {filter === "active" &&
+                    "No active tasks. Add a new todo or mark an existing one as complete."}
+                  {filter === "completed" &&
+                    "No completed tasks. Complete some todos to see them here."}
                 </p>
               </div>
             ) : (
               <TodoList
-                todos={todos}
+                todos={filteredTodos}
                 toggleTodo={toggleTodo}
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}

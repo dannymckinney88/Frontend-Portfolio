@@ -4,6 +4,8 @@ export type Todo = {
   completed: boolean;
 };
 
+export type Filter = "all" | "active" | "completed";
+
 export type AddTodo = (text: string) => void;
 export type ToggleTodo = (id: string) => void;
 export type DeleteTodo = (id: string) => void;
@@ -16,13 +18,14 @@ export interface TodoListProps {
   editTodo: EditTodo;
 }
 
-export interface TodoInputProps {
-  addTodo: AddTodo;
-}
-
 export interface TodoItemProps {
   todo: Todo;
   toggleTodo: ToggleTodo;
   deleteTodo: DeleteTodo;
   editTodo: EditTodo;
+}
+
+export interface TodoFilterProps {
+  filter: Filter;
+  setFilter: (filter: Filter) => void;
 }

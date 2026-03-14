@@ -8,14 +8,6 @@ const TodoList = ({
   deleteTodo,
   editTodo,
 }: TodoListProps) => {
-  if (todos.length === 0) {
-    return (
-      <div className="text-sm text-muted-foreground text-center py-6">
-        No todos yet. Add one above.
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-2">
       {todos.map((todo, index) => (

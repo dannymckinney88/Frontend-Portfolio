@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import type { TodoInputProps } from "./types";
+import type { AddTodo } from "./types";
 import { Plus } from "lucide-react";
 
-const TodoInput = ({ addTodo }: TodoInputProps) => {
+const TodoInput = ({ addTodo }: { addTodo: AddTodo }) => {
   const [text, setText] = useState("");
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -28,7 +28,7 @@ const TodoInput = ({ addTodo }: TodoInputProps) => {
         Add a new task
       </Label>
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col items-center gap-2 sm:flex-row">
         <Input
           id="todo-input"
           type="text"
@@ -38,7 +38,11 @@ const TodoInput = ({ addTodo }: TodoInputProps) => {
           onChange={handleChange}
         />
 
-        <Button type="submit" disabled={!text.trim()}>
+        <Button
+          type="submit"
+          disabled={!text.trim()}
+          className="w-full sm:w-auto"
+        >
           <Plus className="h-4 w-4" aria-hidden="true" />
           <span>Add</span>
         </Button>
