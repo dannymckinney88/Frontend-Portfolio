@@ -35,9 +35,21 @@ const Home = () => {
               </CardHeader>
 
               <CardContent className="pt-4">
-                <Button asChild>
-                  <Link to="/todo">View Project</Link>
-                </Button>
+                <div className="flex gap-2">
+                  <Button asChild>
+                    <Link to="/todo">View Project</Link>
+                  </Button>
+
+                  <Button variant="outline" asChild>
+                    <a
+                      href="https://github.com/dannymckinney88/Frontend-Portfolio"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Code
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </div>
           </Card>
@@ -56,9 +68,21 @@ const Home = () => {
               </CardHeader>
 
               <CardContent className="pt-4">
-                <Button asChild>
-                  <Link to="/counter">View Project</Link>
-                </Button>
+                <div className="flex gap-2">
+                  <Button asChild>
+                    <Link to="/counter">View Project</Link>
+                  </Button>
+
+                  <Button variant="outline" asChild>
+                    <a
+                      href="https://github.com/dannymckinney88/Frontend-Portfolio"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Code
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </div>
           </Card>
