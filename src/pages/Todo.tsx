@@ -3,6 +3,7 @@ import TodoInput from "@/components/todo/TodoInput";
 import TodoList from "@/components/todo/TodoList";
 import type { TodoInputProps } from "@/components/todo/types";
 import type { Todo as TodoType } from "@/components/todo/types";
+import { Button } from "@/components/ui/button";
 
 import {
   Card,
@@ -39,7 +40,6 @@ const Todo = () => {
     };
 
     setTodos((prev) => [...prev, newTodo]);
-    console.log("Added new todo:", newTodo);
   };
 
   const toggleTodo = (id: string) => {
@@ -60,32 +60,64 @@ const Todo = () => {
     );
   };
 
+  const hasCompletedTodos = todos.some((todo) => todo.completed);
+
   return (
-    <div className="w-full px-4 py-10">
-      <div className="w-full max-w-4xl mx-auto space-y-6">
-        <div className="space-y-1">
-          <h1 className="text-3xl font-semibold tracking-tight">Todo App</h1>
+    <div className="w-full px-4 py-12">
+      <div className="mx-auto w-full max-w-3xl space-y-8">
+        <div className="space-y-3">
+          <h1 className="text-4xl font-bold tracking-tight">Todo App</h1>
           <p className="text-sm text-muted-foreground">
-            Track tasks, practice React state, and build out your portfolio app.
+            A full CRUD task manager focused on React state, reusable
+            components, and local storage persistence.
           </p>
         </div>
 
         <Card className="w-full border-border/60 shadow-sm">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg"> Tasks ({todos.length})</CardTitle>
-            <CardDescription className="text-sm">
-              Manage your current todos
-            </CardDescription>
+          <CardHeader className="flex flex-row items-start justify-between gap-4 pb-3">
+            <div className="space-y-1">
+              <CardTitle className="text-lg">Tasks ({todos.length})</CardTitle>
+              <CardDescription className="text-sm">
+                Manage your current todos
+              </CardDescription>
+              <p className="text-sm text-muted-foreground/80">
+                React • TypeScript • Shadcn UI
+              </p>
+            </div>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() =>
+                setTodos((previousTodos) =>
+                  previousTodos.filter((todo) => !todo.completed),
+                )
+              }
+              disabled={!hasCompletedTodos}
+              className="text-destructive hover:text-destructive"
+              aria-label="Clear completed tasks"
+            >
+              Clear Completed
+            </Button>
           </CardHeader>
 
           <CardContent className="space-y-6">
             <TodoInput addTodo={addTodo} />
-            <TodoList
-              todos={todos}
-              toggleTodo={toggleTodo}
-              deleteTodo={deleteTodo}
-              editTodo={editTodo}
-            />
+
+            {todos.length === 0 ? (
+              <div className="rounded-md border border-dashed px-4 py-8 text-center">
+                <p className="text-sm text-muted-foreground">
+                  No tasks yet. Add your first todo to get started.
+                </p>
+              </div>
+            ) : (
+              <TodoList
+                todos={todos}
+                toggleTodo={toggleTodo}
+                deleteTodo={deleteTodo}
+                editTodo={editTodo}
+              />
+            )}
           </CardContent>
         </Card>
       </div>
