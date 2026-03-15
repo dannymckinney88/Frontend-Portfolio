@@ -13,8 +13,9 @@ const GithubExplorer = () => {
     const loadRepos = async () => {
       try {
         const data = await fetchUserRepos("your-username");
-        setRepos(data as GithubRepo[]);
+        setRepos(data);
       } catch (err) {
+        console.error(err);
         setError("Could not load repositories");
       } finally {
         setLoading(false);

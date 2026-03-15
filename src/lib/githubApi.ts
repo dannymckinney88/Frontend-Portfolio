@@ -1,4 +1,7 @@
-export interface GithubRepo {
+/**
+ * GitHub repository response
+ */
+export interface GithubRepoResponse {
   id: number;
   name: string;
   html_url: string;
@@ -10,10 +13,38 @@ export interface GithubRepo {
   homepage: string | null;
 }
 
+/**
+ * GitHub repository view model
+ */
+export interface GithubRepo {
+  id: number;
+  name: string;
+  repoUrl: string;
+  description: string;
+  stars: number;
+  language: string;
+  updatedAt: string;
+  homepage: string | null;
+}
+
 const BASE_URL = "https://api.github.com";
 
 /**
- * Fetch user repositories
+ * Map GitHub API data to the UI shape
+ */
+const mapRepo = (repo: GithubRepoResponse): GithubRepo => ({
+  id: repo.id,
+  name: repo.name,
+  repoUrl: repo.html_url,
+  description: repo.description || "No description available.",
+  stars: repo.stargazers_count,
+  language: repo.language || "Not specified",
+  updatedAt: repo.updated_at,
+  homepage: repo.homepage,
+});
+
+/**
+ * Fetch public repositories for a GitHub user
  */
 export const fetchUserRepos = async (
   username: string,
@@ -24,5 +55,7 @@ export const fetchUserRepos = async (
     throw new Error("Failed to fetch repositories");
   }
 
-  return response.json();
+  const data: GithubRepoResponse[] = await response.json();
+
+  return data.filter((repo) => !repo.fork).map(mapRepo);
 };
