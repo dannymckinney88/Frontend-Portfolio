@@ -16,6 +16,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import EmptyState from "@/components/common/EmptyState";
+import PageHeader from "@/components/common/PageHeader";
 
 const Todo = () => {
   const [todos, setTodos] = useState<TodoType[]>(() => {
@@ -79,16 +81,20 @@ const Todo = () => {
 
   const hasCompletedTodos = todos.some((todo) => todo.completed);
 
+  const emptyMessage =
+    filter === "all"
+      ? "No tasks yet. Add your first todo to get started."
+      : filter === "active"
+        ? "No active tasks. Add a new todo or mark an existing one as complete."
+        : "No completed tasks. Complete some todos to see them here.";
+
   return (
     <div className="w-full px-4 py-12">
       <div className="mx-auto w-full max-w-3xl space-y-8">
-        <div className="space-y-3">
-          <h1 className="text-4xl font-bold tracking-tight">Todo App</h1>
-          <p className="text-sm text-muted-foreground">
-            A full CRUD task manager focused on React state, reusable
-            components, and local storage persistence.
-          </p>
-        </div>
+        <PageHeader
+          title="Todo App"
+          description="A full CRUD task manager focused on React state, reusable components, and local storage persistence."
+        />
 
         <Card className="w-full border-border/60 shadow-sm">
           <CardHeader className="flex flex-col gap-3 pb-3 sm:flex-row sm:items-start sm:justify-between">
@@ -119,16 +125,7 @@ const Todo = () => {
             <TodoInput addTodo={addTodo} />
 
             {filteredTodos.length === 0 ? (
-              <div className="rounded-md border border-dashed px-4 py-8 text-center">
-                <p className="text-sm text-muted-foreground">
-                  {filter === "all" &&
-                    "No tasks yet. Add your first todo to get started."}
-                  {filter === "active" &&
-                    "No active tasks. Add a new todo or mark an existing one as complete."}
-                  {filter === "completed" &&
-                    "No completed tasks. Complete some todos to see them here."}
-                </p>
-              </div>
+              <EmptyState message={emptyMessage} />
             ) : (
               <TodoList
                 todos={filteredTodos}

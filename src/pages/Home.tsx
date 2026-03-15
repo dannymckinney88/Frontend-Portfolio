@@ -7,18 +7,16 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import PageHeader from "@/components/common/PageHeader";
 
 const Home = () => {
   return (
     <div className="w-full px-4 py-12">
       <div className="mx-auto max-w-3xl space-y-8">
-        <div className="space-y-3">
-          <h1 className="text-4xl font-bold tracking-tight">Projects</h1>
-          <p className="text-sm text-muted-foreground">
-            Small React projects focused on state management, component
-            architecture, and accessible UI patterns.
-          </p>
-        </div>
+        <PageHeader
+          title="Projects"
+          description="Small React projects focused on state management, component architecture, and accessible UI patterns."
+        />
 
         <div className="grid gap-5 sm:grid-cols-2">
           <Card className="h-full transition hover:-translate-y-[2px] hover:shadow-md hover:border-border">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import CounterDisplay from "../components/counter/CounterDisplay";
 import CounterControls from "../components/counter/CounterControls";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import PageHeader from "@/components/common/PageHeader";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
@@ -19,13 +20,10 @@ const Counter = () => {
   return (
     <section className="w-full px-4 py-12">
       <div className="mx-auto w-full max-w-3xl space-y-6">
-        <div className="space-y-3">
-          <h1 className="text-4xl font-bold tracking-tight">Counter App</h1>
-          <p className="text-sm text-muted-foreground">
-            A simple React demo focused on state updates, component composition,
-            and UI behavior.
-          </p>
-        </div>
+        <PageHeader
+          title="Counter App"
+          description="A simple React demo focused on state updates, component composition, and UI behavior."
+        />
 
         <Card className="w-full max-w-md rounded-2xl border-border/80 shadow-sm">
           <CardContent className="flex flex-col items-center gap-4 px-6 py-6 text-center">
