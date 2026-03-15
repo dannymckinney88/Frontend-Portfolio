@@ -23,7 +23,7 @@ const Navbar = () => {
         <Link to="/" className="text-lg font-semibold tracking-tight">
           React Lab
         </Link>
-        <NavigationMenu>
+        <NavigationMenu aria-label="Primary navigation">
           <NavigationMenuList className="flex gap-6">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>

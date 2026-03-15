@@ -20,6 +20,10 @@ import EmptyState from "@/components/common/EmptyState";
 import PageHeader from "@/components/common/PageHeader";
 
 const Todo = () => {
+  /**
+   * Initialize todos from localStorage.
+   * Falls back to an empty list if parsing fails.
+   */
   const [todos, setTodos] = useState<TodoType[]>(() => {
     try {
       const savedTodos = localStorage.getItem("todos");
@@ -30,13 +34,17 @@ const Todo = () => {
     }
   });
 
+  /**
+   * Persist todos to localStorage whenever they change.
+   */
   useEffect(() => {
     try {
       localStorage.setItem("todos", JSON.stringify(todos));
     } catch (error) {
-      console.error("Failed to save todos to localStorage:", error);
+      console.error("Failed to save todos from localStorage:", error);
     }
   }, [todos]);
+
   const [filter, setFilter] = useState<Filter>("all");
 
   const addTodo: AddTodo = (text) => {
