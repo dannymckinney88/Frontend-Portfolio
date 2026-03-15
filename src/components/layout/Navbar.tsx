@@ -1,36 +1,81 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   NavigationMenu,
-  NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
-export default function Navbar() {
+const Navbar = () => {
+  const location = useLocation();
+
+  const navLinkClass = (path: string) =>
+    cn(
+      "no-underline transition-colors",
+      location.pathname === path ? " underline underline-offset-4" : "",
+    );
+
   return (
     <nav className="border-b bg-background">
-      <div className="max-w-6xl mx-auto flex items-center gap-18 px-6 py-4">
+      <div className="mx-auto flex max-w-6xl items-center gap-18 px-6 py-4">
         {/* Logo */}
         <Link to="/" className="text-lg font-semibold tracking-tight">
           React Lab
         </Link>
-
-        {/* Navigation */}
         <NavigationMenu>
           <NavigationMenuList className="flex gap-6">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <Link to="/">Home</Link>
+                <Link
+                  to="/"
+                  className={navLinkClass("/")}
+                  aria-current={location.pathname === "/" ? "page" : undefined}
+                >
+                  Home
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <Link to="/counter">Counter</Link>
+                <Link
+                  to="/counter"
+                  className={navLinkClass("/counter")}
+                  aria-current={
+                    location.pathname === "/counter" ? "page" : undefined
+                  }
+                >
+                  Counter
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <Link to="/todo">Todo</Link>
+                <Link
+                  to="/todos"
+                  className={navLinkClass("/todos")}
+                  aria-current={
+                    location.pathname === "/todos" ? "page" : undefined
+                  }
+                >
+                  Todos
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link
+                  to="/github"
+                  className={navLinkClass("/github")}
+                  aria-current={
+                    location.pathname === "/github" ? "page" : undefined
+                  }
+                >
+                  Github
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -38,4 +83,6 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;
