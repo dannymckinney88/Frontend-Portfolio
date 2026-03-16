@@ -1,11 +1,16 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import PageHeader from "@/components/common/PageHeader";
-import GithubSearch from "@/components/github/GithubSearch";
+import GithubProfileCard from "@/components/github/GithubProfileCard";
 import GithubRepoList from "@/components/github/GithubRepoList";
+import GithubSearch from "@/components/github/GithubSearch";
 import { Button } from "@/components/ui/button";
-import { fetchUserRepos } from "@/lib/githubApi";
-import type { GithubRepo } from "@/lib/githubApi";
+import {
+  fetchUserProfile,
+  fetchUserRepos,
+  type GithubProfile,
+  type GithubRepo,
+} from "@/lib/githubApi";
 
 /**
  * Default username so the page loads with real data
@@ -13,9 +18,9 @@ import type { GithubRepo } from "@/lib/githubApi";
 const DEFAULT_USERNAME = "dannymckinney88";
 
 /**
- * Session storage key for GitHub repo caching
+ * Session storage key for GitHub cache
  */
-const GITHUB_CACHE_KEY = "github-repos-cache";
+const GITHUB_CACHE_KEY = "github-explorer-cache";
 
 /**
  * Number of repositories shown per page
@@ -27,6 +32,7 @@ const REPOS_PER_PAGE = 6;
  */
 function GithubExplorer() {
   const [username, setUsername] = useState(DEFAULT_USERNAME);
+  const [profile, setProfile] = useState<GithubProfile | null>(null);
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -34,6 +40,7 @@ function GithubExplorer() {
 
   const repoListRef = useRef<HTMLDivElement | null>(null);
   const firstRepoRef = useRef<HTMLLIElement | null>(null);
+
   /**
    * Pagination values
    */
@@ -43,27 +50,33 @@ function GithubExplorer() {
   const paginatedRepos = repos.slice(startIndex, endIndex);
 
   /**
-   * Fetch repositories for a username
+   * Fetch GitHub profile and repositories for a username
    */
-  const loadRepos = async (targetUsername: string) => {
+  const loadGithubData = async (targetUsername: string) => {
     try {
       setLoading(true);
       setError(null);
 
-      const data = await fetchUserRepos(targetUsername);
+      const [profileData, repoData] = await Promise.all([
+        fetchUserProfile(targetUsername),
+        fetchUserRepos(targetUsername),
+      ]);
 
-      setRepos(data);
+      setProfile(profileData);
+      setRepos(repoData);
       setCurrentPage(1);
 
       sessionStorage.setItem(
         GITHUB_CACHE_KEY,
         JSON.stringify({
           username: targetUsername,
-          repos: data,
+          profile: profileData,
+          repos: repoData,
         }),
       );
     } catch (err) {
       console.error(err);
+      setProfile(null);
       setRepos([]);
       setCurrentPage(1);
 
@@ -85,7 +98,7 @@ function GithubExplorer() {
 
     if (!trimmedUsername) return;
 
-    loadRepos(trimmedUsername);
+    loadGithubData(trimmedUsername);
   };
 
   /**
@@ -107,7 +120,7 @@ function GithubExplorer() {
    */
   useEffect(() => {
     /**
-     * Reuse cached repo data during the session to avoid unnecessary API calls.
+     * Reuse cached GitHub data during the session to avoid unnecessary API calls.
      */
     const cached = sessionStorage.getItem(GITHUB_CACHE_KEY);
 
@@ -117,8 +130,10 @@ function GithubExplorer() {
 
         if (
           parsed.username === DEFAULT_USERNAME &&
+          parsed.profile &&
           Array.isArray(parsed.repos)
         ) {
+          setProfile(parsed.profile);
           setRepos(parsed.repos);
           setCurrentPage(1);
           setLoading(false);
@@ -129,13 +144,15 @@ function GithubExplorer() {
       }
     }
 
-    loadRepos(DEFAULT_USERNAME);
+    loadGithubData(DEFAULT_USERNAME);
   }, []);
 
   /**
    * Scroll to the repository list and focus the first repository after page changes.
    */
   useEffect(() => {
+    if (currentPage === 1) return;
+
     if (repoListRef.current) {
       repoListRef.current.scrollIntoView({
         behavior: "smooth",
@@ -169,7 +186,7 @@ function GithubExplorer() {
             role="status"
             aria-live="polite"
           >
-            Loading repositories...
+            Loading GitHub profile and repositories...
           </p>
         )}
 
@@ -181,6 +198,10 @@ function GithubExplorer() {
           >
             {error}
           </p>
+        )}
+
+        {!loading && !error && profile && (
+          <GithubProfileCard profile={profile} />
         )}
 
         {!loading && !error && repos.length === 0 && (
