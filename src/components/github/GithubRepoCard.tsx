@@ -9,9 +9,18 @@ interface GithubRepoCardProps {
   repo: GithubRepo;
 }
 
-/**
- * Display a single GitHub repository
- */
+const languageColors: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f1e05a",
+  CSharp: "#178600",
+  "C#": "#178600",
+  Python: "#3572A5",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  SCSS: "#c6538c",
+  Shell: "#89e051",
+};
+
 function GithubRepoCard({ repo }: GithubRepoCardProps) {
   const updatedDate = new Date(repo.updatedAt).toLocaleDateString(undefined, {
     month: "short",
@@ -30,12 +39,19 @@ function GithubRepoCard({ repo }: GithubRepoCardProps) {
               </CardTitle>
             </div>
 
-            <div className="min-h-12">
-              <p className="line-clamp-2 text-sm text-muted-foreground">
-                {repo.description}
-              </p>
-            </div>
+            <div className="flex items-center gap-1">
+              <dt className="sr-only">Language</dt>
 
+              <span
+                className="h-2.5 w-2.5 rounded-full"
+                style={{
+                  backgroundColor: languageColors[repo.language] ?? "#9ca3af",
+                }}
+                aria-hidden="true"
+              />
+
+              <dd>{repo.language}</dd>
+            </div>
             <dl className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
                 <dt className="sr-only">Language</dt>
