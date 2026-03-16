@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import PageHeader from "@/components/common/PageHeader";
 import GithubSearch from "@/components/github/GithubSearch";
 import GithubRepoList from "@/components/github/GithubRepoList";
-
+import { Button } from "@/components/ui/button";
 import { fetchUserRepos } from "@/lib/githubApi";
 import type { GithubRepo } from "@/lib/githubApi";
 
@@ -11,7 +11,16 @@ import type { GithubRepo } from "@/lib/githubApi";
  * Default username so the page loads with real data
  */
 const DEFAULT_USERNAME = "dannymckinney88";
+
+/**
+ * Session storage key for GitHub repo caching
+ */
 const GITHUB_CACHE_KEY = "github-repos-cache";
+
+/**
+ * Number of repositories shown per page
+ */
+const REPOS_PER_PAGE = 6;
 
 /**
  * GitHub Repository Explorer Page
@@ -21,6 +30,16 @@ function GithubExplorer() {
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const repoListRef = useRef<HTMLDivElement | null>(null);
+
+  /**
+   * Pagination values
+   */
+  const totalPages = Math.ceil(repos.length / REPOS_PER_PAGE);
+  const startIndex = (currentPage - 1) * REPOS_PER_PAGE;
+  const endIndex = startIndex + REPOS_PER_PAGE;
+  const paginatedRepos = repos.slice(startIndex, endIndex);
 
   /**
    * Fetch repositories for a username
@@ -31,7 +50,9 @@ function GithubExplorer() {
       setError(null);
 
       const data = await fetchUserRepos(targetUsername);
+
       setRepos(data);
+      setCurrentPage(1);
 
       sessionStorage.setItem(
         GITHUB_CACHE_KEY,
@@ -43,6 +64,7 @@ function GithubExplorer() {
     } catch (err) {
       console.error(err);
       setRepos([]);
+      setCurrentPage(1);
 
       if (err instanceof Error) {
         setError(err.message);
@@ -52,6 +74,31 @@ function GithubExplorer() {
     } finally {
       setLoading(false);
     }
+  };
+
+  /**
+   * Handle search submit
+   */
+  const handleSearch = () => {
+    const trimmedUsername = username.trim();
+
+    if (!trimmedUsername) return;
+
+    loadRepos(trimmedUsername);
+  };
+
+  /**
+   * Move to the next page
+   */
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  /**
+   * Move to the previous page
+   */
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
   /**
@@ -72,26 +119,26 @@ function GithubExplorer() {
           Array.isArray(parsed.repos)
         ) {
           setRepos(parsed.repos);
+          setCurrentPage(1);
           setLoading(false);
           return;
         }
-      } catch (error) {
-        console.error("Failed to parse GitHub cache:", error);
+      } catch (cacheError) {
+        console.error("Failed to parse GitHub cache:", cacheError);
       }
     }
 
     loadRepos(DEFAULT_USERNAME);
   }, []);
-  /**
-   * Handle search submit
-   */
-  const handleSearch = () => {
-    const trimmed = username.trim();
 
-    if (!trimmed) return;
-
-    loadRepos(trimmed);
-  };
+  useEffect(() => {
+    if (repoListRef.current) {
+      repoListRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [currentPage]);
 
   return (
     <div className="w-full px-4 py-12">
@@ -139,7 +186,49 @@ function GithubExplorer() {
         )}
 
         {!loading && !error && repos.length > 0 && (
-          <GithubRepoList repos={repos} />
+          <div className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Showing {startIndex + 1}-{Math.min(endIndex, repos.length)} of{" "}
+              {repos.length} repositories
+            </p>
+
+            <div id="repo-list" ref={repoListRef}>
+              <GithubRepoList repos={paginatedRepos} />
+            </div>
+
+            {totalPages > 1 && (
+              <nav
+                className="flex items-center justify-center gap-4 pt-2"
+                aria-label="Repository pagination"
+              >
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                  aria-label="Go to previous page"
+                  aria-controls="repo-list"
+                >
+                  Previous
+                </Button>
+
+                <p className="text-sm text-muted-foreground" aria-live="polite">
+                  Page {currentPage} of {totalPages}
+                </p>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                  aria-label="Go to next page"
+                  aria-controls="repo-list"
+                >
+                  Next
+                </Button>
+              </nav>
+            )}
+          </div>
         )}
       </div>
     </div>
