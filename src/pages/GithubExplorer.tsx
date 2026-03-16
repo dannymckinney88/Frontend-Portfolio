@@ -198,7 +198,7 @@ function GithubExplorer() {
 
             {totalPages > 1 && (
               <nav
-                className="flex items-center justify-center gap-4 pt-2"
+                className="flex items-center justify-center gap-6 pt-4"
                 aria-label="Repository pagination"
               >
                 <Button
@@ -212,9 +212,12 @@ function GithubExplorer() {
                   Previous
                 </Button>
 
-                <p className="text-sm text-muted-foreground" aria-live="polite">
+                <span
+                  className="min-w-28 text-center text-sm text-muted-foreground"
+                  aria-live="polite"
+                >
                   Page {currentPage} of {totalPages}
-                </p>
+                </span>
 
                 <Button
                   type="button"
