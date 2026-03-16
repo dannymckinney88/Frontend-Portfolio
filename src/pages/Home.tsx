@@ -17,7 +17,11 @@ const Home = () => {
           title="Projects"
           description="Small React projects focused on state management, component architecture, and accessible UI patterns."
         />
-
+        <p className="text-sm text-muted-foreground/80">
+          New projects are added regularly as I explore deeper React patterns,
+          TypeScript, API integration, and accessible UI architecture.
+        </p>
+        6
         <div className="grid gap-5 sm:grid-cols-2">
           <Card className="h-full transition hover:-translate-y-[2px] hover:shadow-md hover:border-border">
             <div className="flex h-full flex-col">

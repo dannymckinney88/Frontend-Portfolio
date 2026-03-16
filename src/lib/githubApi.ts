@@ -49,10 +49,16 @@ const mapRepo = (repo: GithubRepoResponse): GithubRepo => ({
 export const fetchUserRepos = async (
   username: string,
 ): Promise<GithubRepo[]> => {
-  const response = await fetch(`${BASE_URL}/users/${username}/repos`);
+  const response = await fetch(
+    `${BASE_URL}/users/${username}/repos?sort=updated&per_page=100`,
+  );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch repositories");
+    if (response.status === 404) {
+      throw new Error("GitHub user not found.");
+    }
+
+    throw new Error("Failed to fetch repositories.");
   }
 
   const data: GithubRepoResponse[] = await response.json();
