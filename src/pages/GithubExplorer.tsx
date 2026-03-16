@@ -13,23 +13,20 @@ import {
 } from "@/lib/githubApi";
 
 /**
- * Default username so the page loads with real data
+ * Default GitHub username shown on initial load
  */
 const DEFAULT_USERNAME = "dannymckinney88";
 
 /**
- * Session storage key for GitHub cache
+ * Local storage key for cached GitHub explorer data
  */
 const GITHUB_CACHE_KEY = "github-explorer-cache";
 
 /**
- * Number of repositories shown per page
+ * Number of repositories displayed per page
  */
 const REPOS_PER_PAGE = 6;
 
-/**
- * GitHub Repository Explorer Page
- */
 function GithubExplorer() {
   const [username, setUsername] = useState(DEFAULT_USERNAME);
   const [profile, setProfile] = useState<GithubProfile | null>(null);
@@ -41,18 +38,15 @@ function GithubExplorer() {
   const repoListRef = useRef<HTMLDivElement | null>(null);
   const firstRepoRef = useRef<HTMLLIElement | null>(null);
 
-  /**
-   * Pagination values
-   */
   const totalPages = Math.ceil(repos.length / REPOS_PER_PAGE);
   const startIndex = (currentPage - 1) * REPOS_PER_PAGE;
   const endIndex = startIndex + REPOS_PER_PAGE;
   const paginatedRepos = repos.slice(startIndex, endIndex);
 
   /**
-   * Fetch GitHub profile and repositories for a username
+   * Load GitHub profile and repositories for a user
    */
-  const loadGithubData = async (targetUsername: string) => {
+  const loadGithubUserData = async (targetUsername: string) => {
     try {
       setLoading(true);
       setError(null);
@@ -66,7 +60,7 @@ function GithubExplorer() {
       setRepos(repoData);
       setCurrentPage(1);
 
-      sessionStorage.setItem(
+      localStorage.setItem(
         GITHUB_CACHE_KEY,
         JSON.stringify({
           username: targetUsername,
@@ -91,50 +85,39 @@ function GithubExplorer() {
   };
 
   /**
-   * Handle search submit
+   * Load data for the entered GitHub username
    */
   const handleSearch = () => {
     const trimmedUsername = username.trim();
 
     if (!trimmedUsername) return;
 
-    loadGithubData(trimmedUsername);
+    loadGithubUserData(trimmedUsername);
   };
 
-  /**
-   * Move to the next page
-   */
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
-  /**
-   * Move to the previous page
-   */
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
-  /**
-   * Initial load
-   */
   useEffect(() => {
-    /**
-     * Reuse cached GitHub data during the session to avoid unnecessary API calls.
-     */
-    const cached = sessionStorage.getItem(GITHUB_CACHE_KEY);
+    const cachedData = localStorage.getItem(GITHUB_CACHE_KEY);
 
-    if (cached) {
+    if (cachedData) {
       try {
-        const parsed = JSON.parse(cached);
+        const parsedCache = JSON.parse(cachedData);
 
         if (
-          parsed.username === DEFAULT_USERNAME &&
-          parsed.profile &&
-          Array.isArray(parsed.repos)
+          parsedCache.username &&
+          parsedCache.profile &&
+          Array.isArray(parsedCache.repos)
         ) {
-          setProfile(parsed.profile);
-          setRepos(parsed.repos);
+          setUsername(parsedCache.username);
+          setProfile(parsedCache.profile);
+          setRepos(parsedCache.repos);
           setCurrentPage(1);
           setLoading(false);
           return;
@@ -144,11 +127,11 @@ function GithubExplorer() {
       }
     }
 
-    loadGithubData(DEFAULT_USERNAME);
+    loadGithubUserData(DEFAULT_USERNAME);
   }, []);
 
   /**
-   * Scroll to the repository list and focus the first repository after page changes.
+   * Scroll to the repository list and focus the first repository after page changes
    */
   useEffect(() => {
     if (currentPage === 1) return;
