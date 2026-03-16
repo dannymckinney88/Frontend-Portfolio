@@ -40,13 +40,13 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
-                  to="/counter"
-                  className={navLinkClass("/counter")}
+                  to="/github"
+                  className={navLinkClass("/github")}
                   aria-current={
-                    location.pathname === "/counter" ? "page" : undefined
+                    location.pathname === "/github" ? "page" : undefined
                   }
                 >
-                  Counter
+                  Github
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -68,13 +68,13 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
-                  to="/github"
-                  className={navLinkClass("/github")}
+                  to="/counter"
+                  className={navLinkClass("/counter")}
                   aria-current={
-                    location.pathname === "/github" ? "page" : undefined
+                    location.pathname === "/counter" ? "page" : undefined
                   }
                 >
-                  Github
+                  Counter
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
