@@ -1,22 +1,30 @@
 import GithubRepoCard from "./GithubRepoCard";
-
 import type { GithubRepo } from "@/lib/githubApi";
+import type { RefObject } from "react";
 
 interface GithubRepoListProps {
   repos: GithubRepo[];
+  firstRepoRef?: RefObject<HTMLLIElement | null>;
 }
 
 /**
  * Display a list of GitHub repositories
  */
-function GithubRepoList({ repos }: GithubRepoListProps) {
+function GithubRepoList({ repos, firstRepoRef }: GithubRepoListProps) {
   return (
     <ul
       className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
       aria-label="List of GitHub repositories"
     >
-      {repos.map((repo) => (
-        <GithubRepoCard key={repo.id} repo={repo} />
+      {repos.map((repo, index) => (
+        <li
+          key={repo.id}
+          ref={index === 0 ? firstRepoRef : undefined}
+          tabIndex={index === 0 ? -1 : undefined}
+          className="list-none"
+        >
+          <GithubRepoCard repo={repo} />
+        </li>
       ))}
     </ul>
   );

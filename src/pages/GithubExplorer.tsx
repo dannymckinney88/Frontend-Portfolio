@@ -31,8 +31,9 @@ function GithubExplorer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const repoListRef = useRef<HTMLDivElement | null>(null);
 
+  const repoListRef = useRef<HTMLDivElement | null>(null);
+  const firstRepoRef = useRef<HTMLLIElement | null>(null);
   /**
    * Pagination values
    */
@@ -131,12 +132,19 @@ function GithubExplorer() {
     loadRepos(DEFAULT_USERNAME);
   }, []);
 
+  /**
+   * Scroll to the repository list and focus the first repository after page changes.
+   */
   useEffect(() => {
     if (repoListRef.current) {
       repoListRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
+    }
+
+    if (firstRepoRef.current) {
+      firstRepoRef.current.focus();
     }
   }, [currentPage]);
 
@@ -193,7 +201,10 @@ function GithubExplorer() {
             </p>
 
             <div id="repo-list" ref={repoListRef}>
-              <GithubRepoList repos={paginatedRepos} />
+              <GithubRepoList
+                repos={paginatedRepos}
+                firstRepoRef={firstRepoRef}
+              />
             </div>
 
             {totalPages > 1 && (
