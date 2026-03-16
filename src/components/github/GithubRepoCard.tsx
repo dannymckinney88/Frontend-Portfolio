@@ -21,12 +21,20 @@ function GithubRepoCard({ repo }: GithubRepoCardProps) {
 
   return (
     <li className="list-none">
-      <Card className="h-full transition hover:-translate-y-[2px] hover:shadow-md hover:border-border">
+      <Card className="h-full transition hover:-translate-y-0.5 hover:border-border hover:shadow-md">
         <div className="flex h-full flex-col">
-          <CardHeader className="space-y-2">
-            <CardTitle className="text-base">{repo.name}</CardTitle>
+          <CardHeader className="flex flex-1 flex-col space-y-2">
+            <div className="min-h-14">
+              <CardTitle className="line-clamp-2 text-base leading-7">
+                {repo.name}
+              </CardTitle>
+            </div>
 
-            <p className="text-sm text-muted-foreground">{repo.description}</p>
+            <div className="min-h-12">
+              <p className="line-clamp-2 text-sm text-muted-foreground">
+                {repo.description}
+              </p>
+            </div>
 
             <dl className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
@@ -47,8 +55,8 @@ function GithubRepoCard({ repo }: GithubRepoCardProps) {
             </dl>
           </CardHeader>
 
-          <CardContent className="mt-auto pt-4">
-            <div className="flex flex-wrap gap-2">
+          <CardContent className="pt-2 mt-auto">
+            <div className="flex min-h-10 flex-wrap gap-2">
               <Button size="sm" asChild>
                 <a
                   href={repo.repoUrl}
