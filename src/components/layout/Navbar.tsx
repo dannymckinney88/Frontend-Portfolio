@@ -18,13 +18,12 @@ const Navbar = () => {
 
   return (
     <nav className="border-b bg-background">
-      <div className="mx-auto flex max-w-6xl items-center gap-18 px-6 py-4">
-        {/* Logo */}
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <Link to="/" className="text-lg font-semibold tracking-tight">
           React Lab
         </Link>
-        <NavigationMenu aria-label="Primary navigation">
-          <NavigationMenuList className="flex gap-6">
+        <NavigationMenu aria-label="Primary navigation" className="max-w-full">
+          <NavigationMenuList className="flex flex-wrap gap-3 sm:gap-6">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
