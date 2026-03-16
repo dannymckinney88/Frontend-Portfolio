@@ -11,6 +11,7 @@ import type { GithubRepo } from "@/lib/githubApi";
  * Default username so the page loads with real data
  */
 const DEFAULT_USERNAME = "dannymckinney88";
+const GITHUB_CACHE_KEY = "github-repos-cache";
 
 /**
  * GitHub Repository Explorer Page
@@ -31,9 +32,16 @@ function GithubExplorer() {
 
       const data = await fetchUserRepos(targetUsername);
       setRepos(data);
+
+      sessionStorage.setItem(
+        GITHUB_CACHE_KEY,
+        JSON.stringify({
+          username: targetUsername,
+          repos: data,
+        }),
+      );
     } catch (err) {
       console.error(err);
-
       setRepos([]);
 
       if (err instanceof Error) {
@@ -50,9 +58,30 @@ function GithubExplorer() {
    * Initial load
    */
   useEffect(() => {
+    /**
+     * Reuse cached repo data during the session to avoid unnecessary API calls.
+     */
+    const cached = sessionStorage.getItem(GITHUB_CACHE_KEY);
+
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+
+        if (
+          parsed.username === DEFAULT_USERNAME &&
+          Array.isArray(parsed.repos)
+        ) {
+          setRepos(parsed.repos);
+          setLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.error("Failed to parse GitHub cache:", error);
+      }
+    }
+
     loadRepos(DEFAULT_USERNAME);
   }, []);
-
   /**
    * Handle search submit
    */
