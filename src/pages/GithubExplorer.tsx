@@ -66,7 +66,7 @@ function GithubExplorer() {
 
   return (
     <div className="w-full px-4 py-12">
-      <div className="mx-auto max-w-5xl space-y-8">
+      <div className="w-full space-y-8">
         <PageHeader
           title="GitHub Repository Explorer"
           description="Search GitHub users and explore their public repositories. Built with React, TypeScript, and API-driven UI patterns."

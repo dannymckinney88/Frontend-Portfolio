@@ -19,31 +19,33 @@ const Counter = () => {
 
   return (
     <section className="w-full px-4 py-12">
-      <div className="mx-auto w-full max-w-3xl space-y-6">
+      <div className="w-full space-y-8">
         <PageHeader
           title="Counter App"
           description="A simple React demo focused on state updates, component composition, and UI behavior."
         />
 
-        <Card className="w-full max-w-md rounded-2xl border-border/80 shadow-sm">
-          <CardContent className="flex flex-col items-center gap-4 px-6 py-6 text-center">
-            <CounterDisplay count={count} />
+        <div className="flex justify-center">
+          <Card className="w-full max-w-md rounded-2xl border-border/80 shadow-sm">
+            <CardContent className="flex flex-col items-center gap-4 px-6 py-6 text-center">
+              <CounterDisplay count={count} />
 
-            <p className="text-sm text-muted-foreground">
-              Range: {MIN_COUNT} - {MAX_COUNT}
-            </p>
-          </CardContent>
+              <p className="text-sm text-muted-foreground">
+                Range: {MIN_COUNT} - {MAX_COUNT}
+              </p>
+            </CardContent>
 
-          <CardFooter className="flex justify-center border-t bg-muted/30 px-4 py-4">
-            <CounterControls
-              onIncrement={increment}
-              onDecrement={decrement}
-              onReset={reset}
-              isMin={isMin}
-              isMax={isMax}
-            />
-          </CardFooter>
-        </Card>
+            <CardFooter className="flex justify-center border-t bg-muted/30 px-4 py-4">
+              <CounterControls
+                onIncrement={increment}
+                onDecrement={decrement}
+                onReset={reset}
+                isMin={isMin}
+                isMax={isMax}
+              />
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     </section>
   );

@@ -12,7 +12,7 @@ import PageHeader from "@/components/common/PageHeader";
 const Home = () => {
   return (
     <div className="w-full px-4 py-12">
-      <div className="mx-auto max-w-3xl space-y-8">
+      <div className="w-full space-y-8">
         <PageHeader
           title="Projects"
           description="Small React projects focused on state management, component architecture, and accessible UI patterns."

@@ -11,7 +11,10 @@ interface GithubRepoListProps {
  */
 function GithubRepoList({ repos }: GithubRepoListProps) {
   return (
-    <ul className="grid gap-5 sm:grid-cols-2" aria-label="GitHub repositories">
+    <ul
+      className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+      aria-label="List of GitHub repositories"
+    >
       {repos.map((repo) => (
         <GithubRepoCard key={repo.id} repo={repo} />
       ))}

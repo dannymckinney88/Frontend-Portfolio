@@ -98,7 +98,7 @@ const Todo = () => {
 
   return (
     <div className="w-full px-4 py-12">
-      <div className="mx-auto w-full max-w-3xl space-y-8">
+      <div className="w-full space-y-8">
         <PageHeader
           title="Todo App"
           description="A full CRUD task manager focused on React state, reusable components, and local storage persistence."
