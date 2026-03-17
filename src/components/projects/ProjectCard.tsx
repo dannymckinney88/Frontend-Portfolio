@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 /**
  * Project card props
@@ -24,35 +24,36 @@ export interface ProjectCardProps {
 /**
  * Display a single project card
  */
-function ProjectCard({
+const ProjectCard = ({
   title,
   description,
   features,
   stack,
   projectHref,
   codeHref,
-}: ProjectCardProps) {
+}: ProjectCardProps) => {
   return (
-    <Card className="h-full min-h-88 transition hover:-translate-y-0.5 hover:border-border hover:shadow-md">
+    <Card className="h-full min-h-88 border-border/80 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <CardContent className="flex h-full flex-col p-6 sm:p-7">
         <div className="flex flex-1 flex-col">
           <CardHeader className="space-y-3 p-0">
-            <CardTitle className="text-lg font-semibold">{title}</CardTitle>
-            <CardDescription className="text-sm leading-relaxed">
-              {description}
-            </CardDescription>
+            <CardTitle className="text-lg font-semibold tracking-tight">
+              {title}
+            </CardTitle>
+
+            <CardDescription className="text-sm leading-6">{description}</CardDescription>
           </CardHeader>
 
-          <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
+          <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm leading-6">
             {features.map((feature) => (
               <li key={feature}>{feature}</li>
             ))}
           </ul>
 
-          <p className="pt-4 text-xs text-muted-foreground mt-auto">{stack}</p>
+          <p className="mt-auto pt-4 text-xs text-muted-foreground">{stack}</p>
         </div>
 
-        <div className="mt-6 flex gap-2">
+        <div className="mt-6 flex flex-wrap gap-2">
           <Button className="min-w-28" asChild>
             <Link to={projectHref}>View Project</Link>
           </Button>
@@ -66,6 +67,6 @@ function ProjectCard({
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ProjectCard;
