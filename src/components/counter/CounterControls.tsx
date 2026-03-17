@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import type { CounterControlsProps } from "./types";
+import type { CounterControlsProps } from './types';
 
 export default function CounterControls({
   onIncrement,
@@ -15,11 +15,16 @@ export default function CounterControls({
         Increment
       </Button>
 
-      <Button onClick={onDecrement} disabled={isMin} variant="outline">
+      <Button
+        onClick={onDecrement}
+        disabled={isMin}
+        variant="outline"
+        className="button-standard"
+      >
         Decrement
       </Button>
 
-      <Button onClick={onReset} variant="outline">
+      <Button onClick={onReset} variant="outline" className="button-standard">
         Reset
       </Button>
     </div>

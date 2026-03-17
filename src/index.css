@@ -262,4 +262,7 @@
   .row-wrap {
     @apply flex flex-wrap items-center gap-3;
   }
+  .button-standard {
+    @apply min-w-28;
+  }
 }

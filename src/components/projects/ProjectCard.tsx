@@ -54,11 +54,11 @@ const ProjectCard = ({
         </div>
 
         <div className="mt-6 flex flex-wrap gap-2">
-          <Button className="min-w-28" asChild>
+          <Button className="button-standard" asChild>
             <Link to={projectHref}>View Project</Link>
           </Button>
 
-          <Button className="min-w-28" variant="outline" asChild>
+          <Button className="button-standard" variant="outline" asChild>
             <a href={codeHref} target="_blank" rel="noopener noreferrer">
               View Code
             </a>

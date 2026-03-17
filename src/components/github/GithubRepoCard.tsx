@@ -79,7 +79,7 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
         </div>
 
         <div className="mt-5 flex flex-wrap gap-2">
-          <Button size="sm" asChild>
+          <Button className="button-standard" asChild>
             <a
               href={repo.repoUrl}
               target="_blank"
@@ -92,7 +92,7 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
           </Button>
 
           {repo.homepage && (
-            <Button variant="outline" size="sm" asChild>
+            <Button className="button-standard" variant="outline" asChild>
               <a
                 href={repo.homepage}
                 target="_blank"
