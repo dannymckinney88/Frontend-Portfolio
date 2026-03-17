@@ -1,8 +1,9 @@
-import { Building2, ExternalLink, Globe, MapPin } from "lucide-react";
+import { Building2, ExternalLink, Globe, MapPin } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import type { GithubProfile } from "@/lib/githubApi";
+import StatTile from '@/components/common/StatTile';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import type { GithubProfile } from '@/lib/githubApi';
 
 interface GithubProfileCardProps {
   profile: GithubProfile;
@@ -11,7 +12,7 @@ interface GithubProfileCardProps {
 /**
  * GitHub profile summary card
  */
-function GithubProfileCard({ profile }: GithubProfileCardProps) {
+const GithubProfileCard = ({ profile }: GithubProfileCardProps) => {
   const displayName = profile.name || profile.login;
 
   const websiteUrl =
@@ -22,7 +23,7 @@ function GithubProfileCard({ profile }: GithubProfileCardProps) {
         : null;
 
   return (
-    <Card className="overflow-hidden border-border/80 shadow-sm transition hover:-translate-y-0.5 hover:border-border hover:shadow-md">
+    <Card className="h-full border-border/80 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <CardContent className="p-6 sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
@@ -36,13 +37,9 @@ function GithubProfileCard({ profile }: GithubProfileCardProps) {
             <div className="min-w-0 space-y-4">
               <header className="space-y-2">
                 <div className="space-y-1">
-                  <h2 className="text-2xl font-semibold tracking-tight">
-                    {displayName}
-                  </h2>
+                  <h2 className="text-2xl font-semibold tracking-tight">{displayName}</h2>
 
-                  <p className="text-sm text-muted-foreground">
-                    @{profile.login}
-                  </p>
+                  <p className="text-sm text-muted-foreground">@{profile.login}</p>
                 </div>
 
                 {profile.bio && (
@@ -57,10 +54,7 @@ function GithubProfileCard({ profile }: GithubProfileCardProps) {
                   {profile.company && (
                     <div className="flex items-center gap-2">
                       <dt className="sr-only">Company</dt>
-                      <Building2
-                        className="h-4 w-4 shrink-0"
-                        aria-hidden="true"
-                      />
+                      <Building2 className="h-4 w-4 shrink-0" aria-hidden="true" />
                       <dd className="min-w-0 truncate">{profile.company}</dd>
                     </div>
                   )}
@@ -94,38 +88,15 @@ function GithubProfileCard({ profile }: GithubProfileCardProps) {
               )}
 
               <dl className="grid grid-cols-3 gap-3 sm:max-w-md">
-                <div className="rounded-xl border border-border/70 bg-muted/30 px-4 py-3">
-                  <dt className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Followers
-                  </dt>
-                  <dd className="mt-1 text-lg font-semibold">
-                    {profile.followers}
-                  </dd>
-                </div>
-
-                <div className="rounded-xl border border-border/70 bg-muted/30 px-4 py-3">
-                  <dt className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Following
-                  </dt>
-                  <dd className="mt-1 text-lg font-semibold">
-                    {profile.following}
-                  </dd>
-                </div>
-
-                <div className="rounded-xl border border-border/70 bg-muted/30 px-4 py-3">
-                  <dt className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Repos
-                  </dt>
-                  <dd className="mt-1 text-lg font-semibold">
-                    {profile.publicRepos}
-                  </dd>
-                </div>
+                <StatTile label="Followers" value={profile.followers} />
+                <StatTile label="Following" value={profile.following} />
+                <StatTile label="Repos" value={profile.publicRepos} />
               </dl>
             </div>
           </div>
 
           <div className="flex shrink-0">
-            <Button asChild>
+            <Button size="lg" asChild>
               <a
                 href={profile.profileUrl}
                 target="_blank"
@@ -141,6 +112,6 @@ function GithubProfileCard({ profile }: GithubProfileCardProps) {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default GithubProfileCard;
