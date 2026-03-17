@@ -2,87 +2,99 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel)](https://frontend-portfolio-iota-three.vercel.app/)
 
-A collection of small React projects focused on **state management, component architecture, TypeScript usage, and accessible UI patterns.**
+A personal frontend portfolio built with React and TypeScript, focused on building clean, accessible, and production-ready UI.
 
-Each project explores common frontend patterns such as data fetching, CRUD operations, reusable components, and UI state handling.
-
----
-
-# Live Site
-
-https://frontend-portfolio-iota-three.vercel.app/
+This project showcases real-world patterns like API integration, state management, reusable components, and thoughtful user experience design.
 
 ---
 
-# Projects
+## 🌐 Live Site
 
-| Project                        | Description                                                                    | Tech                            |
-| ------------------------------ | ------------------------------------------------------------------------------ | ------------------------------- |
-| **GitHub Repository Explorer** | Search GitHub users and explore their public repositories using the GitHub API | React, TypeScript, API Fetch    |
-| **Todo App**                   | Full CRUD task manager with filtering and persistent storage                   | React, TypeScript, localStorage |
-| **Counter App**                | Simple counter demonstrating React state and component composition             | React, TypeScript               |
+👉 https://frontend-portfolio-iota-three.vercel.app/
 
 ---
 
-# Project Details
+## 🚀 Projects
 
-## GitHub Repository Explorer
+| Project                        | Description                                                              | Tech                            |
+| ------------------------------ | ------------------------------------------------------------------------ | ------------------------------- |
+| **GitHub Repository Explorer** | Search GitHub users and explore repositories with pagination and caching | React, TypeScript, REST API     |
+| **Todo App**                   | Full CRUD task manager with filtering, drag-and-drop, and persistence    | React, TypeScript, localStorage |
+| **Counter App**                | Simple demo focused on state and component composition                   | React, TypeScript               |
 
-Search GitHub users and explore their public repositories using the GitHub REST API.
+---
 
-### Features
+## 📌 Project Highlights
+
+### GitHub Repository Explorer
+
+A performant GitHub explorer that allows users to search profiles and browse repositories.
+
+**Features**
 
 - GitHub REST API integration
-- Loading, error, and empty states
-- Repository metadata display (stars, language, last update)
-- Accessible UI patterns
+- Manual search to control API usage
+- Client-side caching using localStorage to reduce repeated API calls
+- Pagination for large datasets
+- Loading, error, and empty UI states
+- Accessible and responsive UI
 
-### Tech
+**Tech**
 
 - React
 - TypeScript
 - Fetch API
+- Tailwind CSS
 - Shadcn UI
 
 ---
 
-## Todo App
+### Todo App
 
-A full CRUD task manager with filtering and persistent storage.
+A clean and interactive task manager demonstrating CRUD operations, state management, and drag-and-drop functionality.
 
-### Features
+**Features**
 
-- Create, edit, and delete tasks
-- Filter active and completed todos
-- Persistent state using localStorage
-- Accessible input and button interactions
+- Add, edit, and delete tasks
+- Filter by active and completed
+- Drag-and-drop reordering using @dnd-kit
+- Persistent task storage using localStorage
+- Reusable and accessible UI components
 
-### Tech
+**Tech**
 
 - React
 - TypeScript
+- Tailwind CSS
 - Shadcn UI
+- dnd-kit
 
 ---
 
-## Counter App
+### Counter App
 
-A simple example demonstrating React state management and component composition.
+A simple React project focused on fundamentals and component structure.
 
-### Features
+**Features**
 
-- React `useState` fundamentals
-- Reusable UI components
-- Accessible button interactions
+- State management with `useState`
+- Component composition
+- Clean and accessible UI
 
-### Tech
+**Tech**
 
 - React
 - TypeScript
 
 ---
 
-# Tech Stack
+## ♿ Accessibility
+
+Accessibility is a core focus throughout the portfolio. The site is built with semantic structure, keyboard-friendly interactions, clear hierarchy, and reusable UI patterns with accessibility in mind.
+
+---
+
+## 🧱 Tech Stack
 
 - React
 - TypeScript
@@ -93,20 +105,11 @@ A simple example demonstrating React state management and component composition.
 
 ---
 
-# Running Locally
-
-Clone the repository
-
-````bash
-git clone https://github.com/dannymckinney88/Frontend-Portfolio.git
-
-## Running Locally
-
-Clone the repository and start the development server:
+## 🛠 Running Locally
 
 ```bash
 git clone https://github.com/dannymckinney88/Frontend-Portfolio.git
 cd Frontend-Portfolio
 npm install
 npm run dev
-````
+```
