@@ -34,28 +34,30 @@ function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Card className="h-full min-h-88 transition hover:-translate-y-0.5 hover:border-border hover:shadow-md">
-      <CardContent className="flex h-full flex-col p-6">
-        <div className="flex-1 space-y-4">
+      <CardContent className="flex h-full flex-col p-6 sm:p-7">
+        <div className="flex flex-1 flex-col">
           <CardHeader className="space-y-3 p-0">
-            <CardTitle>{title}</CardTitle>
-            <CardDescription>{description}</CardDescription>
+            <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+            <CardDescription className="text-sm leading-relaxed">
+              {description}
+            </CardDescription>
           </CardHeader>
 
-          <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+          <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
             {features.map((feature) => (
               <li key={feature}>{feature}</li>
             ))}
           </ul>
 
-          <p className="text-muted-foreground text-xs">{stack}</p>
+          <p className="pt-4 text-xs text-muted-foreground mt-auto">{stack}</p>
         </div>
 
         <div className="mt-6 flex gap-2">
-          <Button className="w-32" asChild>
+          <Button className="min-w-28" asChild>
             <Link to={projectHref}>View Project</Link>
           </Button>
 
-          <Button className="w-32" variant="outline" asChild>
+          <Button className="min-w-28" variant="outline" asChild>
             <a href={codeHref} target="_blank" rel="noopener noreferrer">
               View Code
             </a>
