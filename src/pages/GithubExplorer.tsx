@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 import PageHeader from '@/components/common/PageHeader';
+import PaginationControls from '@/components/common/PaginationControls';
+import SectionState from '@/components/common/SectionState';
 import GithubProfileCard from '@/components/github/GithubProfileCard';
 import GithubRepoList from '@/components/github/GithubRepoList';
 import GithubSearch from '@/components/github/GithubSearch';
-import { Button } from '@/components/ui/button';
 import {
   fetchUserProfile,
   fetchUserRepos,
@@ -149,7 +150,7 @@ function GithubExplorer() {
   }, [currentPage]);
 
   return (
-    <section className="page-stack">
+    <section className="section-stack">
       <PageHeader
         title="GitHub Repository Explorer"
         description="A performant and accessible GitHub repository explorer built with React and TypeScript, showcasing API integration, pagination, persistent caching, and production-ready UI state management."
@@ -162,31 +163,26 @@ function GithubExplorer() {
         isLoading={loading}
       />
 
-      {loading && (
-        <p className="text-sm text-muted-foreground" role="status" aria-live="polite">
-          Loading GitHub profile and repositories...
-        </p>
-      )}
+      {loading && <SectionState message="Loading GitHub profile and repositories..." />}
 
       {error && (
-        <p className="text-sm text-destructive" role="alert" aria-live="assertive">
-          {error}
-        </p>
+        <SectionState message={error} tone="error" role="alert" live="assertive" />
       )}
 
       {!loading && !error && profile && <GithubProfileCard profile={profile} />}
 
       {!loading && !error && repos.length === 0 && (
-        <p className="text-sm text-muted-foreground" role="status" aria-live="polite">
-          No public repositories found.
-        </p>
+        <SectionState message="No public repositories found." />
       )}
 
       {!loading && !error && repos.length > 0 && (
         <div className="section-stack">
-          <p className="text-sm text-muted-foreground">
-            Showing {startIndex + 1}-{Math.min(endIndex, repos.length)} of {repos.length}{' '}
-            repositories
+          <p className="text-sm font-medium text-muted-foreground">
+            Showing{' '}
+            <span className="text-foreground">
+              {startIndex + 1}-{Math.min(endIndex, repos.length)}
+            </span>{' '}
+            of <span className="text-foreground">{repos.length}</span> repositories
           </p>
 
           <div id="repo-list" ref={repoListRef}>
@@ -194,39 +190,13 @@ function GithubExplorer() {
           </div>
 
           {totalPages > 1 && (
-            <nav
-              className="flex items-center justify-center gap-6 pt-2"
-              aria-label="Repository pagination"
-            >
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-                aria-label="Go to previous page"
-                aria-controls="repo-list"
-              >
-                Previous
-              </Button>
-
-              <span
-                className="min-w-28 text-center text-sm text-muted-foreground"
-                aria-live="polite"
-              >
-                Page {currentPage} of {totalPages}
-              </span>
-
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-                aria-label="Go to next page"
-                aria-controls="repo-list"
-              >
-                Next
-              </Button>
-            </nav>
+            <PaginationControls
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPreviousPage={handlePreviousPage}
+              onNextPage={handleNextPage}
+              ariaControls="repo-list"
+            />
           )}
         </div>
       )}
