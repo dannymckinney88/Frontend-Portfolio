@@ -1,5 +1,6 @@
-import type { CounterControlsProps } from "./types";
 import { Button } from "@/components/ui/button";
+
+import type { CounterControlsProps } from "./types";
 
 export default function CounterControls({
   onIncrement,

@@ -1,8 +1,9 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "@/pages/Home";
+import { Route,Routes } from "react-router-dom";
+
 import Counter from "@/pages/Counter";
-import Todo from "@/pages/Todo";
 import GithubExplorer from "@/pages/GithubExplorer";
+import Home from "@/pages/Home";
+import Todo from "@/pages/Todo";
 
 export default function AppRoutes() {
   return (

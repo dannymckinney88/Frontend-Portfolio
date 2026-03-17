@@ -1,30 +1,22 @@
-import { useEffect, useState } from "react";
+import { closestCenter, DndContext, type DragEndEvent } from '@dnd-kit/core';
+import { restrictToParentElement,restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import { arrayMove } from '@dnd-kit/sortable';
+import { useEffect, useState } from 'react';
 
-import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
-import { arrayMove } from "@dnd-kit/sortable";
-import {
-  restrictToVerticalAxis,
-  restrictToParentElement,
-} from "@dnd-kit/modifiers";
-import TodoInput from "@/components/todo/TodoInput";
-import TodoList from "@/components/todo/TodoList";
-import TodoFilter from "@/components/todo/TodoFilter";
-import type {
-  Filter,
-  Todo as TodoType,
-  AddTodo,
-} from "@/components/todo/types";
-import { Button } from "@/components/ui/button";
-
+import EmptyState from '@/components/common/EmptyState';
+import PageHeader from '@/components/common/PageHeader';
+import TodoFilter from '@/components/todo/TodoFilter';
+import TodoInput from '@/components/todo/TodoInput';
+import TodoList from '@/components/todo/TodoList';
+import type { AddTodo,Filter, Todo as TodoType } from '@/components/todo/types';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import EmptyState from "@/components/common/EmptyState";
-import PageHeader from "@/components/common/PageHeader";
+} from '@/components/ui/card';
 
 const Todo = () => {
   /**
@@ -33,10 +25,10 @@ const Todo = () => {
    */
   const [todos, setTodos] = useState<TodoType[]>(() => {
     try {
-      const savedTodos = localStorage.getItem("todos");
+      const savedTodos = localStorage.getItem('todos');
       return savedTodos ? JSON.parse(savedTodos) : [];
     } catch (error) {
-      console.error("Failed to load todos from localStorage:", error);
+      console.error('Failed to load todos from localStorage:', error);
       return [];
     }
   });
@@ -46,13 +38,13 @@ const Todo = () => {
    */
   useEffect(() => {
     try {
-      localStorage.setItem("todos", JSON.stringify(todos));
+      localStorage.setItem('todos', JSON.stringify(todos));
     } catch (error) {
-      console.error("Failed to save todos from localStorage:", error);
+      console.error('Failed to save todos from localStorage:', error);
     }
   }, [todos]);
 
-  const [filter, setFilter] = useState<Filter>("all");
+  const [filter, setFilter] = useState<Filter>('all');
 
   const addTodo: AddTodo = (text) => {
     const newTodo: TodoType = {
@@ -83,9 +75,7 @@ const Todo = () => {
   };
 
   const clearCompleted = () => {
-    setTodos((previousTodos) =>
-      previousTodos.filter((todo) => !todo.completed),
-    );
+    setTodos((previousTodos) => previousTodos.filter((todo) => !todo.completed));
   };
 
   /**
@@ -109,19 +99,19 @@ const Todo = () => {
   };
 
   const filteredTodos = todos.filter((todo) => {
-    if (filter === "active") return !todo.completed;
-    if (filter === "completed") return todo.completed;
+    if (filter === 'active') return !todo.completed;
+    if (filter === 'completed') return todo.completed;
     return true;
   });
 
   const hasCompletedTodos = todos.some((todo) => todo.completed);
 
   const emptyMessage =
-    filter === "all"
-      ? "No tasks yet. Add your first todo to get started."
-      : filter === "active"
-        ? "No active tasks. Add a new todo or mark an existing one as complete."
-        : "No completed tasks. Complete some todos to see them here.";
+    filter === 'all'
+      ? 'No tasks yet. Add your first todo to get started.'
+      : filter === 'active'
+        ? 'No active tasks. Add a new todo or mark an existing one as complete.'
+        : 'No completed tasks. Complete some todos to see them here.';
 
   return (
     <div className="w-full px-4 py-12">

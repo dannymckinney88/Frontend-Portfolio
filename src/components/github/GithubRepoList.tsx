@@ -1,6 +1,8 @@
-import GithubRepoCard from "./GithubRepoCard";
-import type { GithubRepo } from "@/lib/githubApi";
 import type { RefObject } from "react";
+
+import type { GithubRepo } from "@/lib/githubApi";
+
+import GithubRepoCard from "./GithubRepoCard";
 
 interface GithubRepoListProps {
   repos: GithubRepo[];

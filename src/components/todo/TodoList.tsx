@@ -2,6 +2,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+
 import TodoItem from "./TodoItem";
 import type { TodoListProps } from "./types";
 

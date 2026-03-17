@@ -1,8 +1,10 @@
 import { useState } from "react";
-import CounterDisplay from "../components/counter/CounterDisplay";
-import CounterControls from "../components/counter/CounterControls";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+
 import PageHeader from "@/components/common/PageHeader";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+
+import CounterControls from "../components/counter/CounterControls";
+import CounterDisplay from "../components/counter/CounterDisplay";
 
 const Counter = () => {
   const [count, setCount] = useState(0);

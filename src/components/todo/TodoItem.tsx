@@ -1,22 +1,24 @@
-import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import type { TodoItemProps } from "./types";
-import { Trash2, Pencil, GripVertical } from "lucide-react";
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
+import { GripVertical,Pencil, Trash2 } from "lucide-react";
+import { useState } from "react";
+
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+import { Button } from "../ui/button";
+import { Checkbox } from "../ui/checkbox";
+import { Input } from "../ui/input";
+import { Separator } from "../ui/separator";
+import type { TodoItemProps } from "./types";
 
 /**
  * Todo Item
