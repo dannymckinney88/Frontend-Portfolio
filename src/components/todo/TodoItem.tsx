@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import type { TodoItemProps } from "./types";
-import { Trash2, Pencil } from "lucide-react";
+import { Trash2, Pencil, GripVertical } from "lucide-react";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
@@ -26,6 +28,16 @@ const TodoItem = ({
 }: TodoItemProps) => {
   const [editedText, setEditedText] = useState(todo.text);
 
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: todo.id,
+    });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   /**
    * Handle edit dialog open state
    */
@@ -49,8 +61,24 @@ const TodoItem = ({
   };
 
   return (
-    <div className="flex items-center justify-between rounded-md px-3 py-2 transition-colors hover:bg-muted/60 group">
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="flex items-center justify-between rounded-md px-3 py-2 transition-colors hover:bg-muted/60 group"
+    >
       <div className="flex items-center gap-3 flex-1 min-w-0">
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="h-8 w-8 cursor-grab hover:bg-background active:cursor-grabbing"
+          aria-label={`Reorder todo: ${todo.text}`}
+          {...attributes}
+          {...listeners}
+        >
+          <GripVertical className="h-4 w-4 text-muted-foreground" />
+        </Button>
+
         <Checkbox
           className="border-foreground data-[state=checked]:bg-black data-[state=checked]:border-black"
           checked={todo.completed}

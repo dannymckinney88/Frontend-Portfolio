@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
+import { arrayMove } from "@dnd-kit/sortable";
 import TodoInput from "@/components/todo/TodoInput";
 import TodoList from "@/components/todo/TodoList";
 import TodoFilter from "@/components/todo/TodoFilter";
@@ -81,6 +83,26 @@ const Todo = () => {
     );
   };
 
+  /**
+   * Reorder todos after drag and drop
+   */
+  const handleDragEnd = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) {
+      return;
+    }
+
+    setTodos((previousTodos) => {
+      const oldIndex = previousTodos.findIndex((todo) => todo.id === active.id);
+      const newIndex = previousTodos.findIndex((todo) => todo.id === over.id);
+
+      if (oldIndex === -1 || newIndex === -1) {
+        return previousTodos;
+      }
+
+      return arrayMove(previousTodos, oldIndex, newIndex);
+    });
+  };
+
   const filteredTodos = todos.filter((todo) => {
     if (filter === "active") return !todo.completed;
     if (filter === "completed") return todo.completed;
@@ -135,12 +157,17 @@ const Todo = () => {
             {filteredTodos.length === 0 ? (
               <EmptyState message={emptyMessage} />
             ) : (
-              <TodoList
-                todos={filteredTodos}
-                toggleTodo={toggleTodo}
-                deleteTodo={deleteTodo}
-                editTodo={editTodo}
-              />
+              <DndContext
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+              >
+                <TodoList
+                  todos={filteredTodos}
+                  toggleTodo={toggleTodo}
+                  deleteTodo={deleteTodo}
+                  editTodo={editTodo}
+                />
+              </DndContext>
             )}
           </CardContent>
         </Card>
