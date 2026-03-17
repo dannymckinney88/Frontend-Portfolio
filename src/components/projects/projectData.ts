@@ -21,7 +21,7 @@ export const projectData: ProjectCardProps[] = [
   {
     title: "Todo App",
     description:
-      "Full CRUD task manager with filtering and local storage persistence.",
+      "A React task manager with full CRUD functionality, drag-and-drop sorting, and local storage persistence.",
     features: [
       "Create, edit, and delete tasks",
       "Filter active and completed todos",

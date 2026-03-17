@@ -123,7 +123,7 @@ const Todo = () => {
       <div className="w-full space-y-8">
         <PageHeader
           title="Todo App"
-          description="A full CRUD task manager focused on React state, reusable components, and local storage persistence."
+          description="A full CRUD task manager with drag-and-drop sorting, reusable components, and local storage persistence."
         />
 
         <Card className="w-full border-border/60 shadow-sm">
