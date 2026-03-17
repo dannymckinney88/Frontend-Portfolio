@@ -23,6 +23,7 @@ export interface TodoItemProps {
   toggleTodo: ToggleTodo;
   deleteTodo: DeleteTodo;
   editTodo: EditTodo;
+  showSeparator?: boolean;
 }
 
 export interface TodoFilterProps {

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
+
 import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
+import {
+  restrictToVerticalAxis,
+  restrictToParentElement,
+} from "@dnd-kit/modifiers";
 import TodoInput from "@/components/todo/TodoInput";
 import TodoList from "@/components/todo/TodoList";
 import TodoFilter from "@/components/todo/TodoFilter";
@@ -160,6 +165,7 @@ const Todo = () => {
               <DndContext
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
+                modifiers={[restrictToVerticalAxis, restrictToParentElement]}
               >
                 <TodoList
                   todos={filteredTodos}
