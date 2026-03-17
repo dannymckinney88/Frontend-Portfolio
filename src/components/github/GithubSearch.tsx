@@ -1,8 +1,8 @@
-import type { FormEvent } from "react";
-import { Search } from "lucide-react";
+import type { FormEvent } from 'react';
+import { Search } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 interface GithubSearchProps {
   username: string;
@@ -14,12 +14,12 @@ interface GithubSearchProps {
 /**
  * GitHub username search form
  */
-function GithubSearch({
+const GithubSearch = ({
   username,
   onUsernameChange,
   onSearch,
   isLoading,
-}: GithubSearchProps) {
+}: GithubSearchProps) => {
   /**
    * Handle form submit
    */
@@ -36,14 +36,11 @@ function GithubSearch({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 rounded-xl border bg-card p-4 shadow-sm sm:flex-row sm:items-end"
+      className="surface stack sm:flex-row sm:items-end sm:gap-4"
       aria-label="Search GitHub repositories by username"
     >
       <div className="flex-1 space-y-2">
-        <label
-          htmlFor="github-username"
-          className="text-sm font-medium leading-none"
-        >
+        <label htmlFor="github-username" className="text-sm font-medium leading-none">
           GitHub username
         </label>
 
@@ -68,14 +65,15 @@ function GithubSearch({
 
       <Button
         type="submit"
-        className="sm:min-w-32"
+        size="lg"
+        className="w-full sm:w-auto"
         disabled={!username.trim() || isLoading}
       >
         <Search className="mr-2 h-4 w-4" aria-hidden="true" />
-        {isLoading ? "Searching..." : "Search"}
+        {isLoading ? 'Searching...' : 'Search'}
       </Button>
     </form>
   );
-}
+};
 
 export default GithubSearch;
