@@ -1,7 +1,7 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -75,7 +75,7 @@
 }
 
 @theme inline {
-  --font-sans: "Geist Variable", sans-serif;
+  --font-sans: 'Geist Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -211,23 +211,55 @@
   }
 }
 @layer components {
-  .ui-button-base {
-    @apply inline-flex shrink-0 items-center justify-center whitespace-nowrap text-sm font-medium transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50;
+  .app-shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
 
-  .ui-button-focus {
-    @apply focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  .page-shell {
+    @apply w-full py-10 md:py-12;
   }
 
-  .ui-button-default {
-    @apply border border-foreground bg-foreground text-background shadow-sm hover:border-foreground hover:bg-background hover:text-foreground hover:shadow-md active:bg-foreground/90 active:text-background active:shadow-inner active:translate-y-px;
+  .page-stack {
+    @apply flex flex-col gap-8 md:gap-10;
   }
 
-  .ui-button-outline {
-    @apply border-2 border-foreground/60 bg-background text-foreground shadow-sm hover:border-foreground hover:bg-foreground hover:text-background hover:shadow-md active:bg-background active:text-foreground active:shadow-inner active:translate-y-px;
+  .section-stack {
+    @apply flex flex-col gap-6;
   }
 
-  .ui-nav-trigger {
-    @apply inline-flex min-w-28 h-9 items-center justify-center rounded-xl border border-transparent bg-background px-3 text-sm font-medium text-foreground shadow-sm transition-all outline-none select-none hover:border-foreground hover:bg-foreground hover:text-background hover:shadow-md active:bg-background active:text-foreground active:shadow-inner active:translate-y-px focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50;
+  .page-header {
+    @apply mx-auto mb-8 max-w-3xl space-y-2 text-center;
+  }
+
+  .page-title {
+    @apply text-3xl font-semibold tracking-tight text-foreground;
+  }
+
+  .page-description {
+    @apply text-base leading-7 text-muted-foreground;
+  }
+
+  .surface {
+    @apply rounded-2xl border bg-card p-6 text-card-foreground shadow-sm;
+  }
+
+  .surface-muted {
+    @apply rounded-2xl border bg-muted/40 p-6;
+  }
+
+  .stack {
+    @apply flex flex-col gap-4;
+  }
+
+  .stack-lg {
+    @apply flex flex-col gap-6;
+  }
+
+  .row {
+    @apply flex items-center gap-3;
+  }
+
+  .row-wrap {
+    @apply flex flex-wrap items-center gap-3;
   }
 }

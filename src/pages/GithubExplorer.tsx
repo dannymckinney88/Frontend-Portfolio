@@ -1,26 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import PageHeader from "@/components/common/PageHeader";
-import GithubProfileCard from "@/components/github/GithubProfileCard";
-import GithubRepoList from "@/components/github/GithubRepoList";
-import GithubSearch from "@/components/github/GithubSearch";
-import { Button } from "@/components/ui/button";
+import PageHeader from '@/components/common/PageHeader';
+import GithubProfileCard from '@/components/github/GithubProfileCard';
+import GithubRepoList from '@/components/github/GithubRepoList';
+import GithubSearch from '@/components/github/GithubSearch';
+import { Button } from '@/components/ui/button';
 import {
   fetchUserProfile,
   fetchUserRepos,
   type GithubProfile,
   type GithubRepo,
-} from "@/lib/githubApi";
+} from '@/lib/githubApi';
 
 /**
  * Default GitHub username shown on initial load
  */
-const DEFAULT_USERNAME = "dannymckinney88";
+const DEFAULT_USERNAME = 'dannymckinney88';
 
 /**
  * Local storage key for cached GitHub explorer data
  */
-const GITHUB_CACHE_KEY = "github-explorer-cache";
+const GITHUB_CACHE_KEY = 'github-explorer-cache';
 
 /**
  * Number of repositories displayed per page
@@ -77,7 +77,7 @@ function GithubExplorer() {
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("Unexpected error occurred.");
+        setError('Unexpected error occurred.');
       }
     } finally {
       setLoading(false);
@@ -123,7 +123,7 @@ function GithubExplorer() {
           return;
         }
       } catch (cacheError) {
-        console.error("Failed to parse GitHub cache:", cacheError);
+        console.error('Failed to parse GitHub cache:', cacheError);
       }
     }
 
@@ -138,8 +138,8 @@ function GithubExplorer() {
 
     if (repoListRef.current) {
       repoListRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+        behavior: 'smooth',
+        block: 'start',
       });
     }
 
@@ -149,107 +149,88 @@ function GithubExplorer() {
   }, [currentPage]);
 
   return (
-    <div className="w-full px-4 py-12">
-      <div className="w-full space-y-8">
-        <PageHeader
-          title="GitHub Repository Explorer"
-          description="A performant and accessible GitHub repository explorer built with React and TypeScript, showcasing API integration, pagination, persistent caching, and production-ready UI state management."
-        />
+    <section className="page-stack">
+      <PageHeader
+        title="GitHub Repository Explorer"
+        description="A performant and accessible GitHub repository explorer built with React and TypeScript, showcasing API integration, pagination, persistent caching, and production-ready UI state management."
+      />
 
-        <GithubSearch
-          username={username}
-          onUsernameChange={setUsername}
-          onSearch={handleSearch}
-          isLoading={loading}
-        />
+      <GithubSearch
+        username={username}
+        onUsernameChange={setUsername}
+        onSearch={handleSearch}
+        isLoading={loading}
+      />
 
-        {loading && (
-          <p
-            className="text-sm text-muted-foreground"
-            role="status"
-            aria-live="polite"
-          >
-            Loading GitHub profile and repositories...
+      {loading && (
+        <p className="text-sm text-muted-foreground" role="status" aria-live="polite">
+          Loading GitHub profile and repositories...
+        </p>
+      )}
+
+      {error && (
+        <p className="text-sm text-destructive" role="alert" aria-live="assertive">
+          {error}
+        </p>
+      )}
+
+      {!loading && !error && profile && <GithubProfileCard profile={profile} />}
+
+      {!loading && !error && repos.length === 0 && (
+        <p className="text-sm text-muted-foreground" role="status" aria-live="polite">
+          No public repositories found.
+        </p>
+      )}
+
+      {!loading && !error && repos.length > 0 && (
+        <div className="section-stack">
+          <p className="text-sm text-muted-foreground">
+            Showing {startIndex + 1}-{Math.min(endIndex, repos.length)} of {repos.length}{' '}
+            repositories
           </p>
-        )}
 
-        {error && (
-          <p
-            className="text-sm text-destructive"
-            role="alert"
-            aria-live="assertive"
-          >
-            {error}
-          </p>
-        )}
-
-        {!loading && !error && profile && (
-          <GithubProfileCard profile={profile} />
-        )}
-
-        {!loading && !error && repos.length === 0 && (
-          <p
-            className="text-sm text-muted-foreground"
-            role="status"
-            aria-live="polite"
-          >
-            No public repositories found.
-          </p>
-        )}
-
-        {!loading && !error && repos.length > 0 && (
-          <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Showing {startIndex + 1}-{Math.min(endIndex, repos.length)} of{" "}
-              {repos.length} repositories
-            </p>
-
-            <div id="repo-list" ref={repoListRef}>
-              <GithubRepoList
-                repos={paginatedRepos}
-                firstRepoRef={firstRepoRef}
-              />
-            </div>
-
-            {totalPages > 1 && (
-              <nav
-                className="flex items-center justify-center gap-6 pt-4"
-                aria-label="Repository pagination"
-              >
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handlePreviousPage}
-                  disabled={currentPage === 1}
-                  aria-label="Go to previous page"
-                  aria-controls="repo-list"
-                >
-                  Previous
-                </Button>
-
-                <span
-                  className="min-w-28 text-center text-sm text-muted-foreground"
-                  aria-live="polite"
-                >
-                  Page {currentPage} of {totalPages}
-                </span>
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages}
-                  aria-label="Go to next page"
-                  aria-controls="repo-list"
-                >
-                  Next
-                </Button>
-              </nav>
-            )}
+          <div id="repo-list" ref={repoListRef}>
+            <GithubRepoList repos={paginatedRepos} firstRepoRef={firstRepoRef} />
           </div>
-        )}
-      </div>
-    </div>
+
+          {totalPages > 1 && (
+            <nav
+              className="flex items-center justify-center gap-6 pt-2"
+              aria-label="Repository pagination"
+            >
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+                aria-label="Go to previous page"
+                aria-controls="repo-list"
+              >
+                Previous
+              </Button>
+
+              <span
+                className="min-w-28 text-center text-sm text-muted-foreground"
+                aria-live="polite"
+              >
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                aria-label="Go to next page"
+                aria-controls="repo-list"
+              >
+                Next
+              </Button>
+            </nav>
+          )}
+        </div>
+      )}
+    </section>
   );
 }
 
