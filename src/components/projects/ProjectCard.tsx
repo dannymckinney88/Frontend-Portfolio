@@ -47,7 +47,7 @@ function ProjectCard({
             ))}
           </ul>
 
-          <p className="text-sm text-muted-foreground/80">{stack}</p>
+          <p className="text-muted-foreground text-xs">{stack}</p>
         </div>
 
         <div className="mt-6 flex gap-2">

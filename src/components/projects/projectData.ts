@@ -7,27 +7,28 @@ export const projectData: ProjectCardProps[] = [
   {
     title: "GitHub Repository Explorer",
     description:
-      "Search GitHub users and explore their public repositories with paginated results, session caching, and accessible navigation patterns.",
+      "Browse public GitHub repositories through a performant, accessible interface with optimized data fetching, pagination, and persistent caching.",
     features: [
-      "GitHub REST API integration",
-      "Accessibility-focused focus management",
-      "Loading, empty, and error states",
-      "Session-based caching for repeated searches",
+      "GitHub REST API integration with client-side filtering",
+      "Accessible focus management and keyboard navigation",
+      "Robust UI states (loading, empty, error)",
+      "Local storage caching scoped by username to reduce redundant API calls and persist results",
     ],
-    stack: "React • TypeScript",
+    stack: "React • TypeScript • REST APIs • Accessibility (WCAG)",
     projectHref: "/github",
     codeHref: "https://github.com/dannymckinney88/Frontend-Portfolio",
   },
   {
     title: "Todo App",
     description:
-      "A React task manager with full CRUD functionality, drag-and-drop sorting, and local storage persistence.",
+      "A responsive task management app demonstrating state management, drag-and-drop interactions, and persistent client-side storage.",
     features: [
-      "Create, edit, and delete tasks",
-      "Filter active and completed todos",
-      "Persistent storage with localStorage",
+      "Full CRUD operations for task management",
+      "Drag-and-drop reordering with intuitive UI feedback",
+      "Filtering for active and completed tasks",
+      "Local storage persistence for session continuity",
     ],
-    stack: "React • TypeScript • Shadcn UI",
+    stack: "React • TypeScript • Shadcn UI • Accessibility (WCAG)",
     projectHref: "/todo",
     codeHref: "https://github.com/dannymckinney88/Frontend-Portfolio",
   },
@@ -36,9 +37,9 @@ export const projectData: ProjectCardProps[] = [
     description:
       "Simple counter demonstrating React state and component composition.",
     features: [
-      "React useState fundamentals",
-      "Reusable UI components",
-      "Accessible button interactions",
+      "State management using React hooks",
+      "Reusable and composable UI components",
+      "Accessible button interactions and keyboard support",
     ],
     stack: "React • TypeScript",
     projectHref: "/counter",
