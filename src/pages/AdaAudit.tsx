@@ -2,16 +2,13 @@ import { useState } from 'react';
 
 import AuditForm from '@/components/ada/AuditForm';
 import AuditSummary from '@/components/ada/AuditSummary';
+import type { AuditResult } from '@/components/ada/types';
 import ViolationList from '@/components/ada/ViolationList';
 import PageHeader from '@/components/common/PageHeader';
 import { scanPage } from '@/lib/auditApi';
 
 const AdaAudit = () => {
-  const [results, setResults] = useState<null | {
-    url: string;
-    scannedAt: string;
-    violations: unknown[];
-  }>(null);
+  const [results, setResults] = useState<AuditResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -50,7 +47,7 @@ const AdaAudit = () => {
         <p className="text-sm text-muted-foreground">Last scanned: {results.url}</p>
       ) : null}
 
-      <AuditSummary />
+      <AuditSummary results={results} />
       <ViolationList />
     </div>
   );
