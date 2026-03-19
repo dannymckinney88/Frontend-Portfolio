@@ -15,8 +15,18 @@ const AdaAudit = () => {
   const handleSubmit = async (url: string) => {
     setError(null);
 
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      setError('Please enter a valid URL starting with http or https.');
+    let parsedUrl: URL;
+
+    try {
+      parsedUrl = new URL(url);
+
+      if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+        setError('Please enter a valid http or https URL.');
+        setResults(null);
+        return;
+      }
+    } catch {
+      setError('Please enter a valid URL.');
       setResults(null);
       return;
     }
@@ -24,7 +34,7 @@ const AdaAudit = () => {
     setIsLoading(true);
 
     try {
-      const response = await scanPage(url);
+      const response = await scanPage(parsedUrl.toString());
       setResults(response);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong');

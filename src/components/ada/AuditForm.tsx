@@ -53,7 +53,7 @@ const AuditForm = ({ onSubmit, isLoading = false, error = '' }: AuditFormProps) 
             />
 
             <p id={helpTextId} className="text-sm text-muted-foreground">
-              Enter a page URL to run a mock accessibility audit and review WCAG issues.
+              Enter a page URL to run an accessibility audit and review WCAG issues.
             </p>
 
             {error ? (

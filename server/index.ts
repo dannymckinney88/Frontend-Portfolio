@@ -1,0 +1,73 @@
+import AxeBuilder from '@axe-core/playwright';
+import cors from 'cors';
+import express, { type Request, type Response } from 'express';
+import { type Browser, chromium } from 'playwright';
+
+const app = express();
+const PORT = 3001;
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/health', (_req: Request, res: Response) => {
+  res.json({ ok: true });
+});
+
+app.post('/audit', async (req: Request, res: Response) => {
+  const { url } = req.body as { url?: string };
+
+  if (!url) {
+    return res.status(400).json({ error: 'URL is required.' });
+  }
+
+  let parsedUrl: URL;
+
+  try {
+    parsedUrl = new URL(url);
+
+    if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+      return res.status(400).json({ error: 'Please enter a valid http or https URL.' });
+    }
+  } catch {
+    return res.status(400).json({ error: 'Please enter a valid URL.' });
+  }
+
+  let browser: Browser | null = null;
+
+  try {
+    browser = await chromium.launch({ headless: true });
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto(parsedUrl.toString(), {
+      waitUntil: 'domcontentloaded',
+      timeout: 15000,
+    });
+
+    const results = await new AxeBuilder({ page }).analyze();
+
+    await context.close();
+
+    return res.json({
+      url: parsedUrl.toString(),
+      scannedAt: new Date().toISOString(),
+      violations: results.violations,
+      passes: results.passes.length,
+      incomplete: results.incomplete.length,
+      inapplicable: results.inapplicable.length,
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Audit failed.';
+
+    return res.status(500).json({ error: message });
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Audit server running at http://localhost:${PORT}`);
+});
