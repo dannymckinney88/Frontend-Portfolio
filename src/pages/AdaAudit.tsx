@@ -97,7 +97,6 @@ const AdaAudit = () => {
       ) : null}
 
       <ViolationList violations={results?.violations ?? []} />
-      <ViolationList violations={results?.violations ?? []} />
     </div>
   );
 };
