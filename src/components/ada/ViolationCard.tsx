@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react';
 
 import { Card, CardContent } from '@/components/ui/card';
 
+import { IMPACT_STYLES } from './constants';
 import type { AuditViolation } from './types';
 
 interface ViolationCardProps {
@@ -11,6 +12,8 @@ interface ViolationCardProps {
 const ViolationCard = ({ violation }: ViolationCardProps) => {
   const headingId = `violation-${violation.id}`;
 
+  const impact = violation.impact ?? 'minor';
+  const impactBadgeClass = IMPACT_STYLES[impact].badge;
   return (
     <Card className="border-border/70 shadow-sm" aria-labelledby={headingId}>
       <CardContent className="p-5 stack gap-4">
@@ -20,8 +23,10 @@ const ViolationCard = ({ violation }: ViolationCardProps) => {
               {violation.id}
             </h3>
 
-            <span className="inline-flex w-fit rounded-full border border-border/70 bg-muted px-2.5 py-1 text-xs font-medium capitalize text-muted-foreground">
-              {violation.impact ?? 'none'}
+            <span
+              className={`inline-flex w-fit rounded-full border px-2.5 py-1 text-xs font-medium capitalize ${impactBadgeClass}`}
+            >
+              {impact}
             </span>
           </div>
 

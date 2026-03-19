@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 interface AuditFormProps {
   onSubmit?: (url: string) => void;
   isLoading?: boolean;
-  error?: string;
+  error?: string | null;
 }
 
 const AuditForm = ({ onSubmit, isLoading = false, error = '' }: AuditFormProps) => {
@@ -29,7 +29,12 @@ const AuditForm = ({ onSubmit, isLoading = false, error = '' }: AuditFormProps) 
   return (
     <Card className="border-border/70 shadow-sm">
       <CardContent className="p-5">
-        <form onSubmit={handleSubmit} className="stack gap-4" noValidate>
+        <form
+          onSubmit={handleSubmit}
+          className="stack gap-4"
+          noValidate
+          aria-busy={isLoading}
+        >
           <div className="stack gap-2">
             <label htmlFor="audit-url" className="text-sm font-medium text-foreground">
               Page URL

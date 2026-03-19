@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 
+import { IMPACT_ORDER as impactOrder } from './constants';
 import type { AuditViolation } from './types';
 import ViolationCard from './ViolationCard';
 
@@ -9,13 +10,6 @@ interface ViolationListProps {
 
 const ViolationList = ({ violations }: ViolationListProps) => {
   if (!violations.length) return null;
-
-  const impactOrder: Record<string, number> = {
-    critical: 0,
-    serious: 1,
-    moderate: 2,
-    minor: 3,
-  };
 
   const sortedViolations = [...violations].sort((a, b) => {
     const aImpact = impactOrder[a.impact ?? 'minor'] ?? 99;

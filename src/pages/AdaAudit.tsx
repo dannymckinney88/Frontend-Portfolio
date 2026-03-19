@@ -10,10 +10,10 @@ import { scanPage } from '@/lib/auditApi';
 const AdaAudit = () => {
   const [results, setResults] = useState<AuditResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (url: string) => {
-    setError('');
+    setError(null);
 
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
       setError('Please enter a valid URL starting with http or https.');
@@ -42,9 +42,19 @@ const AdaAudit = () => {
       />
 
       <AuditForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {!isLoading && results
+          ? `Audit complete. ${results.violations.length} issues found for ${results.url}.`
+          : ''}
+        {isLoading ? 'Running accessibility audit...' : ''}
+        {!isLoading && error ? `Error: ${error}` : ''}
+      </div>
 
       {results ? (
-        <p className="text-sm text-muted-foreground">Last scanned: {results.url}</p>
+        <p className="text-sm text-muted-foreground">
+          Last scanned: <span className="font-medium">{results.url}</span> ·{' '}
+          {new Date(results.scannedAt).toLocaleTimeString()}
+        </p>
       ) : null}
 
       <AuditSummary results={results} />

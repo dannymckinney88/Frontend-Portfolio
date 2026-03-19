@@ -7,20 +7,17 @@ import { projectData } from '@/components/projects/projectData';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
+const qualifications = [
+  '4+ Years Enterprise Experience',
+  'ADA / WCAG Focused',
+  'React + TypeScript',
+  'Fintech Product Delivery',
+];
+
 function Home() {
   /**
    * Smooth scroll to projects section with offset
    */
-  const handleProjectsClick = () => {
-    const section = document.getElementById('projects');
-
-    if (!section) return;
-
-    const yOffset = -140;
-    const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
-
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  };
 
   return (
     <div className="page-stack">
@@ -47,27 +44,28 @@ function Home() {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Button onClick={handleProjectsClick}>View Projects</Button>
+          <Button asChild>
+            <a href="#projects">View Projects</a>
+          </Button>
 
           <Button variant="outline" asChild>
             <Link to="/github">View Live Demo</Link>
           </Button>
         </div>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-2">
-          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
-            4+ Years Enterprise Experience
-          </span>
-          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
-            ADA / WCAG Focused
-          </span>
-          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
-            React + TypeScript
-          </span>
-          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
-            Fintech Product Delivery
-          </span>
-        </div>
+        <ul
+          className="mt-9 flex flex-wrap items-center justify-center gap-2"
+          aria-label="Key qualifications"
+        >
+          {qualifications.map((tag) => (
+            <li
+              key={tag}
+              className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm"
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* About (NOT a card – keeps layout breathing) */}
@@ -131,7 +129,11 @@ function Home() {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="section-stack" aria-labelledby="projects-heading">
+      <section
+        id="projects"
+        className="section-stack scroll-mt-36"
+        aria-labelledby="projects-heading"
+      >
         <div className="space-y-2">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
             Featured Work
@@ -173,7 +175,7 @@ function Home() {
                   rel="noopener noreferrer"
                   aria-label="View resume PDF"
                 >
-                  <FileText />
+                  <FileText aria-hidden="true" />
                   View Resume
                 </a>
               </Button>
@@ -183,7 +185,7 @@ function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Linkedin />
+                  <Linkedin aria-hidden="true" />
                   LinkedIn
                 </a>
               </Button>
@@ -194,7 +196,7 @@ function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Github />
+                  <Github aria-hidden="true" />
                   GitHub
                 </a>
               </Button>

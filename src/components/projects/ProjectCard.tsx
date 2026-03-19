@@ -42,8 +42,8 @@ const ProjectCard = ({
             </p>
 
             <ul className="list-disc space-y-2.5 pl-5 text-sm leading-7 marker:text-muted-foreground">
-              {features.map((feature) => (
-                <li key={feature}>{feature}</li>
+              {features.map((feature, index) => (
+                <li key={index}>{feature}</li>
               ))}
             </ul>
           </div>

@@ -19,7 +19,7 @@
   --primary-foreground: oklch(0.985 0.01 255);
 
   --secondary: oklch(0.96 0.008 255);
-  --primary-foreground: oklch(0.985 0.01 255);
+  --secondary-foreground: oklch(0.22 0.02 255);
 
   --muted: oklch(0.955 0.006 255);
   --muted-foreground: oklch(0.5 0.02 255);
@@ -128,55 +128,6 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  html {
-    @apply font-sans scroll-smooth;
-  }
-
-  body {
-    @apply min-h-screen bg-background text-foreground antialiased;
-  }
-
-  #root {
-    @apply min-h-screen;
-  }
-
-  h1 {
-    @apply text-3xl font-semibold tracking-tight text-foreground;
-  }
-
-  h2 {
-    @apply text-2xl font-semibold tracking-tight text-foreground;
-  }
-
-  h3 {
-    @apply text-xl font-semibold tracking-tight text-foreground;
-  }
-
-  p {
-    @apply leading-7 text-muted-foreground;
-  }
-
-  a {
-    @apply transition-colors;
-  }
-
-  button,
-  input,
-  textarea,
-  select {
-    font: inherit;
-  }
-
-  ::selection {
-    @apply bg-primary text-primary-foreground;
-  }
 }
 
 @layer components {
