@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FileText, Github, Linkedin } from 'lucide-react';
 
 import StrengthCard from '@/components/common/StrengthCard';
 import ProjectCard from '@/components/projects/ProjectCard';
@@ -170,16 +171,35 @@ function Home() {
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <Button asChild>
                 <a
+                  href="/danny-mckinney-resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View resume PDF"
+                >
+                  <FileText />
+                  View Resume
+                </a>
+              </Button>
+              <Button variant="outline" asChild>
+                <a
+                  href="https://www.linkedin.com/in/danny-mckinney/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin />
+                  LinkedIn
+                </a>
+              </Button>
+
+              <Button variant="outline" asChild>
+                <a
                   href="https://github.com/dannymckinney88"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  View GitHub
+                  <Github />
+                  GitHub
                 </a>
-              </Button>
-
-              <Button variant="outline" onClick={handleProjectsClick}>
-                View Projects
               </Button>
             </div>
           </CardContent>
