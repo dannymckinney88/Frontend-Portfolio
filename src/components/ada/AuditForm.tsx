@@ -10,7 +10,7 @@ interface AuditFormProps {
   error?: string | null;
 }
 
-const AuditForm = ({ onSubmit, isLoading = false, error = '' }: AuditFormProps) => {
+const AuditForm = ({ onSubmit, isLoading = false, error = null }: AuditFormProps) => {
   const [url, setUrl] = useState('');
 
   const helpTextId = 'audit-url-help';

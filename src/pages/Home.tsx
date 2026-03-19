@@ -57,7 +57,7 @@ function Home() {
           </Button>
 
           <Button variant="outline" asChild>
-            <Link to="/github">View Live Demo</Link>
+            <Link to="/accessibility-audit">View Live Demo</Link>
           </Button>
         </div>
 

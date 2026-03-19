@@ -71,6 +71,7 @@ const ProjectCard = ({
             <Button variant="outline" asChild>
               <a href={codeHref} target="_blank" rel="noopener noreferrer">
                 View Code
+                <span className="sr-only"> (opens in new tab)</span>
               </a>
             </Button>
           </div>

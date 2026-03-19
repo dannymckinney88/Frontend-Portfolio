@@ -5,6 +5,19 @@ import type { ProjectCardProps } from './ProjectCard';
  */
 export const projectData: ProjectCardProps[] = [
   {
+    title: 'Accessibility Audit Tool',
+    description:
+      'A full-stack accessibility auditing tool that runs real Playwright and axe-core scans, surfaces WCAG issues by severity, and provides actionable guidance for remediation.',
+    features: [
+      'Runs real page audits with a Node/Express backend using Playwright and axe-core',
+      'Displays violations, severity breakdowns, passed checks, and affected DOM nodes',
+      'Built with accessible form flows, live region announcements, focus management, and clear error handling',
+    ],
+    stack: ['React', 'TypeScript', 'Express', 'Playwright', 'axe-core', 'Accessibility'],
+    projectHref: '/accessibility-audit',
+    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+  },
+  {
     title: 'GitHub Repository Explorer',
     description:
       'An API-driven interface for repository search, pagination, caching, and resilient UI states.',
