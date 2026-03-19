@@ -130,11 +130,11 @@ function Home() {
           </h2>
           <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
             Selected projects demonstrating frontend fundamentals, accessible UI patterns,
-            and production-minded React architecture.
+            and production-ready React architecture.
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {projectData.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}

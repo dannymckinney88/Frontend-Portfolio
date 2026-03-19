@@ -1,48 +1,46 @@
-import type { ProjectCardProps } from "./ProjectCard";
+import type { ProjectCardProps } from './ProjectCard';
 
 /**
  * Portfolio project data
  */
 export const projectData: ProjectCardProps[] = [
   {
-    title: "GitHub Repository Explorer",
+    title: 'GitHub Repository Explorer',
     description:
-      "Browse public GitHub repositories through a performant, accessible interface with optimized data fetching, pagination, and persistent caching.",
+      'An API-driven interface for repository search, pagination, caching, and resilient UI states.',
     features: [
-      "GitHub REST API integration with client-side filtering",
-      "Accessible focus management and keyboard navigation",
-      "Robust UI states (loading, empty, error)",
-      "Local storage caching scoped by username to reduce redundant API calls and persist results",
+      'GitHub REST API integration with username-based repository browsing',
+      'Loading, empty, and error states for realistic data-fetching flows',
+      'Local storage caching scoped by username to reduce redundant API calls',
     ],
-    stack: "React • TypeScript • REST APIs • Accessibility (WCAG)",
-    projectHref: "/github",
-    codeHref: "https://github.com/dannymckinney88/Frontend-Portfolio",
+    stack: ['React', 'TypeScript', 'REST API', 'Accessibility'],
+    projectHref: '/github',
+    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
   },
   {
-    title: "Todo App",
+    title: 'Todo App',
     description:
-      "A responsive task management app demonstrating state management, drag-and-drop interactions, and persistent client-side storage.",
+      'A task management interface focused on CRUD actions, filtering, drag-and-drop, and local persistence.',
     features: [
-      "Full CRUD operations for task management",
-      "Drag-and-drop reordering with intuitive UI feedback",
-      "Filtering for active and completed tasks",
-      "Local storage persistence for session continuity",
+      'Full CRUD interactions for creating and managing tasks',
+      'Drag-and-drop reordering with clear visual feedback',
+      'Local storage persistence to preserve state across sessions',
     ],
-    stack: "React • TypeScript • Shadcn UI • Accessibility (WCAG)",
-    projectHref: "/todo",
-    codeHref: "https://github.com/dannymckinney88/Frontend-Portfolio",
+    stack: ['React', 'TypeScript', 'Shadcn UI', 'Accessibility'],
+    projectHref: '/todo',
+    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
   },
   {
-    title: "Counter App",
+    title: 'Counter App',
     description:
-      "Simple counter demonstrating React state and component composition.",
+      'A lightweight React project demonstrating predictable state updates, component composition, and accessible UI patterns.',
     features: [
-      "State management using React hooks",
-      "Reusable and composable UI components",
-      "Accessible button interactions and keyboard support",
+      'Predictable state updates with clear user feedback',
+      'Reusable components that support clean composition',
+      'Accessible button interactions with keyboard support',
     ],
-    stack: "React • TypeScript",
-    projectHref: "/counter",
-    codeHref: "https://github.com/dannymckinney88/Frontend-Portfolio",
+    stack: ['React', 'TypeScript', 'Accessibility'],
+    projectHref: '/counter',
+    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
   },
 ];
