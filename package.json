@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "tsx server/index.ts",
-    "start": "tsx server/index.ts",
-    "postinstall": "playwright install --with-deps chromium"
+    "start": "tsx server/index.ts"
   },
   "dependencies": {
     "@dnd-kit/modifiers": "^9.0.0",
