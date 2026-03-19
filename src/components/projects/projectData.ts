@@ -27,7 +27,7 @@ export const projectData: ProjectCardProps[] = [
       'Local storage persistence to preserve state across sessions',
     ],
     stack: ['React', 'TypeScript', 'Shadcn UI', 'Accessibility'],
-    projectHref: '/todo',
+    projectHref: '/todos',
     codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
   },
   {

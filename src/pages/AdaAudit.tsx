@@ -1,16 +1,21 @@
 import AuditForm from '@/components/ada/AuditForm';
 import AuditSummary from '@/components/ada/AuditSummary';
 import ViolationList from '@/components/ada/ViolationList';
+import PageHeader from '@/components/common/PageHeader';
 
-/**
- * ADA Audit Page
- */
 const AdaAudit = () => {
-  return (
-    <div className="container mx-auto px-4 py-8 space-y-6">
-      <h1 className="text-2xl font-semibold">Accessibility Audit</h1>
+  const handleSubmit = (url: string) => {
+    console.log('Audit URL:', url);
+  };
 
-      <AuditForm />
+  return (
+    <div className="section-stack">
+      <PageHeader
+        title="Accessibility Audit"
+        description="Run a page audit and review accessibility issues in a clear, developer-friendly format."
+      />
+
+      <AuditForm onSubmit={handleSubmit} />
       <AuditSummary />
       <ViolationList />
     </div>
