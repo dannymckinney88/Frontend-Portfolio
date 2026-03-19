@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const location = useLocation();
-  const [activeSection, setActiveSection] = React.useState<'home' | 'projects'>('home');
 
   const navLinkClass = (isActive = false) =>
     cn(
@@ -27,23 +26,11 @@ const Navbar = () => {
 
   React.useEffect(() => {
     if (location.pathname !== '/') {
-      setActiveSection('home');
       return;
     }
 
     const projects = document.getElementById('projects');
     if (!projects) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setActiveSection(entry.isIntersecting ? 'projects' : 'home');
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(projects);
-
-    return () => observer.disconnect();
   }, [location.pathname]);
 
   const isHomeRoute = location.pathname === '/';
@@ -53,9 +40,8 @@ const Navbar = () => {
     location.pathname === '/github' ||
     location.pathname === '/counter';
 
-  const isHomeActive = isHomeRoute && activeSection === 'home';
-  const isProjectsActive = isProjectPage || (isHomeRoute && activeSection === 'projects');
-
+  const isHomeActive = isHomeRoute;
+  const isProjectsActive = isProjectPage;
   return (
     <nav className="border-b border-border/70 bg-background">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
