@@ -4,8 +4,11 @@ import express, { type Request, type Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { type Browser, chromium } from 'playwright';
 
+import 'dotenv/config';
+
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT ?? 3001;
+const API_SECRET = process.env.AUDIT_API_SECRET;
 
 const auditLimiter = rateLimit({
   windowMs: 60 * 1000,
@@ -23,6 +26,14 @@ app.get('/health', (_req: Request, res: Response) => {
 });
 
 app.post('/audit', auditLimiter, async (req: Request, res: Response) => {
+  if (API_SECRET) {
+    const provided = req.headers['x-api-secret'];
+
+    if (provided !== API_SECRET) {
+      return res.status(401).json({ error: 'Unauthorized.' });
+    }
+  }
+
   const { url } = req.body as { url?: string };
 
   if (!url) {
