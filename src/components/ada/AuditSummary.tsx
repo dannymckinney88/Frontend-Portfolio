@@ -60,7 +60,7 @@ const AuditSummary = ({ results }: AuditSummaryProps) => {
         <div className="space-y-1">
           <h2
             id="audit-summary-heading"
-            className="rounded-sm text-xl font-semibold tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="text-xl font-semibold tracking-tight focus:outline-none"
             ref={headingRef}
             tabIndex={-1}
           >

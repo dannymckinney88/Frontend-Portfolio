@@ -87,6 +87,16 @@ const AdaAudit = () => {
       ) : null}
 
       <AuditSummary results={results} />
+      {!isLoading && !error && results && results.violations.length === 0 ? (
+        <div className="rounded-xl border border-green-200 bg-green-50 px-6 py-8 text-center dark:border-green-900/40 dark:bg-green-950/30">
+          <p className="text-sm font-medium text-green-700 dark:text-green-400">
+            No accessibility violations found. This page passed all axe-core checks{' '}
+            <span aria-hidden="true"> 🎉</span>
+          </p>
+        </div>
+      ) : null}
+
+      <ViolationList violations={results?.violations ?? []} />
       <ViolationList violations={results?.violations ?? []} />
     </div>
   );
