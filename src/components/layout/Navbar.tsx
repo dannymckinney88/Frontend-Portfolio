@@ -38,7 +38,8 @@ const Navbar = () => {
   const isProjectPage =
     location.pathname === '/todos' ||
     location.pathname === '/github' ||
-    location.pathname === '/counter';
+    location.pathname === '/counter' ||
+    location.pathname === '/accessibility-audit';
 
   const isHomeActive = isHomeRoute;
   const isProjectsActive = isProjectPage;
