@@ -27,7 +27,7 @@ function Home() {
   return (
     <div className="page-stack">
       {/* Hero */}
-      <section className="mx-auto max-w-4xl py-8 text-center sm:py-12">
+      <section className="mx-auto max-w-4xl py-10 text-center sm:py-14">
         <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
           Frontend Developer
         </p>
@@ -37,12 +37,13 @@ function Home() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
-          I build accessible, performant React applications with a strong focus on
-          TypeScript, reusable UI architecture, and polished user experiences.
+          Frontend developer building accessible, production-ready React applications with
+          strong TypeScript foundations, reusable UI architecture, and polished user
+          experiences.
         </p>
 
-        <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-          4+ years building enterprise fintech interfaces across client, advisor, and
+        <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+          4+ years delivering enterprise fintech interfaces across client, advisor, and
           internal platforms, with hands-on experience in ADA / WCAG compliance and
           scalable frontend systems.
         </p>
@@ -51,14 +52,23 @@ function Home() {
           <Button onClick={handleProjectsClick}>View Projects</Button>
 
           <Button variant="outline" asChild>
-            <a
-              href="https://github.com/dannymckinney88"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
+            <Link to="/github">View Live Demo</Link>
           </Button>
+        </div>
+
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-2">
+          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
+            4+ Years Enterprise Experience
+          </span>
+          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
+            ADA / WCAG Focused
+          </span>
+          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
+            React + TypeScript
+          </span>
+          <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-xs text-muted-foreground sm:text-sm">
+            Fintech Product Delivery
+          </span>
         </div>
       </section>
 
@@ -70,20 +80,23 @@ function Home() {
           </p>
 
           <h2 className="text-2xl font-semibold tracking-tight">
-            Enterprise frontend experience with accessibility at the core
+            Building enterprise frontend systems with accessibility at the core
           </h2>
 
           <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-            I’m a frontend developer with 4+ years of experience building and maintaining
-            enterprise web applications in fintech. My work has focused on scalable UI,
-            accessibility, and delivering polished experiences across client, advisor, and
-            internal platforms.
+            I’m a frontend developer with 4+ years of experience building enterprise web
+            applications in fintech.
           </p>
 
           <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-            This portfolio highlights the kind of frontend work I enjoy most: thoughtful
-            interfaces, strong UX fundamentals, resilient UI states, and reusable React
-            component patterns.
+            I build interfaces that are resilient, accessible, and designed for real-world
+            use — handling edge cases, managing UI states, and creating components that
+            scale across teams and products.
+          </p>
+
+          <p className="text-sm leading-7 text-muted-foreground sm:text-base">
+            I focus on delivering experiences that feel predictable and polished, where
+            users always understand what’s happening.
           </p>
         </div>
       </section>
@@ -150,12 +163,12 @@ function Home() {
             </h2>
 
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-              I’m focused on frontend roles where accessibility, UI quality, and strong
-              React fundamentals matter.
+              I’m looking for frontend opportunities where accessibility, polished UI, and
+              production-minded React engineering are valued.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Button variant="outline" asChild>
+              <Button asChild>
                 <a
                   href="https://github.com/dannymckinney88"
                   target="_blank"
@@ -165,8 +178,8 @@ function Home() {
                 </a>
               </Button>
 
-              <Button variant="outline" asChild>
-                <Link to="/github">Open Featured Demo</Link>
+              <Button variant="outline" onClick={handleProjectsClick}>
+                View Projects
               </Button>
             </div>
           </CardContent>
