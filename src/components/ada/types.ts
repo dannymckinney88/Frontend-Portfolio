@@ -1,0 +1,4 @@
+/**
+ * ADA types (scaffold)
+ */
+export {};
