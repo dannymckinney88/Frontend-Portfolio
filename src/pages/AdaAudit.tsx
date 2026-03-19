@@ -17,7 +17,6 @@ const AdaAudit = () => {
 
     let normalizedUrl = url.trim();
 
-    // ✅ auto-prepend https if missing
     if (!normalizedUrl.startsWith('http://') && !normalizedUrl.startsWith('https://')) {
       normalizedUrl = `https://${normalizedUrl}`;
     }
@@ -50,6 +49,15 @@ const AdaAudit = () => {
       setIsLoading(false);
     }
   };
+
+  const liveMessage = isLoading
+    ? 'Running accessibility audit...'
+    : error
+      ? `Error: ${error}`
+      : results
+        ? `Audit complete. ${results.violations.length} issues found for ${results.url}.`
+        : '';
+
   return (
     <div className="section-stack">
       <PageHeader
@@ -58,12 +66,9 @@ const AdaAudit = () => {
       />
 
       <AuditForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
+
       <div aria-live="polite" aria-atomic="true" className="sr-only">
-        {!isLoading && results
-          ? `Audit complete. ${results.violations.length} issues found for ${results.url}.`
-          : ''}
-        {isLoading ? 'Running accessibility audit...' : ''}
-        {!isLoading && error ? `Error: ${error}` : ''}
+        {liveMessage}
       </div>
 
       {results ? (
@@ -71,6 +76,14 @@ const AdaAudit = () => {
           Last scanned: <span className="font-medium">{results.url}</span> ·{' '}
           {new Date(results.scannedAt).toLocaleTimeString()}
         </p>
+      ) : null}
+
+      {!results && !isLoading && !error ? (
+        <div className="rounded-xl border border-dashed border-border/70 px-6 py-10 text-center">
+          <p className="text-sm text-muted-foreground">
+            Enter a URL above to run your first accessibility audit.
+          </p>
+        </div>
       ) : null}
 
       <AuditSummary results={results} />

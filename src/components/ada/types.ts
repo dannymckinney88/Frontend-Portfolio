@@ -19,4 +19,7 @@ export interface AuditResult {
   url: string;
   scannedAt: string;
   violations: AuditViolation[];
+  passes: number; // ← missing
+  incomplete: number; // ← missing
+  inapplicable: number; // ← missing
 }

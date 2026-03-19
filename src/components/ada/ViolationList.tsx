@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { Card, CardContent } from '@/components/ui/card';
 
 import { IMPACT_ORDER as impactOrder } from './constants';
@@ -9,14 +11,18 @@ interface ViolationListProps {
 }
 
 const ViolationList = ({ violations }: ViolationListProps) => {
-  if (!violations.length) return null;
+  const sortedViolations = useMemo(
+    () =>
+      [...violations].sort((a, b) => {
+        const aImpact = impactOrder[a.impact ?? 'minor'] ?? 99;
+        const bImpact = impactOrder[b.impact ?? 'minor'] ?? 99;
 
-  const sortedViolations = [...violations].sort((a, b) => {
-    const aImpact = impactOrder[a.impact ?? 'minor'] ?? 99;
-    const bImpact = impactOrder[b.impact ?? 'minor'] ?? 99;
+        return aImpact - bImpact;
+      }),
+    [violations],
+  );
 
-    return aImpact - bImpact;
-  });
+  if (!sortedViolations.length) return null;
 
   return (
     <Card className="border-border/70 shadow-sm" aria-labelledby="violation-list-heading">

@@ -1,10 +1,19 @@
 import AxeBuilder from '@axe-core/playwright';
 import cors from 'cors';
 import express, { type Request, type Response } from 'express';
+import rateLimit from 'express-rate-limit';
 import { type Browser, chromium } from 'playwright';
 
 const app = express();
 const PORT = 3001;
+
+const auditLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests. Please wait before scanning again.' },
+});
 
 app.use(cors());
 app.use(express.json());
@@ -13,7 +22,7 @@ app.get('/health', (_req: Request, res: Response) => {
   res.json({ ok: true });
 });
 
-app.post('/audit', async (req: Request, res: Response) => {
+app.post('/audit', auditLimiter, async (req: Request, res: Response) => {
   const { url } = req.body as { url?: string };
 
   if (!url) {

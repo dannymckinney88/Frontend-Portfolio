@@ -14,7 +14,7 @@ export async function scanPage(url: string): Promise<AuditResult> {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.error || 'Audit failed.');
+    throw new Error(data.error ?? 'Audit failed.');
   }
 
   return data;
