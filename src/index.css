@@ -160,7 +160,7 @@
   }
 
   .surface {
-    @apply rounded-2xl border bg-card p-6 text-card-foreground shadow-sm;
+    @apply rounded-2xl border border-border/70 bg-card p-6 text-card-foreground shadow-sm;
   }
 
   .surface-muted {

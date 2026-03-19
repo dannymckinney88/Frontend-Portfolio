@@ -101,7 +101,7 @@ const GithubProfileCard = ({ profile }: GithubProfileCardProps) => {
                 aria-label={`View ${displayName}'s GitHub profile`}
               >
                 View Profile
-                <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
+                <ExternalLink aria-hidden="true" />
               </a>
             </Button>
           </div>

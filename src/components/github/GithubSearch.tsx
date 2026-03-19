@@ -66,7 +66,7 @@ const GithubSearch = ({
         className="w-full sm:w-auto"
         disabled={!username.trim() || isLoading}
       >
-        <Search className="mr-2 h-4 w-4" aria-hidden="true" />
+        <Search aria-hidden="true" />
         {isLoading ? 'Searching...' : 'Search'}
       </Button>
     </form>

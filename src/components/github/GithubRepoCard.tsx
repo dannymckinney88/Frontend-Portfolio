@@ -1,8 +1,9 @@
 import { ExternalLink, Star } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import type { GithubRepo } from '@/lib/githubApi';
+import { cn } from '@/lib/utils';
 
 interface GithubRepoCardProps {
   repo: GithubRepo;
@@ -20,6 +21,10 @@ const languageColors: Record<string, string> = {
   Shell: '#89e051',
 };
 
+// 1. Remove min-h constraints, let flex do the work
+// 2. De-emphasize missing data
+// 3. Fix the empty space issue
+
 const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
   const updatedDate = new Date(repo.updatedAt).toLocaleDateString(undefined, {
     month: 'short',
@@ -27,31 +32,40 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
     year: 'numeric',
   });
 
+  const description = repo.description?.trim();
+
   return (
-    <Card className="h-full border-border/80 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <Card className="h-full border-border/70 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <CardContent className="flex h-full flex-col p-5">
-        <div className="flex flex-1 flex-col gap-4">
-          <CardHeader className="space-y-2 p-0">
-            <h3 className="min-h-14 line-clamp-2 text-base leading-7 font-semibold tracking-tight">
-              {repo.name}
-            </h3>
+        <div className="flex flex-1 flex-col gap-3">
+          {/* Title — no min-h, just let it flow */}
+          <h3 className="line-clamp-2 min-h-12 text-base font-semibold leading-6 tracking-tight">
+            {repo.name}
+          </h3>
 
-            <CardDescription className="min-h-10 text-sm leading-6">
-              {repo.description?.trim() || 'No description provided.'}
-            </CardDescription>
-          </CardHeader>
+          {/* Description — flex-1 pushes metadata to bottom */}
+          <p
+            className={cn(
+              'flex-1 line-clamp-3 min-h-18 text-sm leading-6',
+              description ? 'text-muted-foreground' : 'text-muted-foreground/50 italic',
+            )}
+          >
+            {description || 'No description available.'}
+          </p>
 
-          <div className="space-y-3">
+          {/* Metadata — always at same vertical position */}
+          <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm">
               <span
-                className="h-2.5 w-2.5 rounded-full"
+                className="h-2.5 w-2.5 shrink-0 rounded-full"
                 style={{
-                  backgroundColor: languageColors[repo.language] ?? '#9ca3af',
+                  backgroundColor: languageColors[repo.language ?? ''] ?? '#9ca3af',
                 }}
                 aria-hidden="true"
               />
-
-              <span>{repo.language || 'Not specified'}</span>
+              <span className={!repo.language ? 'text-muted-foreground/60' : ''}>
+                {repo.language || 'Not specified'}
+              </span>
             </div>
 
             <dl className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
@@ -60,7 +74,6 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
                 <Star className="h-3 w-3" aria-hidden="true" />
                 <dd>{repo.stars}</dd>
               </div>
-
               <div className="flex items-center gap-1">
                 <dt className="sr-only">Last updated</dt>
                 <dd>Updated {updatedDate}</dd>
@@ -69,21 +82,22 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
           </div>
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Button className="button-standard" asChild>
+        {/* Buttons — always pinned to bottom */}
+        <div className="mt-4 flex flex-wrap gap-2 border-t border-border/50 pt-4">
+          <Button size="sm" asChild>
             <a
               href={repo.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`View repository for ${repo.name} on GitHub`}
+              aria-label={`View ${repo.name} on GitHub`}
             >
               View Repo
-              <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
+              <ExternalLink aria-hidden="true" />
             </a>
           </Button>
 
           {repo.homepage && (
-            <Button className="button-standard" variant="outline" asChild>
+            <Button size="sm" variant="outline" asChild>
               <a
                 href={repo.homepage}
                 target="_blank"

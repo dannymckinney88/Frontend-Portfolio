@@ -185,7 +185,7 @@ function GithubExplorer() {
             of <span className="text-foreground">{repos.length}</span> repositories
           </p>
 
-          <div id="repo-list" ref={repoListRef}>
+          <div id="repo-list" ref={repoListRef} className="min-h-150">
             <GithubRepoList repos={paginatedRepos} firstRepoRef={firstRepoRef} />
           </div>
 
