@@ -16,11 +16,37 @@ This project showcases real-world patterns like API integration, state managemen
 
 ## 🚀 Projects
 
-| Project                        | Description                                                              | Tech                            |
-| ------------------------------ | ------------------------------------------------------------------------ | ------------------------------- |
-| **GitHub Repository Explorer** | Search GitHub users and explore repositories with pagination and caching | React, TypeScript, REST API     |
-| **Todo App**                   | Full CRUD task manager with filtering, drag-and-drop, and persistence    | React, TypeScript, localStorage |
-| **Counter App**                | Simple demo focused on state and component composition                   | React, TypeScript               |
+| Project                        | Description                                                                                                                                                           | Tech                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| **Accessibility Audit Tool**   | Full-stack accessibility audit tool using Playwright and axe-core to scan live sites, detect WCAG violations by severity, and deliver actionable remediation insights | React, TypeScript, Playwright, axe-core, Express |
+| **GitHub Repository Explorer** | Search GitHub users and explore repositories with pagination and caching                                                                                              | React, TypeScript, REST API                      |
+| **Todo App**                   | Full CRUD task manager with filtering, drag-and-drop, and persistence                                                                                                 | React, TypeScript, localStorage                  |
+| **Counter App**                | Simple demo focused on state and component composition                                                                                                                | React, TypeScript                                |
+
+---
+
+## 🔍 Accessibility Audit Tool
+
+A full-stack accessibility auditing tool that scans live websites and surfaces WCAG violations in a clear, developer-friendly format.
+
+**Features**
+
+- Run real-time accessibility audits on any public URL
+- Headless browser scanning using Playwright
+- Automated WCAG validation with axe-core
+- Structured results with severity breakdown (Critical, Serious, Moderate, Minor)
+- Clean UI for reviewing violations and affected nodes
+- Production deployment with frontend (Vercel) and backend (Railway)
+
+**Tech**
+
+- React
+- TypeScript
+- Playwright
+- axe-core
+- Express
+- Tailwind CSS
+- Shadcn UI
 
 ---
 
