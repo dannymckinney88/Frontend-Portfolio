@@ -15,10 +15,17 @@ const AdaAudit = () => {
   const handleSubmit = async (url: string) => {
     setError(null);
 
+    let normalizedUrl = url.trim();
+
+    // ✅ auto-prepend https if missing
+    if (!normalizedUrl.startsWith('http://') && !normalizedUrl.startsWith('https://')) {
+      normalizedUrl = `https://${normalizedUrl}`;
+    }
+
     let parsedUrl: URL;
 
     try {
-      parsedUrl = new URL(url);
+      parsedUrl = new URL(normalizedUrl);
 
       if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
         setError('Please enter a valid http or https URL.');
@@ -43,7 +50,6 @@ const AdaAudit = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="section-stack">
       <PageHeader
