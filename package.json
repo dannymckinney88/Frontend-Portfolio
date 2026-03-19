@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "tsx server/index.ts"
+    "server": "tsx server/index.ts",
+    "start": "tsx server/index.ts"
   },
   "dependencies": {
     "@dnd-kit/modifiers": "^9.0.0",
