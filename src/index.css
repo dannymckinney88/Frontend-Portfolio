@@ -132,51 +132,6 @@
 
 @layer components {
   .app-shell {
-    @apply mx-auto w-full max-w-6xl px-6;
-  }
-
-  .page-shell {
-    @apply mx-auto w-full max-w-3xl px-6 py-10;
-  }
-
-  .page-header {
-    @apply mb-8 space-y-2 text-center;
-  }
-
-  .page-title {
-    @apply text-3xl font-semibold tracking-tight text-foreground;
-  }
-
-  .page-description {
-    @apply text-base leading-7 text-muted-foreground;
-  }
-
-  .surface {
-    @apply rounded-2xl border bg-card p-6 text-card-foreground shadow-sm;
-  }
-
-  .surface-muted {
-    @apply rounded-2xl border bg-muted/40 p-6;
-  }
-
-  .stack {
-    @apply flex flex-col gap-4;
-  }
-
-  .stack-lg {
-    @apply flex flex-col gap-6;
-  }
-
-  .row {
-    @apply flex items-center gap-3;
-  }
-
-  .row-wrap {
-    @apply flex flex-wrap items-center gap-3;
-  }
-}
-@layer components {
-  .app-shell {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
 
@@ -227,6 +182,7 @@
   .row-wrap {
     @apply flex flex-wrap items-center gap-3;
   }
+
   .button-standard {
     @apply min-w-28;
   }

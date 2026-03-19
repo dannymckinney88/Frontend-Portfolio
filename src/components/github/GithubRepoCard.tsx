@@ -1,13 +1,7 @@
 import { ExternalLink, Star } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import type { GithubRepo } from '@/lib/githubApi';
 
 interface GithubRepoCardProps {
@@ -38,9 +32,9 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
       <CardContent className="flex h-full flex-col p-5">
         <div className="flex flex-1 flex-col gap-4">
           <CardHeader className="space-y-2 p-0">
-            <CardTitle className="min-h-14 line-clamp-2 text-base leading-7 font-semibold tracking-tight">
+            <h3 className="min-h-14 line-clamp-2 text-base leading-7 font-semibold tracking-tight">
               {repo.name}
-            </CardTitle>
+            </h3>
 
             <CardDescription className="min-h-10 text-sm leading-6">
               {repo.description?.trim() || 'No description provided.'}

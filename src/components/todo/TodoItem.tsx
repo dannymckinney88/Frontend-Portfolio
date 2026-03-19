@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { GripVertical,Pencil, Trash2 } from "lucide-react";
+import { useState } from 'react';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { GripVertical, Pencil, Trash2 } from 'lucide-react';
 
 import {
   Dialog,
@@ -12,13 +12,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
-import type { TodoItemProps } from "./types";
+import { Button } from '../ui/button';
+import { Checkbox } from '../ui/checkbox';
+import { Input } from '../ui/input';
+import { Separator } from '../ui/separator';
+import type { TodoItemProps } from './types';
 
 /**
  * Todo Item
@@ -32,10 +32,9 @@ const TodoItem = ({
 }: TodoItemProps) => {
   const [editedText, setEditedText] = useState(todo.text);
 
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: todo.id,
-    });
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: todo.id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -81,7 +80,6 @@ const TodoItem = ({
           </Button>
 
           <Checkbox
-            className="border-foreground data-[state=checked]:border-black data-[state=checked]:bg-black"
             checked={todo.completed}
             onCheckedChange={() => toggleTodo(todo.id)}
             aria-label={
@@ -93,7 +91,7 @@ const TodoItem = ({
 
           <span
             className={`cursor-pointer truncate text-sm transition-all duration-200 ${
-              todo.completed ? "text-muted-foreground line-through" : ""
+              todo.completed ? 'text-muted-foreground line-through' : ''
             }`}
           >
             {todo.text}
@@ -117,9 +115,7 @@ const TodoItem = ({
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Edit Todo</DialogTitle>
-                <DialogDescription>
-                  Update the text for this todo item.
-                </DialogDescription>
+                <DialogDescription>Update the text for this todo item.</DialogDescription>
               </DialogHeader>
 
               <form
@@ -178,8 +174,8 @@ const TodoItem = ({
               <DialogHeader>
                 <DialogTitle>Delete Todo</DialogTitle>
                 <DialogDescription>
-                  Are you sure you want to delete "{todo.text}"? This action
-                  cannot be undone.
+                  Are you sure you want to delete "{todo.text}"? This action cannot be
+                  undone.
                 </DialogDescription>
               </DialogHeader>
 

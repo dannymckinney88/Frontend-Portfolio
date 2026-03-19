@@ -17,8 +17,14 @@ const qualifications = [
 function Home() {
   /**
    * Smooth scroll to projects section with offset
+   *
    */
-
+  const handleProjectsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div className="page-stack">
       {/* Hero */}
@@ -45,7 +51,9 @@ function Home() {
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild>
-            <a href="#projects">View Projects</a>
+            <a href="#projects" onClick={handleProjectsClick}>
+              View Projects
+            </a>
           </Button>
 
           <Button variant="outline" asChild>
@@ -177,6 +185,7 @@ function Home() {
                 >
                   <FileText aria-hidden="true" />
                   View Resume
+                  <span className="sr-only"> (opens in new tab)</span>
                 </a>
               </Button>
               <Button variant="outline" asChild>
@@ -187,6 +196,7 @@ function Home() {
                 >
                   <Linkedin aria-hidden="true" />
                   LinkedIn
+                  <span className="sr-only"> (opens in new tab)</span>
                 </a>
               </Button>
 
@@ -197,7 +207,7 @@ function Home() {
                   rel="noopener noreferrer"
                 >
                   <Github aria-hidden="true" />
-                  GitHub
+                  GitHub <span className="sr-only"> (opens in new tab)</span>
                 </a>
               </Button>
             </div>
