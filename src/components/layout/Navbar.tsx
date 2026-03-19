@@ -5,15 +5,16 @@ import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const location = useLocation();
+  const [activeSection, setActiveSection] = React.useState<'home' | 'projects'>('home');
 
-  const navLinkClass = (path?: string) =>
+  const navLinkClass = (isActive = false) =>
     cn(
       'inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium',
       'no-underline transition-colors',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
       'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-      path && location.pathname === path
-        ? 'text-foreground underline underline-offset-4 decoration-1 pointer-events-none'
+      isActive
+        ? 'text-foreground underline underline-offset-4 decoration-1'
         : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
     );
 
@@ -23,6 +24,37 @@ const Navbar = () => {
       document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  React.useEffect(() => {
+    if (location.pathname !== '/') {
+      setActiveSection('home');
+      return;
+    }
+
+    const projects = document.getElementById('projects');
+    if (!projects) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setActiveSection(entry.isIntersecting ? 'projects' : 'home');
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(projects);
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  const isHomeRoute = location.pathname === '/';
+
+  const isProjectPage =
+    location.pathname === '/todos' ||
+    location.pathname === '/github' ||
+    location.pathname === '/counter';
+
+  const isHomeActive = isHomeRoute && activeSection === 'home';
+  const isProjectsActive = isProjectPage || (isHomeRoute && activeSection === 'projects');
 
   return (
     <nav className="border-b border-border/70 bg-background">
@@ -39,15 +71,20 @@ const Navbar = () => {
           <li>
             <Link
               to="/"
-              className={navLinkClass('/')}
-              aria-current={location.pathname === '/' ? 'page' : undefined}
+              className={navLinkClass(isHomeActive)}
+              aria-current={isHomeActive ? 'page' : undefined}
             >
               Home
             </Link>
           </li>
 
           <li>
-            <a href="/#projects" className={navLinkClass()} onClick={handleProjectsClick}>
+            <a
+              href="/#projects"
+              className={navLinkClass(isProjectsActive)}
+              aria-current={isProjectsActive ? 'page' : undefined}
+              onClick={handleProjectsClick}
+            >
               Projects
             </a>
           </li>
@@ -57,7 +94,7 @@ const Navbar = () => {
               href="https://github.com/dannymckinney88"
               target="_blank"
               rel="noopener noreferrer"
-              className={navLinkClass()}
+              className={navLinkClass(false)}
             >
               GitHub
               <span className="sr-only"> (opens in new tab)</span>
