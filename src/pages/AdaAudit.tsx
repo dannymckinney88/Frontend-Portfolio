@@ -16,8 +16,15 @@ const AdaAudit = () => {
   const [error, setError] = useState('');
 
   const handleSubmit = async (url: string) => {
-    setIsLoading(true);
     setError('');
+
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      setError('Please enter a valid URL starting with http or https.');
+      setResults(null);
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const response = await scanPage(url);
@@ -37,9 +44,7 @@ const AdaAudit = () => {
         description="Run a page audit and review accessibility issues in a clear, developer-friendly format."
       />
 
-      <AuditForm onSubmit={handleSubmit} isLoading={isLoading} />
-
-      {error ? <p className="text-sm text-destructive">{error}</p> : null}
+      <AuditForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
 
       {results ? (
         <p className="text-sm text-muted-foreground">Last scanned: {results.url}</p>
