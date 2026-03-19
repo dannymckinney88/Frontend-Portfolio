@@ -35,6 +35,7 @@ const Navbar = () => {
 
   const isHomeRoute = location.pathname === '/';
 
+  // Determine if current route is a project page to conditionally render navigation/CTA
   const isProjectPage =
     location.pathname === '/todos' ||
     location.pathname === '/github' ||

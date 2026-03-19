@@ -1,76 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 
 interface AuditFormProps {
-  onSubmit?: (url: string) => void;
-  isLoading?: boolean;
-  error?: string | null;
+  onSubmit: (url: string) => void;
+  isLoading: boolean;
+  error: string | null;
+  initialUrl?: string;
 }
 
-const AuditForm = ({ onSubmit, isLoading = false, error = null }: AuditFormProps) => {
-  const [url, setUrl] = useState('');
+const AuditForm = ({ onSubmit, isLoading, error, initialUrl = '' }: AuditFormProps) => {
+  const [url, setUrl] = useState(initialUrl);
 
-  const helpTextId = 'audit-url-help';
-  const errorTextId = 'audit-url-error';
-  const describedBy = error ? `${helpTextId} ${errorTextId}` : helpTextId;
+  useEffect(() => {
+    setUrl(initialUrl);
+  }, [initialUrl]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const trimmedUrl = url.trim();
-    if (!trimmedUrl) return;
-
-    onSubmit?.(trimmedUrl);
+    onSubmit(url);
   };
 
   return (
-    <Card className="border-border/70 shadow-sm">
-      <CardContent className="p-5">
-        <form
-          onSubmit={handleSubmit}
-          className="stack gap-4"
-          noValidate
-          aria-busy={isLoading}
-        >
-          <div className="stack gap-2">
-            <label htmlFor="audit-url" className="text-sm font-medium text-foreground">
-              Page URL
-            </label>
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-2xl border border-border bg-card px-5 py-6 shadow-sm"
+    >
+      <div className="space-y-2">
+        <label htmlFor="audit-url" className="text-sm font-medium text-foreground">
+          Page URL
+        </label>
 
-            <Input
-              id="audit-url"
-              name="audit-url"
-              type="url"
-              value={url}
-              onChange={(event) => setUrl(event.target.value)}
-              placeholder="https://example.com"
-              autoComplete="url"
-              aria-describedby={describedBy}
-              aria-invalid={error ? 'true' : 'false'}
-            />
+        <Input
+          id="audit-url"
+          type="text"
+          value={url}
+          onChange={(event) => setUrl(event.target.value)}
+          placeholder="https://example.com"
+          autoComplete="url"
+          inputMode="url"
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'audit-url-error' : 'audit-url-help'}
+        />
 
-            <p id={helpTextId} className="text-sm text-muted-foreground">
-              Enter a page URL to run an accessibility audit and review WCAG issues.
-            </p>
+        <p id="audit-url-help" className="text-sm text-muted-foreground">
+          Enter a page URL to run an accessibility audit and review WCAG issues.
+        </p>
 
-            {error ? (
-              <p id={errorTextId} className="text-sm text-destructive">
-                {error}
-              </p>
-            ) : null}
-          </div>
+        {error ? (
+          <p id="audit-url-error" className="text-sm text-red-600 dark:text-red-400">
+            {error}
+          </p>
+        ) : null}
+      </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button type="submit" disabled={isLoading} className="sm:w-auto">
-              {isLoading ? 'Scanning...' : 'Run Audit'}
-            </Button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+      <div className="mt-5">
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? 'Running Audit...' : 'Run Audit'}
+        </Button>
+      </div>
+    </form>
   );
 };
 
