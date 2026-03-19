@@ -56,61 +56,67 @@ const AuditSummary = ({ results }: AuditSummaryProps) => {
 
   return (
     <Card className="border-border/70 shadow-sm" aria-labelledby="audit-summary-heading">
-      <CardContent className="p-5 stack gap-4">
-        <div className="space-y-1">
-          <h2
-            id="audit-summary-heading"
-            className="text-xl font-semibold tracking-tight focus:outline-none"
-            ref={headingRef}
-            tabIndex={-1}
-          >
-            Audit Summary
-          </h2>
-
-          <p className="text-sm text-muted-foreground">
-            Overview of detected accessibility issues for this page.
-          </p>
-        </div>
-
-        <dl className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-8">
-          <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
-            <dt className="text-xs text-muted-foreground">Total Issues</dt>
-            <dd className="text-lg font-semibold text-foreground">{total}</dd>
-          </div>
-
-          <div className="rounded-xl border border-green-200 bg-green-50 p-3 dark:border-green-900/40 dark:bg-green-950/30">
-            <dt className="text-xs text-muted-foreground">Passed</dt>
-            <dd className="text-lg font-semibold text-green-700 dark:text-green-400">
-              {results.passes}
-            </dd>
-          </div>
-
-          <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 dark:border-sky-900/40 dark:bg-sky-950/30">
-            <dt className="text-xs text-muted-foreground">Incomplete</dt>
-            <dd className="text-lg font-semibold text-sky-700 dark:text-sky-400">
-              {results.incomplete}
-            </dd>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/30">
-            <dt className="text-xs text-muted-foreground">Inapplicable</dt>
-            <dd className="text-lg font-semibold text-slate-700 dark:text-slate-300">
-              {results.inapplicable}
-            </dd>
-          </div>
-
-          {summaryItems.map((item) => (
-            <div
-              key={item.label}
-              className={`rounded-xl border p-3 ${IMPACT_STYLES[item.impact].card}`}
+      <CardContent className="p-4 sm:p-5">
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <h2
+              id="audit-summary-heading"
+              className="text-xl font-semibold tracking-tight focus:outline-none"
+              ref={headingRef}
+              tabIndex={-1}
             >
-              <dt className="text-xs text-muted-foreground">{item.label}</dt>
-              <dd className={`text-lg font-semibold ${IMPACT_STYLES[item.impact].label}`}>
-                {item.value}
+              Audit Summary
+            </h2>
+
+            <p className="text-sm text-muted-foreground">
+              Overview of detected accessibility issues for this page.
+            </p>
+          </div>
+
+          <dl className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8">
+            <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
+              <dt className="text-xs text-muted-foreground">Total Issues</dt>
+              <dd className="text-base font-semibold text-foreground sm:text-lg">
+                {total}
               </dd>
             </div>
-          ))}
-        </dl>
+
+            <div className="rounded-xl border border-green-200 bg-green-50 p-3 dark:border-green-900/40 dark:bg-green-950/30">
+              <dt className="text-xs text-muted-foreground">Passed</dt>
+              <dd className="text-base font-semibold text-green-700 dark:text-green-400 sm:text-lg">
+                {results.passes}
+              </dd>
+            </div>
+
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 dark:border-sky-900/40 dark:bg-sky-950/30">
+              <dt className="text-xs text-muted-foreground">Incomplete</dt>
+              <dd className="text-base font-semibold text-sky-700 dark:text-sky-400 sm:text-lg">
+                {results.incomplete}
+              </dd>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/30">
+              <dt className="text-xs text-muted-foreground">Inapplicable</dt>
+              <dd className="text-base font-semibold text-slate-700 dark:text-slate-300 sm:text-lg">
+                {results.inapplicable}
+              </dd>
+            </div>
+
+            {summaryItems.map((item) => (
+              <div
+                key={item.label}
+                className={`rounded-xl border p-3 ${IMPACT_STYLES[item.impact].card}`}
+              >
+                <dt className="text-xs text-muted-foreground">{item.label}</dt>
+                <dd
+                  className={`text-base font-semibold sm:text-lg ${IMPACT_STYLES[item.impact].label}`}
+                >
+                  {item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </CardContent>
     </Card>
   );
