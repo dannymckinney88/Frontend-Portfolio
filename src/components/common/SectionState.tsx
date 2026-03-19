@@ -5,9 +5,6 @@ interface SectionStateProps {
   role?: 'status' | 'alert';
 }
 
-/**
- * Display a reusable section state message
- */
 const SectionState = ({
   message,
   tone = 'default',

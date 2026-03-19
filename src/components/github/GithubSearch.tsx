@@ -11,9 +11,6 @@ interface GithubSearchProps {
   isLoading: boolean;
 }
 
-/**
- * GitHub username search form
- */
 const GithubSearch = ({
   username,
   onUsernameChange,

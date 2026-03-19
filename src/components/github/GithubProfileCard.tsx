@@ -9,9 +9,6 @@ interface GithubProfileCardProps {
   profile: GithubProfile;
 }
 
-/**
- * GitHub profile summary card
- */
 const GithubProfileCard = ({ profile }: GithubProfileCardProps) => {
   const displayName = profile.name || profile.login;
 

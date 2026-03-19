@@ -4,9 +4,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 
-/**
- * Project card props
- */
 export interface ProjectCardProps {
   title: string;
   description: string;
@@ -16,9 +13,6 @@ export interface ProjectCardProps {
   codeHref: string;
 }
 
-/**
- * Display a single project card
- */
 const ProjectCard = ({
   title,
   description,

@@ -1,17 +1,14 @@
-import type { RefObject } from "react";
+import type { RefObject } from 'react';
 
-import type { GithubRepo } from "@/lib/githubApi";
+import type { GithubRepo } from '@/lib/githubApi';
 
-import GithubRepoCard from "./GithubRepoCard";
+import GithubRepoCard from './GithubRepoCard';
 
 interface GithubRepoListProps {
   repos: GithubRepo[];
   firstRepoRef?: RefObject<HTMLLIElement | null>;
 }
 
-/**
- * Display a list of GitHub repositories
- */
 function GithubRepoList({ repos, firstRepoRef }: GithubRepoListProps) {
   return (
     <ul

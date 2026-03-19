@@ -26,9 +26,6 @@ const languageColors: Record<string, string> = {
   Shell: '#89e051',
 };
 
-/**
- * Display a single GitHub repository card
- */
 const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
   const updatedDate = new Date(repo.updatedAt).toLocaleDateString(undefined, {
     month: 'short',

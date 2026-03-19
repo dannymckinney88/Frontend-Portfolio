@@ -8,9 +8,6 @@ interface PaginationControlsProps {
   ariaControls?: string;
 }
 
-/**
- * Display pagination controls for paged content
- */
 const PaginationControls = ({
   currentPage,
   totalPages,
