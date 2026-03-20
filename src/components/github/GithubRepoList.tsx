@@ -12,7 +12,7 @@ interface GithubRepoListProps {
 function GithubRepoList({ repos, firstRepoRef }: GithubRepoListProps) {
   return (
     <ul
-      className="grid grid-cols-2 gap-4 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
       aria-label="List of GitHub repositories"
     >
       {repos.map((repo, index) => (
