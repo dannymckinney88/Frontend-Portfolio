@@ -169,34 +169,36 @@ function GithubExplorer() {
         <SectionState message={error} tone="error" role="alert" live="assertive" />
       )}
 
-      {!loading && !error && profile && <GithubProfileCard profile={profile} />}
-
-      {!loading && !error && repos.length === 0 && (
-        <SectionState message="No public repositories found." />
-      )}
-
-      {!loading && !error && repos.length > 0 && (
+      {!loading && !error && profile && (
         <div className="section-stack">
-          <p className="text-sm font-medium text-muted-foreground">
-            Showing{' '}
-            <span className="text-foreground">
-              {startIndex + 1}-{Math.min(endIndex, repos.length)}
-            </span>{' '}
-            of <span className="text-foreground">{repos.length}</span> repositories
-          </p>
+          <GithubProfileCard profile={profile} />
 
-          <div id="repo-list" ref={repoListRef} className="min-h-150">
-            <GithubRepoList repos={paginatedRepos} firstRepoRef={firstRepoRef} />
-          </div>
+          {repos.length === 0 ? (
+            <SectionState message="No public repositories found." />
+          ) : (
+            <>
+              <p className="text-sm font-medium text-muted-foreground">
+                Showing{' '}
+                <span className="text-foreground">
+                  {startIndex + 1}-{Math.min(endIndex, repos.length)}
+                </span>{' '}
+                of <span className="text-foreground">{repos.length}</span> repositories
+              </p>
 
-          {totalPages > 1 && (
-            <PaginationControls
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPreviousPage={handlePreviousPage}
-              onNextPage={handleNextPage}
-              ariaControls="repo-list"
-            />
+              <div id="repo-list" ref={repoListRef}>
+                <GithubRepoList repos={paginatedRepos} firstRepoRef={firstRepoRef} />
+              </div>
+
+              {totalPages > 1 && (
+                <PaginationControls
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPreviousPage={handlePreviousPage}
+                  onNextPage={handleNextPage}
+                  ariaControls="repo-list"
+                />
+              )}
+            </>
           )}
         </div>
       )}
