@@ -99,6 +99,8 @@ const AdaAudit = () => {
         isLoading={isLoading}
         error={error}
         initialUrl={initialUrl}
+        lastScannedUrl={results?.url}
+        lastScannedAt={results ? new Date(results.scannedAt).toLocaleString() : undefined}
       />
 
       <div aria-live="polite" aria-atomic="true" className="sr-only">
