@@ -32,34 +32,39 @@ const ViolationCard = ({ violation, defaultExpanded = false }: ViolationCardProp
           <CollapsibleTrigger asChild>
             <button
               type="button"
-              className="flex w-full items-start justify-between gap-4 rounded-2xl p-4 text-left transition hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-5"
+              className="flex w-full items-start justify-between gap-3 rounded-2xl p-3 text-left transition hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-4"
               aria-expanded={open}
               aria-controls={contentId}
             >
               <div className="min-w-0 space-y-2">
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 id={headingId} className="text-lg font-semibold tracking-tight">
-                    {violation.id}
+                <div className="space-y-1">
+                  <h3
+                    id={headingId}
+                    className="text-sm font-semibold leading-5 text-foreground sm:text-base"
+                  >
+                    {violation.help}
                   </h3>
 
+                  <p className="text-xs text-muted-foreground">{violation.id}</p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
                   <span
-                    className={`inline-flex w-fit rounded-full border px-2.5 py-1 text-xs font-medium capitalize ${impactBadgeClass}`}
+                    className={`inline-flex w-fit rounded-full border px-2 py-0.5 text-[11px] font-medium capitalize ${impactBadgeClass}`}
                   >
                     {impact}
                   </span>
+
+                  <p className="text-xs text-muted-foreground">
+                    {violation.nodes.length} affected{' '}
+                    {violation.nodes.length === 1 ? 'node' : 'nodes'}
+                  </p>
                 </div>
-
-                <p className="text-sm font-medium text-foreground">{violation.help}</p>
-
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {violation.description}
-                </p>
               </div>
 
-              <span className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground">
-                <span className="hidden sm:inline">{open ? 'Collapse' : 'Expand'}</span>
+              <span className="flex shrink-0 items-center text-muted-foreground">
                 <ChevronDown
-                  className={`transition-transform ${open ? 'rotate-180' : ''}`}
+                  className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
                   aria-hidden="true"
                 />
               </span>
@@ -67,12 +72,14 @@ const ViolationCard = ({ violation, defaultExpanded = false }: ViolationCardProp
           </CollapsibleTrigger>
 
           <CollapsibleContent id={contentId}>
-            <div className="border-t border-border/60 px-4 pb-4 pt-4 sm:px-5 sm:pb-5">
+            <div className="border-t border-border/60 px-3 pb-3 pt-3 sm:px-4 sm:pb-4">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <h4 className="text-sm font-semibold text-foreground">
                     Affected Nodes
                   </h4>
+
+                  <p className="text-sm text-muted-foreground">{violation.description}</p>
 
                   <ul className="stack gap-3">
                     {violation.nodes.map((node, index) => (

@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 import { IMPACT_ORDER as impactOrder, IMPACT_STYLES } from './constants';
 import type { AuditImpact, AuditViolation } from './types';
@@ -76,45 +77,19 @@ const ViolationList = ({ violations }: ViolationListProps) => {
 
   return (
     <Card className="border-border/70 shadow-sm" aria-labelledby="violation-list-heading">
-      <CardContent className="p-4 sm:p-5">
-        <div className="space-y-5">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <div className="space-y-1">
-              <h2
-                id="violation-list-heading"
-                className="text-xl font-semibold tracking-tight"
-              >
-                Violations
-              </h2>
-
-              <p className="text-sm text-muted-foreground">
-                Review accessibility issues by severity and expand individual items for
-                affected nodes and guidance.
-              </p>
-            </div>
-
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={handleToggleAll}
-              aria-label={
-                allExpanded ? 'Collapse all violations' : 'Expand all violations'
-              }
-              className="w-fit"
+      <CardContent className="overflow-hidden p-4 sm:p-5">
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <h2
+              id="violation-list-heading"
+              className="text-xl font-semibold tracking-tight"
             >
-              {allExpanded ? (
-                <>
-                  <ChevronUp aria-hidden="true" />
-                  Collapse all
-                </>
-              ) : (
-                <>
-                  <ChevronDown aria-hidden="true" />
-                  Expand all
-                </>
-              )}
-            </Button>
+              Violations
+            </h2>
+
+            <p className="text-sm text-muted-foreground">
+              Review issues by severity and expand items for affected nodes and guidance.
+            </p>
           </div>
 
           <div className="space-y-2">
@@ -138,11 +113,13 @@ const ViolationList = ({ violations }: ViolationListProps) => {
                     disabled={isDisabled}
                     onClick={() => setActiveFilter(filter)}
                     aria-pressed={isActive}
-                    className={
+                    className={cn(
+                      'h-8 rounded-full px-3 text-xs sm:h-9 sm:px-4 sm:text-sm',
                       !isActive && filter !== 'all' && !isDisabled
                         ? IMPACT_STYLES[filter].badge
-                        : ''
-                    }
+                        : '',
+                      isDisabled && 'opacity-50',
+                    )}
                   >
                     {FILTER_LABELS[filter]} ({count})
                   </Button>
@@ -151,9 +128,34 @@ const ViolationList = ({ violations }: ViolationListProps) => {
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground">
-            Showing {filteredViolations.length} of {sortedViolations.length} violations
-          </p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs text-muted-foreground sm:text-sm">
+              {filteredViolations.length} violations shown
+            </p>
+
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={handleToggleAll}
+              aria-label={
+                allExpanded ? 'Collapse all violations' : 'Expand all violations'
+              }
+              className="h-8 w-fit px-2 text-xs sm:h-9 sm:px-3 sm:text-sm"
+            >
+              {allExpanded ? (
+                <>
+                  <ChevronUp aria-hidden="true" />
+                  Collapse all
+                </>
+              ) : (
+                <>
+                  <ChevronDown aria-hidden="true" />
+                  Expand all
+                </>
+              )}
+            </Button>
+          </div>
 
           {filteredViolations.length ? (
             <div className="stack gap-4">
