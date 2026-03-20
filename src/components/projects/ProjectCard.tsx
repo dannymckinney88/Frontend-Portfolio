@@ -26,12 +26,12 @@ const ProjectCard = ({
       <CardContent className="flex h-full flex-col p-6 sm:p-7">
         {/* Top */}
         <div>
-          <div className="min-h-32">
-            <CardTitle className="text-xl font-semibold tracking-tight">
+          <div className="space-y-4">
+            <CardTitle className="line-clamp-2 min-h-14 text-xl font-semibold tracking-tight">
               {title}
             </CardTitle>
 
-            <CardDescription className="mt-4 text-sm leading-7 text-muted-foreground">
+            <CardDescription className="min-h-18 line-clamp-3 text-sm leading-6 text-muted-foreground">
               {description}
             </CardDescription>
           </div>
@@ -63,7 +63,7 @@ const ProjectCard = ({
             ))}
           </div>
 
-          <div className="mt-auto pt-6 flex gap-3">
+          <div className="mt-auto flex gap-3 pt-6">
             <Button asChild>
               <Link to={projectHref}>View Project</Link>
             </Button>

@@ -7,7 +7,7 @@ export const projectData: ProjectCardProps[] = [
   {
     title: 'Accessibility Audit Tool',
     description:
-      'Full-stack accessibility audit tool using Playwright and axe-core to scan live sites, detect WCAG violations by severity, and deliver actionable remediation insights.',
+      'Full-stack accessibility audit tool using Playwright and axe-core to scan live sites and surface actionable WCAG remediation insights.',
     features: [
       'Runs real page audits with a Node/Express backend using Playwright and axe-core',
       'Displays violations, severity breakdowns, passed checks, and affected DOM nodes',
