@@ -31,33 +31,67 @@ const AuditSummary = ({ results }: AuditSummaryProps) => {
     return acc;
   }, {});
 
-  const summaryItems = [
+  const issueSummaryItems = [
+    {
+      label: 'Total Issues',
+      value: total,
+      className: 'border-border/70 bg-muted/30',
+      valueClassName: 'text-foreground',
+    },
     {
       label: 'Critical',
       value: countsByImpact.critical ?? 0,
-      impact: 'critical' as const,
+      className: IMPACT_STYLES.critical.card,
+      valueClassName: IMPACT_STYLES.critical.label,
     },
     {
       label: 'Serious',
       value: countsByImpact.serious ?? 0,
-      impact: 'serious' as const,
+      className: IMPACT_STYLES.serious.card,
+      valueClassName: IMPACT_STYLES.serious.label,
     },
     {
       label: 'Moderate',
       value: countsByImpact.moderate ?? 0,
-      impact: 'moderate' as const,
+      className: IMPACT_STYLES.moderate.card,
+      valueClassName: IMPACT_STYLES.moderate.label,
     },
     {
       label: 'Minor',
       value: countsByImpact.minor ?? 0,
-      impact: 'minor' as const,
+      className: IMPACT_STYLES.minor.card,
+      valueClassName: IMPACT_STYLES.minor.label,
+    },
+  ];
+
+  const auditCheckItems = [
+    {
+      label: 'Passed',
+      value: results.passes,
+      className:
+        'border-green-200/70 bg-green-50/70 dark:border-green-900/40 dark:bg-green-950/20',
+      valueClassName: 'text-green-700 dark:text-green-400',
+    },
+    {
+      label: 'Incomplete',
+      value: results.incomplete,
+      className:
+        'border-sky-200/70 bg-sky-50/70 dark:border-sky-900/40 dark:bg-sky-950/20',
+      valueClassName: 'text-sky-700 dark:text-sky-400',
+    },
+    {
+      label: 'Inapplicable',
+      value: results.inapplicable,
+      className:
+        'border-slate-200/70 bg-slate-50/70 dark:border-slate-800 dark:bg-slate-950/20',
+      valueClassName: 'text-slate-700 dark:text-slate-300',
     },
   ];
 
   return (
     <Card className="border-border/70 shadow-sm" aria-labelledby="audit-summary-heading">
       <CardContent className="p-4 sm:p-5">
-        <div className="space-y-4">
+        <div className="space-y-5">
           <div className="space-y-1">
             <h2
               id="audit-summary-heading"
@@ -69,53 +103,59 @@ const AuditSummary = ({ results }: AuditSummaryProps) => {
             </h2>
 
             <p className="text-sm text-muted-foreground">
-              Overview of detected accessibility issues for this page.
+              Overview of detected accessibility issues and audit check results.
             </p>
           </div>
 
-          <dl className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8">
-            <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
-              <dt className="text-xs text-muted-foreground">Total Issues</dt>
-              <dd className="text-base font-semibold text-foreground sm:text-lg">
-                {total}
-              </dd>
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold text-foreground">Issue Summary</h3>
+              <p className="text-sm text-muted-foreground">
+                Severity counts for issues found on the scanned page.
+              </p>
             </div>
 
-            <div className="rounded-xl border border-green-200 bg-green-50 p-3 dark:border-green-900/40 dark:bg-green-950/30">
-              <dt className="text-xs text-muted-foreground">Passed</dt>
-              <dd className="text-base font-semibold text-green-700 dark:text-green-400 sm:text-lg">
-                {results.passes}
-              </dd>
-            </div>
-
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 dark:border-sky-900/40 dark:bg-sky-950/30">
-              <dt className="text-xs text-muted-foreground">Incomplete</dt>
-              <dd className="text-base font-semibold text-sky-700 dark:text-sky-400 sm:text-lg">
-                {results.incomplete}
-              </dd>
-            </div>
-
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/30">
-              <dt className="text-xs text-muted-foreground">Inapplicable</dt>
-              <dd className="text-base font-semibold text-slate-700 dark:text-slate-300 sm:text-lg">
-                {results.inapplicable}
-              </dd>
-            </div>
-
-            {summaryItems.map((item) => (
-              <div
-                key={item.label}
-                className={`rounded-xl border p-3 ${IMPACT_STYLES[item.impact].card}`}
-              >
-                <dt className="text-xs text-muted-foreground">{item.label}</dt>
-                <dd
-                  className={`text-base font-semibold sm:text-lg ${IMPACT_STYLES[item.impact].label}`}
+            <dl className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+              {issueSummaryItems.map((item) => (
+                <div
+                  key={item.label}
+                  className={`rounded-xl border p-3 ${item.className}`}
                 >
-                  {item.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+                  <dt className="text-xs text-muted-foreground">{item.label}</dt>
+                  <dd
+                    className={`text-base font-semibold sm:text-lg ${item.valueClassName}`}
+                  >
+                    {item.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold text-foreground">Audit Checks</h3>
+              <p className="text-sm text-muted-foreground">
+                Additional axe results that were passed, incomplete, or not applicable.
+              </p>
+            </div>
+
+            <dl className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+              {auditCheckItems.map((item) => (
+                <div
+                  key={item.label}
+                  className={`rounded-xl border p-3 ${item.className}`}
+                >
+                  <dt className="text-xs text-muted-foreground">{item.label}</dt>
+                  <dd
+                    className={`text-base font-semibold sm:text-lg ${item.valueClassName}`}
+                  >
+                    {item.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </CardContent>
     </Card>
