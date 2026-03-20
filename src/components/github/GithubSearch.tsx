@@ -33,14 +33,14 @@ const GithubSearch = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="surface stack sm:flex-row sm:items-end sm:gap-4"
+      className="surface stack"
       aria-label="Search GitHub repositories by username"
     >
-      <div className="flex-1 space-y-2">
-        <label htmlFor="github-username" className="text-sm font-medium leading-none">
-          GitHub username
-        </label>
+      <label htmlFor="github-username" className="text-sm font-medium leading-none">
+        GitHub username
+      </label>
 
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <Input
           id="github-username"
           type="text"
@@ -53,22 +53,23 @@ const GithubSearch = ({
           spellCheck={false}
           disabled={isLoading}
           aria-describedby="github-search-helper"
+          className="flex-1"
         />
 
-        <p id="github-search-helper" className="text-sm text-muted-foreground">
-          Search public repositories for any GitHub user.
-        </p>
+        <Button
+          type="submit"
+          size="lg"
+          className="w-full sm:w-auto"
+          disabled={!username.trim() || isLoading}
+        >
+          <Search aria-hidden="true" />
+          {isLoading ? 'Searching...' : 'Search'}
+        </Button>
       </div>
 
-      <Button
-        type="submit"
-        size="lg"
-        className="w-full sm:w-auto"
-        disabled={!username.trim() || isLoading}
-      >
-        <Search aria-hidden="true" />
-        {isLoading ? 'Searching...' : 'Search'}
-      </Button>
+      <p id="github-search-helper" className="text-sm text-muted-foreground">
+        Search public repositories for any GitHub user.
+      </p>
     </form>
   );
 };
