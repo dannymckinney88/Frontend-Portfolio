@@ -11,7 +11,6 @@ const qualifications = [
   '4+ Years Enterprise Experience',
   'ADA / WCAG Focused',
   'React + TypeScript',
-  'Fintech Product Delivery',
 ];
 
 function Home() {
@@ -25,44 +24,44 @@ function Home() {
       document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
   return (
     <div className="page-stack">
       {/* Hero */}
-      <section className="mx-auto max-w-4xl py-10 text-center sm:py-14">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          Frontend Developer
+      <section className="mx-auto max-w-6xl py-14 text-center sm:py-18 lg:py-24">
+        <p className="text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground">
+          Frontend Developer • Accessibility-Focused
         </p>
 
-        <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mt-5 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
           Danny McKinney
         </h1>
 
-        <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
-          Frontend developer building accessible, production-ready React applications with
-          strong TypeScript foundations, reusable UI architecture, and polished user
-          experiences.
+        <p className="mx-auto mt-7 max-w-3xl text-xl leading-8 text-foreground sm:text-2xl">
+          Building accessible, production-ready frontend experiences for real-world
+          products.
         </p>
 
-        <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
-          4+ years delivering enterprise fintech interfaces across client, advisor, and
-          internal platforms, with hands-on experience in ADA / WCAG compliance and
-          scalable frontend systems.
+        <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+          4+ years delivering enterprise fintech interfaces across complex client-facing
+          platforms, with hands-on experience in React, TypeScript, ADA / WCAG compliance,
+          and scalable UI systems.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Button asChild>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <Button asChild size="lg">
             <a href="#projects" onClick={handleProjectsClick}>
               View Projects
             </a>
           </Button>
 
-          <Button variant="outline" asChild>
+          <Button variant="outline" asChild size="lg">
             <Link to="/accessibility-audit">View Live Demo</Link>
           </Button>
         </div>
 
         <ul
-          className="mt-9 flex flex-wrap items-center justify-center gap-2"
+          className="mt-8 flex flex-wrap items-center justify-center gap-2"
           aria-label="Key qualifications"
         >
           {qualifications.map((tag) => (
@@ -76,14 +75,14 @@ function Home() {
         </ul>
       </section>
 
-      {/* About (NOT a card – keeps layout breathing) */}
-      <section className="mx-auto max-w-4xl px-6 sm:px-0">
-        <div className="space-y-3">
+      {/* About */}
+      <section className="mx-auto max-w-6xl px-6 pt-2 sm:px-0">
+        <div className="max-w-4xl space-y-4">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
             About
           </p>
 
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             Building enterprise frontend systems with accessibility at the core
           </h2>
 
@@ -95,18 +94,14 @@ function Home() {
           <p className="text-sm leading-7 text-muted-foreground sm:text-base">
             I build interfaces that are resilient, accessible, and designed for real-world
             use — handling edge cases, managing UI states, and creating components that
-            scale across teams and products.
-          </p>
-
-          <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-            I focus on delivering experiences that feel predictable and polished, where
-            users always understand what’s happening.
+            scale across teams and products. I focus on delivering experiences that feel
+            predictable and polished, where users always understand what’s happening.
           </p>
         </div>
       </section>
 
-      {/* Strengths (Cards) */}
-      <section className="section-stack" aria-labelledby="strengths-heading">
+      {/* Strengths */}
+      <section className="section-stack pt-4" aria-labelledby="strengths-heading">
         <div className="space-y-2">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
             Strengths
@@ -139,7 +134,7 @@ function Home() {
       {/* Projects */}
       <section
         id="projects"
-        className="section-stack scroll-mt-36"
+        className="section-stack scroll-mt-36 pt-6"
         aria-labelledby="projects-heading"
       >
         <div className="space-y-2">
@@ -150,8 +145,8 @@ function Home() {
             Projects
           </h2>
           <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
-            Selected projects demonstrating frontend fundamentals, accessible UI patterns,
-            and production-ready React architecture.
+            Selected work highlighting accessible UI patterns, frontend fundamentals, and
+            production-minded React architecture.
           </p>
         </div>
 
@@ -162,21 +157,28 @@ function Home() {
         </div>
       </section>
 
-      {/* Contact (Card – strong CTA) */}
-      <section id="contact" className="section-stack" aria-labelledby="contact-heading">
+      {/* Contact */}
+      <section
+        id="contact"
+        className="section-stack pt-8"
+        aria-labelledby="contact-heading"
+      >
         <Card className="border-border/70 shadow-sm">
-          <CardContent className="px-6 py-8 text-center sm:px-8">
-            <h2 id="contact-heading" className="text-2xl font-semibold tracking-tight">
-              Let’s connect
+          <CardContent className="px-6 py-8 text-center sm:px-8 sm:py-10">
+            <h2
+              id="contact-heading"
+              className="text-2xl font-semibold tracking-tight sm:text-3xl"
+            >
+              Let’s build accessible, polished frontend experiences
             </h2>
 
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-              I’m looking for frontend opportunities where accessibility, polished UI, and
-              production-minded React engineering are valued.
+              I’m looking for frontend opportunities where accessibility, strong UI craft,
+              and production-minded React engineering are genuinely valued.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Button asChild>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <Button asChild size="lg">
                 <a
                   href="/danny-mckinney-resume.pdf"
                   target="_blank"
@@ -188,6 +190,7 @@ function Home() {
                   <span className="sr-only"> (opens in new tab)</span>
                 </a>
               </Button>
+
               <Button variant="outline" asChild>
                 <a
                   href="https://www.linkedin.com/in/danny-mckinney/"
@@ -207,7 +210,8 @@ function Home() {
                   rel="noopener noreferrer"
                 >
                   <Github aria-hidden="true" />
-                  GitHub <span className="sr-only"> (opens in new tab)</span>
+                  GitHub
+                  <span className="sr-only"> (opens in new tab)</span>
                 </a>
               </Button>
             </div>
