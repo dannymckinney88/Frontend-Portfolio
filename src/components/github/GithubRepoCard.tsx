@@ -36,24 +36,21 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
 
   return (
     <Card className="h-full border-border/70 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-      <CardContent className="flex h-full flex-col p-5">
+      <CardContent className="flex h-full flex-col p-4 sm:p-5">
         <div className="flex flex-1 flex-col gap-3">
-          {/* Title — no min-h, just let it flow */}
           <h3 className="line-clamp-2 min-h-12 text-base font-semibold leading-6 tracking-tight">
             {repo.name}
           </h3>
 
-          {/* Description — flex-1 pushes metadata to bottom */}
           <p
             className={cn(
-              'flex-1 line-clamp-3 min-h-18 text-sm leading-6',
+              'flex-1 line-clamp-3 min-h-16 text-sm leading-6',
               description ? 'text-muted-foreground' : 'text-muted-foreground/50 italic',
             )}
           >
             {description || 'No description available.'}
           </p>
 
-          {/* Metadata — always at same vertical position */}
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm">
               <span
@@ -82,9 +79,8 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
           </div>
         </div>
 
-        {/* Buttons — always pinned to bottom */}
-        <div className="mt-4 flex flex-wrap gap-2 border-t border-border/50 pt-4">
-          <Button size="sm" asChild>
+        <div className="mt-3 flex flex-col gap-2 border-t border-border/50 pt-3 sm:mt-4 sm:flex-row sm:pt-4">
+          <Button size="sm" asChild className="min-w-0 sm:flex-1">
             <a
               href={repo.repoUrl}
               target="_blank"
@@ -97,7 +93,7 @@ const GithubRepoCard = ({ repo }: GithubRepoCardProps) => {
           </Button>
 
           {repo.homepage && (
-            <Button size="sm" variant="outline" asChild>
+            <Button size="sm" variant="outline" asChild className="min-w-0 sm:flex-1">
               <a
                 href={repo.homepage}
                 target="_blank"
