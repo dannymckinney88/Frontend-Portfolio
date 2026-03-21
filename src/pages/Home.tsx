@@ -18,14 +18,12 @@ function Home() {
   const handleProjectsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === '/') {
       e.preventDefault();
-
       const el = document.getElementById('featured-project');
-
       if (el) {
         const yOffset = -10;
         const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
-
         window.scrollTo({ top: y, behavior: 'smooth' });
+        el.focus({ preventScroll: true }); // move focus after scroll
       }
     }
   };
@@ -95,6 +93,7 @@ function Home() {
           id="featured-project"
           className="mx-auto w-full max-w-6xl px-4 pt-4 sm:pt-6 lg:pt-6"
           aria-labelledby="featured-project-heading"
+          tabIndex={-1}
         >
           <div className="section-stack">
             <div className="space-y-2">

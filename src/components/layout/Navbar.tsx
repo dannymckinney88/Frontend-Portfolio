@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { cn } from '@/lib/utils';
@@ -20,19 +21,12 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-
-    if (!element) {
-      console.warn(`Section not found: ${sectionId}`);
-      return;
-    }
+    if (!element) return;
 
     const yOffset = -10;
     const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    element.focus({ preventScroll: true }); // ← add this
   };
 
   const handleSectionClick =
@@ -46,6 +40,14 @@ const Navbar = () => {
       e.preventDefault();
       navigate(`/#${sectionId}`);
     };
+
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      // gives the DOM time to render before we try to scroll
+      requestAnimationFrame(() => scrollToSection(hash));
+    }
+  }, [location.hash]);
 
   const isHomeRoute = location.pathname === '/';
 
