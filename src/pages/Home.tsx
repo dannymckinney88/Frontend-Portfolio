@@ -18,7 +18,15 @@ function Home() {
   const handleProjectsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === '/') {
       e.preventDefault();
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+
+      const el = document.getElementById('featured-project');
+
+      if (el) {
+        const yOffset = -10;
+        const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
   };
 
@@ -60,7 +68,7 @@ function Home() {
           </Button>
 
           <Button variant="outline" asChild size="lg">
-            <a href="#projects" onClick={handleProjectsClick}>
+            <a href="#featured-project" onClick={handleProjectsClick}>
               View Portfolio
             </a>
           </Button>
@@ -84,7 +92,8 @@ function Home() {
       {/* Featured ADA Project */}
       {featuredProject ? (
         <section
-          className="mx-auto w-full max-w-6xl px-4 pt-2 sm:px-6 lg:pt-4"
+          id="featured-project"
+          className="mx-auto w-full max-w-6xl px-4 pt-4 sm:pt-6 lg:pt-6"
           aria-labelledby="featured-project-heading"
         >
           <div className="section-stack">
@@ -122,10 +131,9 @@ function Home() {
           </div>
         </section>
       ) : null}
-
       {/* Supporting Projects */}
       <section
-        id="projects"
+        id="supporting-projects"
         className="app-shell section-stack scroll-mt-36 pt-2"
         aria-labelledby="projects-heading"
       >

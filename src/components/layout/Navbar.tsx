@@ -22,10 +22,17 @@ const Navbar = () => {
     const element = document.getElementById(sectionId);
 
     if (!element) {
+      console.warn(`Section not found: ${sectionId}`);
       return;
     }
 
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const yOffset = -10;
+    const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth',
+    });
   };
 
   const handleSectionClick =
@@ -77,10 +84,10 @@ const Navbar = () => {
 
           <li>
             <a
-              href="/#projects"
+              href="/#featured-project"
               className={navLinkClass(isProjectsActive)}
               aria-current={isProjectsActive ? 'page' : undefined}
-              onClick={handleSectionClick('projects')}
+              onClick={handleSectionClick('featured-project')}
             >
               Projects
             </a>

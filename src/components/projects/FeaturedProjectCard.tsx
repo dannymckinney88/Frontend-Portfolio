@@ -26,7 +26,7 @@ const FeaturedProjectCard = ({
   imageAlt,
 }: FeaturedProjectCardProps) => {
   return (
-    <Card className="overflow-hidden border-border/70 bg-card shadow-sm transition-all duration-200 hover:shadow-lg">
+    <Card className="overflow-hidden border-border/70 bg-card shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
       <CardContent className="p-0">
         <div className="grid items-stretch lg:grid-cols-[1.2fr_0.8fr]">
           {/* Screenshot Panel */}
