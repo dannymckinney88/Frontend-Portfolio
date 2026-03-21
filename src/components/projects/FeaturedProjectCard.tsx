@@ -28,9 +28,9 @@ const FeaturedProjectCard = ({
   return (
     <Card className="overflow-hidden border-border/70 bg-card shadow-sm transition-all duration-200 hover:shadow-lg">
       <CardContent className="p-0">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="grid items-stretch lg:grid-cols-[1.2fr_0.8fr]">
           {/* Screenshot Panel */}
-          <div className="border-b border-border/70 bg-gradient-to-br from-muted/40 to-background p-4 sm:p-5 lg:border-r lg:border-b-0 lg:p-6">
+          <div className="border-b border-border/70 bg-linear-to-br from-muted/40 to-background p-4 sm:p-5 lg:border-r lg:border-b-0 lg:p-6">
             <div className="overflow-hidden rounded-[26px] border border-border/70 bg-background shadow-sm">
               <div className="flex items-center justify-between border-b border-border/60 px-4 py-2.5 sm:px-5">
                 <div className="flex items-center gap-2" aria-hidden="true">
@@ -48,7 +48,7 @@ const FeaturedProjectCard = ({
                 <img
                   src={imageSrc}
                   alt={imageAlt}
-                  className="block h-auto w-full rounded-lg object-top"
+                  className="block h-auto w-full rounded-xl"
                   loading="lazy"
                 />
               </div>
@@ -56,8 +56,8 @@ const FeaturedProjectCard = ({
           </div>
 
           {/* Content */}
-          <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-            <div className="space-y-5">
+          <div className="flex flex-col justify-start p-6 sm:p-8 lg:p-10">
+            <div className="space-y-6">
               <div className="flex flex-wrap items-center gap-2.5">
                 <span className="inline-flex items-center rounded-full border border-border/70 bg-muted px-3 py-1 text-xs font-semibold text-foreground">
                   Featured Project
