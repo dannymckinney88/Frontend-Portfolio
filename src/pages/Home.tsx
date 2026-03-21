@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { FileText, Github, Linkedin } from 'lucide-react';
 
 import StrengthCard from '@/components/common/StrengthCard';
+import FeaturedProjectCard from '@/components/projects/FeaturedProjectCard';
 import ProjectCard from '@/components/projects/ProjectCard';
 import { projectData } from '@/components/projects/projectData';
 import { Button } from '@/components/ui/button';
@@ -14,10 +15,6 @@ const qualifications = [
 ];
 
 function Home() {
-  /**
-   * Smooth scroll to projects section with offset
-   *
-   */
   const handleProjectsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === '/') {
       e.preventDefault();
@@ -25,10 +22,19 @@ function Home() {
     }
   };
 
+  const featuredProject = projectData.find(
+    (project) => project.title === 'Accessibility Audit Tool',
+  );
+
+  const supportingProjects = projectData.filter(
+    (project) =>
+      project.title !== 'Accessibility Audit Tool' && project.title !== 'Counter App',
+  );
+
   return (
     <div className="page-stack">
       {/* Hero */}
-      <section className="mx-auto max-w-6xl py-14 text-center sm:py-18 lg:py-24">
+      <section className="mx-auto w-full max-w-6xl px-4 py-14 text-center sm:px-6 sm:py-18 lg:py-24">
         <p className="text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground">
           Frontend Developer • Accessibility-Focused
         </p>
@@ -50,13 +56,13 @@ function Home() {
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
-            <a href="#projects" onClick={handleProjectsClick}>
-              View Projects
-            </a>
+            <Link to="/accessibility-audit">Launch Audit Tool</Link>
           </Button>
 
           <Button variant="outline" asChild size="lg">
-            <Link to="/accessibility-audit">View Live Demo</Link>
+            <a href="#projects" onClick={handleProjectsClick}>
+              View Portfolio
+            </a>
           </Button>
         </div>
 
@@ -75,8 +81,76 @@ function Home() {
         </ul>
       </section>
 
+      {/* Featured ADA Project */}
+      {featuredProject ? (
+        <section
+          className="mx-auto w-full max-w-6xl px-4 pt-2 sm:px-6 lg:pt-4"
+          aria-labelledby="featured-project-heading"
+        >
+          <div className="section-stack">
+            <div className="space-y-2">
+              <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                Featured Project
+              </p>
+              <h2
+                id="featured-project-heading"
+                className="text-2xl font-semibold tracking-tight sm:text-3xl"
+              >
+                Accessibility Audit Tool
+              </h2>
+              <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+                A real scan workflow built to surface WCAG issues clearly, prioritize
+                severity, and present actionable findings in a developer-friendly
+                interface.
+              </p>
+            </div>
+
+            <FeaturedProjectCard
+              title={featuredProject.title}
+              description="Run live accessibility scans on real websites and review WCAG issues in a clear, developer-friendly workflow."
+              highlights={[
+                'Scans live pages with a Playwright + axe-core backend',
+                'Surfaces violations, severity breakdowns, and actionable guidance',
+                'Built with accessible form flows, live announcements, and focus-aware UI states',
+              ]}
+              stack={featuredProject.stack}
+              projectHref={featuredProject.projectHref}
+              codeHref={featuredProject.codeHref}
+              imageSrc="/ada-featured-preview.png"
+              imageAlt="Accessibility audit tool results showing summary metrics, severity filters, and an expanded WCAG violation card"
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {/* Supporting Projects */}
+      <section
+        id="projects"
+        className="app-shell section-stack scroll-mt-36 pt-2"
+        aria-labelledby="projects-heading"
+      >
+        <div className="space-y-2">
+          <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            Supporting Work
+          </p>
+          <h2 id="projects-heading" className="text-2xl font-semibold tracking-tight">
+            More Projects
+          </h2>
+          <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+            Additional work showing API-driven UI, reusable components, and practical
+            React fundamentals.
+          </p>
+        </div>
+
+        <div className="grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {supportingProjects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
+          ))}
+        </div>
+      </section>
+
       {/* About */}
-      <section className="mx-auto max-w-6xl px-6 pt-2 sm:px-0">
+      <section className="app-shell pt-2">
         <div className="max-w-4xl space-y-4">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
             About
@@ -94,14 +168,16 @@ function Home() {
           <p className="text-sm leading-7 text-muted-foreground sm:text-base">
             I build interfaces that are resilient, accessible, and designed for real-world
             use — handling edge cases, managing UI states, and creating components that
-            scale across teams and products. I focus on delivering experiences that feel
-            predictable and polished, where users always understand what’s happening.
+            scale across teams and products.
           </p>
         </div>
       </section>
 
       {/* Strengths */}
-      <section className="section-stack pt-4" aria-labelledby="strengths-heading">
+      <section
+        className="app-shell section-stack pt-4"
+        aria-labelledby="strengths-heading"
+      >
         <div className="space-y-2">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
             Strengths
@@ -111,7 +187,7 @@ function Home() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 lg:gap-4 xl:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:gap-4 xl:grid-cols-4">
           <StrengthCard
             title="Accessible UI"
             description="Experience building interfaces with WCAG awareness, keyboard usability, and clearer interaction patterns."
@@ -131,36 +207,10 @@ function Home() {
         </div>
       </section>
 
-      {/* Projects */}
-      <section
-        id="projects"
-        className="section-stack scroll-mt-36 pt-6"
-        aria-labelledby="projects-heading"
-      >
-        <div className="space-y-2">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
-            Featured Work
-          </p>
-          <h2 id="projects-heading" className="text-2xl font-semibold tracking-tight">
-            Projects
-          </h2>
-          <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
-            Selected work highlighting accessible UI patterns, frontend fundamentals, and
-            production-minded React architecture.
-          </p>
-        </div>
-
-        <div className="grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {projectData.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </div>
-      </section>
-
       {/* Contact */}
       <section
         id="contact"
-        className="section-stack pt-8"
+        className="app-shell section-stack pt-8"
         aria-labelledby="contact-heading"
       >
         <Card className="border-border/70 shadow-sm">
