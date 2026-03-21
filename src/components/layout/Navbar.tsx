@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinkClass = (isActive = false) =>
     cn(
@@ -17,25 +18,30 @@ const Navbar = () => {
         : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
     );
 
-  const handleProjectsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (location.pathname === '/') {
-      e.preventDefault();
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
 
-  React.useEffect(() => {
-    if (location.pathname !== '/') {
+    if (!element) {
       return;
     }
 
-    const projects = document.getElementById('projects');
-    if (!projects) return;
-  }, [location.pathname]);
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleSectionClick =
+    (sectionId: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (location.pathname === '/') {
+        e.preventDefault();
+        scrollToSection(sectionId);
+        return;
+      }
+
+      e.preventDefault();
+      navigate(`/#${sectionId}`);
+    };
 
   const isHomeRoute = location.pathname === '/';
 
-  // Determine if current route is a project page to conditionally render navigation/CTA
   const isProjectPage =
     location.pathname === '/todos' ||
     location.pathname === '/github' ||
@@ -43,7 +49,10 @@ const Navbar = () => {
     location.pathname === '/accessibility-audit';
 
   const isHomeActive = isHomeRoute;
-  const isProjectsActive = isProjectPage;
+  const isProjectsActive =
+    isProjectPage || (isHomeRoute && location.hash === '#projects');
+  const isContactActive = isHomeRoute && location.hash === '#contact';
+
   return (
     <nav className="border-b border-border/70 bg-background">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
@@ -71,7 +80,7 @@ const Navbar = () => {
               href="/#projects"
               className={navLinkClass(isProjectsActive)}
               aria-current={isProjectsActive ? 'page' : undefined}
-              onClick={handleProjectsClick}
+              onClick={handleSectionClick('projects')}
             >
               Projects
             </a>
@@ -79,13 +88,12 @@ const Navbar = () => {
 
           <li>
             <a
-              href="https://github.com/dannymckinney88"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={navLinkClass(false)}
+              href="/#contact"
+              className={navLinkClass(isContactActive)}
+              aria-current={isContactActive ? 'page' : undefined}
+              onClick={handleSectionClick('contact')}
             >
-              GitHub
-              <span className="sr-only"> (opens in new tab)</span>
+              Contact
             </a>
           </li>
         </ul>
