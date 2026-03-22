@@ -61,9 +61,13 @@ app.post('/audit', auditLimiter, async (req: Request, res: Response) => {
     const page = await context.newPage();
 
     await page.goto(parsedUrl.toString(), {
-      waitUntil: 'domcontentloaded',
+      waitUntil: 'networkidle',
       timeout: 15000,
     });
+
+    await page
+      .waitForFunction('document.querySelector("h1") !== null', { timeout: 8000 })
+      .catch(() => null);
 
     const results = await new AxeBuilder({ page }).analyze();
 
