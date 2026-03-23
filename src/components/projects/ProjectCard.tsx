@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import { trackEvent } from '@/lib/analytics';
 
 export interface ProjectCardProps {
   title: string;
@@ -65,11 +66,31 @@ const ProjectCard = ({
 
           <div className="mt-auto flex gap-3 pt-6">
             <Button asChild>
-              <Link to={projectHref}>View Project</Link>
+              <Link
+                to={projectHref}
+                onClick={() =>
+                  trackEvent('click_project_view', {
+                    project_name: title,
+                    location: 'project_card',
+                  })
+                }
+              >
+                View Project
+              </Link>
             </Button>
 
             <Button variant="outline" asChild>
-              <a href={codeHref} target="_blank" rel="noopener noreferrer">
+              <a
+                href={codeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent('click_project_code', {
+                    project_name: title,
+                    location: 'project_card',
+                  })
+                }
+              >
                 View Code
                 <span className="sr-only"> (opens in new tab)</span>
               </a>

@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import { trackEvent } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
@@ -89,7 +90,14 @@ const Navbar = () => {
               href="/#featured-project"
               className={navLinkClass(isProjectsActive)}
               aria-current={isProjectsActive ? 'page' : undefined}
-              onClick={handleSectionClick('featured-project')}
+              onClick={(event) => {
+                trackEvent('click_nav_projects', {
+                  location: 'navbar',
+                  target: 'featured_projects',
+                });
+
+                handleSectionClick('featured-project')(event);
+              }}
             >
               Projects
             </a>
@@ -100,7 +108,14 @@ const Navbar = () => {
               href="/#contact"
               className={navLinkClass(isContactActive)}
               aria-current={isContactActive ? 'page' : undefined}
-              onClick={handleSectionClick('contact')}
+              onClick={(event) => {
+                trackEvent('click_nav_contact', {
+                  location: 'navbar',
+                  target: 'contact',
+                });
+
+                handleSectionClick('contact')(event);
+              }}
             >
               Contact
             </a>

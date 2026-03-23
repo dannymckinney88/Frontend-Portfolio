@@ -7,6 +7,7 @@ import ProjectCard from '@/components/projects/ProjectCard';
 import { projectData } from '@/components/projects/projectData';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { trackEvent } from '@/lib/analytics';
 
 const qualifications = [
   '4+ Years Enterprise Experience',
@@ -62,7 +63,17 @@ function Home() {
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
-            <Link to="/accessibility-audit">Launch Audit Tool</Link>
+            <Link
+              to="/accessibility-audit"
+              onClick={() =>
+                trackEvent('click_audit_cta', {
+                  project_name: 'ada_audit_tool',
+                  location: 'homepage',
+                })
+              }
+            >
+              Launch Audit Tool
+            </Link>
           </Button>
 
           <Button variant="outline" asChild size="lg">
@@ -241,6 +252,12 @@ function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="View resume PDF"
+                  onClick={() =>
+                    trackEvent('click_contact_cta', {
+                      target: 'resume',
+                      location: 'footer',
+                    })
+                  }
                 >
                   <FileText aria-hidden="true" />
                   View Resume
@@ -253,6 +270,12 @@ function Home() {
                   href="https://www.linkedin.com/in/danny-mckinney/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent('click_contact_cta', {
+                      target: 'linkdin',
+                      location: 'footer',
+                    })
+                  }
                 >
                   <Linkedin aria-hidden="true" />
                   LinkedIn
@@ -265,6 +288,12 @@ function Home() {
                   href="https://github.com/dannymckinney88"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent('click_contact_cta', {
+                      target: 'github',
+                      location: 'footer',
+                    })
+                  }
                 >
                   <Github aria-hidden="true" />
                   GitHub

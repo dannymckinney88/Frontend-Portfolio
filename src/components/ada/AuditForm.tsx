@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { trackEvent } from '@/lib/analytics';
 
 interface AuditFormProps {
   onSubmit: (url: string) => void;
@@ -26,9 +27,18 @@ const AuditForm = ({
     setUrl(initialUrl);
   }, [initialUrl]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(url);
+
+    const trimmed = url.trim();
+    if (!trimmed) return;
+
+    trackEvent('submit_audit_scan', {
+      location: 'audit_form',
+      has_url: !!trimmed,
+    });
+
+    onSubmit(trimmed);
   };
 
   const showLastScan = Boolean(lastScannedUrl && lastScannedAt);
@@ -83,7 +93,7 @@ const AuditForm = ({
             className="min-w-0 rounded-xl border border-border/60 bg-muted/20 px-3 py-2 text-sm"
           >
             <p className="text-[11px] font-medium text-muted-foreground">Last scanned</p>
-            <p className="break-words text-sm text-foreground" title={lastScannedUrl}>
+            <p className="wrap-break-word text-sm text-foreground" title={lastScannedUrl}>
               {lastScannedUrl}
             </p>
             <p className="text-xs text-muted-foreground">{lastScannedAt}</p>

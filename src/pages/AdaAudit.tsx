@@ -5,6 +5,7 @@ import AuditSummary from '@/components/ada/AuditSummary';
 import type { AuditResult } from '@/components/ada/types';
 import ViolationList from '@/components/ada/ViolationList';
 import PageHeader from '@/components/common/PageHeader';
+import { trackEvent } from '@/lib/analytics';
 import { scanPage } from '@/lib/auditApi';
 
 const LAST_SCAN_STORAGE_KEY = 'ada:last-scan';
@@ -55,11 +56,23 @@ const AdaAudit = () => {
       if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
         setError('Please enter a valid http or https URL.');
         setResults(null);
+
+        trackEvent('audit_scan_error', {
+          location: 'audit_form',
+          error_type: 'invalid_protocol',
+        });
+
         return;
       }
     } catch {
       setError('Please enter a valid URL.');
       setResults(null);
+
+      trackEvent('audit_scan_error', {
+        location: 'audit_form',
+        error_type: 'invalid_url',
+      });
+
       return;
     }
 
@@ -71,9 +84,18 @@ const AdaAudit = () => {
       setResults(response);
       setInitialUrl(response.url);
       localStorage.setItem(LAST_SCAN_STORAGE_KEY, JSON.stringify(response));
+
+      trackEvent('audit_scan_success', {
+        location: 'audit_results',
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong.');
       setResults(null);
+
+      trackEvent('audit_scan_error', {
+        location: 'audit_form',
+        error_type: 'request_failed',
+      });
     } finally {
       setIsLoading(false);
     }

@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, ExternalLink, ShieldCheck } from 'lucide-reac
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { trackEvent } from '@/lib/analytics';
 
 type FeaturedProjectCardProps = {
   title: string;
@@ -106,14 +107,32 @@ const FeaturedProjectCard = ({
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Button asChild size="lg" className="min-w-48">
-                  <Link to={projectHref}>
+                  <Link
+                    to={projectHref}
+                    onClick={() =>
+                      trackEvent('click_project_view', {
+                        project_name: title,
+                        location: 'featured_card',
+                      })
+                    }
+                  >
                     Run Accessibility Demo
                     <ArrowRight aria-hidden="true" />
                   </Link>
                 </Button>
 
                 <Button variant="outline" asChild size="lg">
-                  <a href={codeHref} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={codeHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent('click_project_code', {
+                        project_name: title,
+                        location: 'featured_card',
+                      })
+                    }
+                  >
                     View Code
                     <ExternalLink aria-hidden="true" />
                     <span className="sr-only"> (opens in new tab)</span>
