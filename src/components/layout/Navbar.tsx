@@ -89,7 +89,6 @@ const Navbar = () => {
             <a
               href="/#featured-project"
               className={navLinkClass(isProjectsActive)}
-              aria-current={isProjectsActive ? 'page' : undefined}
               onClick={(event) => {
                 trackEvent('click_nav_projects', {
                   location: 'navbar',
@@ -107,7 +106,6 @@ const Navbar = () => {
             <a
               href="/#contact"
               className={navLinkClass(isContactActive)}
-              aria-current={isContactActive ? 'page' : undefined}
               onClick={(event) => {
                 trackEvent('click_nav_contact', {
                   location: 'navbar',
