@@ -111,12 +111,12 @@ function Home() {
               <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
                 Featured Project
               </p>
-              <h2
+              <h3
                 id="featured-project-heading"
                 className="text-2xl font-semibold tracking-tight sm:text-3xl"
               >
                 Accessibility Audit Tool
-              </h2>
+              </h3>
               <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
                 A real scan workflow built to surface WCAG issues clearly, prioritize
                 severity, and present actionable findings in a developer-friendly
