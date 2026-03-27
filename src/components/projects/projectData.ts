@@ -18,6 +18,19 @@ export const projectData: ProjectCardProps[] = [
     codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
   },
   {
+    title: 'User Management — Accessible Form Handling',
+    description:
+      'A production-minded React + TypeScript app demonstrating WCAG 2.1 compliant form validation, modal focus trapping, and screen reader support. Lighthouse accessibility score: 100, zero axe violations.',
+    features: [
+      'Accessible modal with focus trap, Escape key handling, and focus return to trigger element',
+      'Form validation with aria-invalid, aria-describedby, and role="alert" error announcements',
+      'Screen reader tested with NVDA — success messages, loading states, and empty states all announced correctly',
+    ],
+    stack: ['React', 'TypeScript', 'Vite', 'WCAG 2.1', 'Accessibility'],
+    projectHref: 'https://react-ts-form-validation.vercel.app/',
+    codeHref: 'https://github.com/dannymckinney88/react-ts-form-validation',
+  },
+  {
     title: 'GitHub Repository Explorer',
     description:
       'An API-driven interface for repository search, pagination, caching, and resilient UI states.',
