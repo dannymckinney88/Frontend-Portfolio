@@ -8,8 +8,8 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 
-import { IMPACT_STYLES } from './constants';
-import type { AuditViolation } from './types';
+import { IMPACT_STYLES } from '../constants';
+import type { AuditViolation } from '../types';
 
 interface ViolationCardProps {
   violation: AuditViolation;

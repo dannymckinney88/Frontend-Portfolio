@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { Plus } from "lucide-react";
+import { useState } from 'react';
+import { Plus } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
-import type { AddTodo } from "./types";
+import type { AddTodo } from '../../components/todo/types';
 
 const TodoInput = ({ addTodo }: { addTodo: AddTodo }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ const TodoInput = ({ addTodo }: { addTodo: AddTodo }) => {
     if (!trimmedText) return;
 
     addTodo(trimmedText);
-    setText("");
+    setText('');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,11 +40,7 @@ const TodoInput = ({ addTodo }: { addTodo: AddTodo }) => {
           onChange={handleChange}
         />
 
-        <Button
-          type="submit"
-          disabled={!text.trim()}
-          className="w-full sm:w-auto"
-        >
+        <Button type="submit" disabled={!text.trim()} className="w-full sm:w-auto">
           <Plus className="h-4 w-4" aria-hidden="true" />
           <span>Add</span>
         </Button>

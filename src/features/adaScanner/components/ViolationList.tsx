@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
-import { IMPACT_ORDER as impactOrder, IMPACT_STYLES } from './constants';
-import type { AuditImpact, AuditViolation } from './types';
+import { IMPACT_ORDER as impactOrder, IMPACT_STYLES } from '../constants';
+import type { AuditImpact, AuditViolation } from '../types';
 import ViolationCard from './ViolationCard';
 
 /**

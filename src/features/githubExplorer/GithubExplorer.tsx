@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import PageHeader from '@/components/common/PageHeader';
 import PaginationControls from '@/components/common/PaginationControls';
 import SectionState from '@/components/common/SectionState';
-import GithubProfileCard from '@/components/github/GithubProfileCard';
-import GithubRepoList from '@/components/github/GithubRepoList';
-import GithubSearch from '@/components/github/GithubSearch';
+import GithubProfileCard from '@/features/githubExplorer/components/GithubProfileCard';
+import GithubRepoList from '@/features/githubExplorer/components/GithubRepoList';
+import GithubSearch from '@/features/githubExplorer/components/GithubSearch';
 import {
   fetchUserProfile,
   fetchUserRepos,

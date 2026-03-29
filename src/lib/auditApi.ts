@@ -1,4 +1,4 @@
-import type { AuditResult } from '@/components/ada/types';
+import type { AuditResult } from '@/features/adaScanner/types';
 
 const API_BASE_URL = import.meta.env.VITE_AUDIT_API_URL ?? 'http://localhost:3001';
 const API_SECRET = import.meta.env.VITE_AUDIT_API_SECRET;

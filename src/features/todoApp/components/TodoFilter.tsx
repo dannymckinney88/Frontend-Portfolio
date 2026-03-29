@@ -1,12 +1,12 @@
-import type { TodoFilterProps } from "@/components/todo/types";
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
+import type { TodoFilterProps } from '@/features/todoApp/types';
 
-import { ButtonGroup } from "../ui/button-group";
+import { ButtonGroup } from '../../../components/ui/button-group';
 
 const filters = [
-  { label: "All", value: "all" },
-  { label: "Active", value: "active" },
-  { label: "Completed", value: "completed" },
+  { label: 'All', value: 'all' },
+  { label: 'Active', value: 'active' },
+  { label: 'Completed', value: 'completed' },
 ] as const;
 
 const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
@@ -19,7 +19,7 @@ const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
           <Button
             key={item.value}
             type="button"
-            variant={isActive ? "default" : "outline"}
+            variant={isActive ? 'default' : 'outline'}
             size="sm"
             aria-pressed={isActive}
             onClick={() => setFilter(item.value)}

@@ -1,17 +1,9 @@
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
-import TodoItem from "./TodoItem";
-import type { TodoListProps } from "./types";
+import TodoItem from './TodoItem';
+import type { TodoListProps } from '../../components/todo/types';
 
-const TodoList = ({
-  todos,
-  toggleTodo,
-  deleteTodo,
-  editTodo,
-}: TodoListProps) => {
+const TodoList = ({ todos, toggleTodo, deleteTodo, editTodo }: TodoListProps) => {
   return (
     <SortableContext
       items={todos.map((todo) => todo.id)}

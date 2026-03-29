@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 
 import { Card, CardContent } from '@/components/ui/card';
 
-import { IMPACT_STYLES } from './constants';
-import type { AuditImpact, AuditResult } from './types';
+import { IMPACT_STYLES } from '../constants';
+import type { AuditImpact, AuditResult } from '../types';
 
 interface AuditSummaryProps {
   results: AuditResult | null;

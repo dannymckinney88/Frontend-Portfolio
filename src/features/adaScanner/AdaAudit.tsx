@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import AuditForm from '@/components/ada/AuditForm';
-import AuditSummary from '@/components/ada/AuditSummary';
-import type { AuditResult } from '@/components/ada/types';
-import ViolationList from '@/components/ada/ViolationList';
 import PageHeader from '@/components/common/PageHeader';
+import AuditForm from '@/features/adaScanner/components/AuditForm';
+import AuditSummary from '@/features/adaScanner/components/AuditSummary';
+import type { AuditResult } from '@/features/adaScanner/types';
+import ViolationList from '@/features/adaScanner/components/ViolationList';
 import { trackEvent } from '@/lib/analytics';
 import { scanPage } from '@/lib/auditApi';
 

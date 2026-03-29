@@ -5,10 +5,6 @@ import { arrayMove } from '@dnd-kit/sortable';
 
 import EmptyState from '@/components/common/EmptyState';
 import PageHeader from '@/components/common/PageHeader';
-import TodoFilter from '@/components/todo/TodoFilter';
-import TodoInput from '@/components/todo/TodoInput';
-import TodoList from '@/components/todo/TodoList';
-import type { AddTodo, Filter, Todo as TodoType } from '@/components/todo/types';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -17,6 +13,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import TodoFilter from '@/features/todoApp/components/TodoFilter';
+import TodoInput from '@/features/todoApp/components/TodoInput';
+import TodoList from '@/features/todoApp/components/TodoList';
+import type { AddTodo, Filter, Todo as TodoType } from '@/features/todoApp/types';
 
 const Todo = () => {
   /**
