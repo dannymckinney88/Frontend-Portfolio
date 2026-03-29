@@ -5,15 +5,16 @@ import Counter from '@/pages/Counter';
 import GithubExplorer from '@/pages/GithubExplorer';
 import Home from '@/pages/Home';
 import Todo from '@/pages/Todo';
+import { routePaths } from '@/lib/routes';
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/counter" element={<Counter />} />
-      <Route path="/todos" element={<Todo />} />
-      <Route path="/github" element={<GithubExplorer />} />
-      <Route path="/accessibility-audit" element={<AdaAudit />} />
+      <Route path={routePaths.home}               element={<Home />} />
+      <Route path={routePaths.counterApp}          element={<Counter />} />
+      <Route path={routePaths.todoApp}             element={<Todo />} />
+      <Route path={routePaths.githubExplorer}      element={<GithubExplorer />} />
+      <Route path={routePaths.accessibilityAudit}  element={<AdaAudit />} />
     </Routes>
   );
 }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { trackEvent } from '@/lib/analytics';
 
@@ -12,89 +12,74 @@ export interface ProjectCardProps {
   stack: string[];
   projectHref: string;
   codeHref: string;
+  index?: number;
 }
 
 const ProjectCard = ({
   title,
   description,
-  features,
   stack,
   projectHref,
   codeHref,
+  index,
 }: ProjectCardProps) => {
   return (
-    <Card className="flex h-full flex-col border-border/70 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
-      <CardContent className="flex h-full flex-col p-6 sm:p-7">
-        {/* Top */}
-        <div>
-          <div className="space-y-4">
-            <CardTitle className="line-clamp-2 min-h-14 text-xl font-semibold tracking-tight">
-              {title}
-            </CardTitle>
+    <Card className="flex h-full flex-col border-border/70 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <CardContent className="flex h-full flex-col p-6">
+        {index !== undefined && (
+          <p
+            className="mb-3 text-3xl font-bold tracking-tight text-muted-foreground/25"
+            aria-hidden="true"
+          >
+            {String(index).padStart(2, '0')}
+          </p>
+        )}
 
-            <CardDescription className="min-h-18 line-clamp-3 text-sm leading-6 text-muted-foreground">
-              {description}
-            </CardDescription>
-          </div>
+        <CardTitle className="text-base font-semibold leading-snug tracking-tight">
+          {title}
+        </CardTitle>
 
-          <div className="mt-6 border-t border-border/60 pt-6">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Highlights
-            </p>
+        <CardDescription className="mt-2 text-sm leading-6 text-muted-foreground">
+          {description}
+        </CardDescription>
 
-            <ul className="list-disc space-y-2.5 pl-5 text-sm leading-7 marker:text-muted-foreground">
-              {features.map((feature, index) => (
-                <li key={index}>{feature}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="mt-auto pt-6">
-          <div className="flex min-h-14 flex-wrap content-start gap-2">
+        <div className="mt-auto pt-5">
+          <div className="flex flex-wrap gap-1.5">
             {stack.map((item) => (
-              <Badge
-                key={item}
-                variant="secondary"
-                className="px-2.5 py-1 text-xs font-medium"
-              >
+              <Badge key={item} variant="secondary" className="px-2.5 py-1 text-xs font-medium">
                 {item}
               </Badge>
             ))}
           </div>
 
-          <div className="mt-auto flex gap-3 pt-6">
-            <Button asChild>
-              <Link
-                to={projectHref}
-                onClick={() =>
-                  trackEvent('click_project_view', {
-                    project_name: title,
-                    location: 'project_card',
-                  })
-                }
-              >
-                View Project
-              </Link>
-            </Button>
-
-            <Button variant="outline" asChild>
-              <a
-                href={codeHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEvent('click_project_code', {
-                    project_name: title,
-                    location: 'project_card',
-                  })
-                }
-              >
-                View Code
-                <span className="sr-only"> (opens in new tab)</span>
-              </a>
-            </Button>
+          <div className="mt-4 flex items-center gap-4">
+            <Link
+              to={projectHref}
+              className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline"
+              onClick={() =>
+                trackEvent('click_project_view', {
+                  project_name: title,
+                  location: 'project_card',
+                })
+              }
+            >
+              View <ExternalLink size={12} aria-hidden="true" />
+            </Link>
+            <a
+              href={codeHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground hover:underline"
+              onClick={() =>
+                trackEvent('click_project_code', {
+                  project_name: title,
+                  location: 'project_card',
+                })
+              }
+            >
+              Source
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
           </div>
         </div>
       </CardContent>

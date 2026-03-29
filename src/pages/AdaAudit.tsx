@@ -110,7 +110,7 @@ const AdaAudit = () => {
         : '';
 
   return (
-    <div className="section-stack">
+    <section className="section-stack lg:py-32 max-w-6xl md:py-24 mx-auto px-4 py-16 sm:px-6 w-full">
       <PageHeader
         title="Accessibility Audit"
         description="Run a live page audit and review accessibility issues in a clear, developer-friendly workflow."
@@ -149,7 +149,7 @@ const AdaAudit = () => {
       ) : null}
 
       <ViolationList violations={results?.violations ?? []} />
-    </div>
+    </section>
   );
 };
 

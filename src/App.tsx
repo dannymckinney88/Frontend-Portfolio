@@ -13,7 +13,7 @@ function App() {
       <RouteAnalytics />
       <Analytics />
 
-      <main className="app-shell page-shell">
+      <main>
         <AppRoutes />
       </main>
     </>

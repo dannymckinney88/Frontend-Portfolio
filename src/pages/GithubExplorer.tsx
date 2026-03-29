@@ -150,7 +150,7 @@ function GithubExplorer() {
   }, [currentPage]);
 
   return (
-    <section className="section-stack">
+    <section className="section-stack lg:py-32 max-w-6xl md:py-24 mx-auto px-4 py-16 sm:px-6 w-full">
       <PageHeader
         title="GitHub Repository Explorer"
         description="A performant and accessible GitHub repository explorer built with React and TypeScript, showcasing API integration, pagination, persistent caching, and production-ready UI state management."

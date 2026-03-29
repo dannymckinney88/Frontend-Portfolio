@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { closestCenter, DndContext, type DragEndEvent } from '@dnd-kit/core';
-import { restrictToParentElement,restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
 
 import EmptyState from '@/components/common/EmptyState';
@@ -8,7 +8,7 @@ import PageHeader from '@/components/common/PageHeader';
 import TodoFilter from '@/components/todo/TodoFilter';
 import TodoInput from '@/components/todo/TodoInput';
 import TodoList from '@/components/todo/TodoList';
-import type { AddTodo,Filter, Todo as TodoType } from '@/components/todo/types';
+import type { AddTodo, Filter, Todo as TodoType } from '@/components/todo/types';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -114,7 +114,7 @@ const Todo = () => {
         : 'No completed tasks. Complete some todos to see them here.';
 
   return (
-    <div className="w-full px-4 py-12">
+    <section className="lg:py-32 max-w-6xl md:py-24 mx-auto px-4 py-16 sm:px-6 w-full">
       <div className="w-full space-y-8">
         <PageHeader
           title="Todo App"
@@ -168,7 +168,7 @@ const Todo = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </section>
   );
 };
 

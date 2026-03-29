@@ -16,7 +16,7 @@ const Navbar = () => {
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
       'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
       isActive
-        ? 'text-foreground underline underline-offset-4 decoration-1'
+        ? 'text-foreground underline underline-offset-4 decoration-2'
         : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
     );
 
@@ -64,12 +64,12 @@ const Navbar = () => {
   const isContactActive = isHomeRoute && location.hash === '#contact';
 
   return (
-    <nav className="border-b border-border/70 bg-background">
+    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <Link
           to="/"
           aria-label="Danny McKinney - Home"
-          className="text-lg font-semibold tracking-tight text-foreground"
+          className="text-lg font-bold tracking-tight text-foreground"
         >
           Danny McKinney
         </Link>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, ExternalLink, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ExternalLink } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -57,55 +57,48 @@ const FeaturedProjectCard = ({
           </div>
 
           {/* Content */}
-          <div className="flex flex-col justify-start p-6 sm:p-8 lg:p-10">
-            <div className="space-y-6">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="inline-flex items-center rounded-full border border-border/70 bg-muted px-3 py-1 text-xs font-semibold text-foreground">
-                  Featured Project
-                </span>
+          <div className="flex flex-col justify-start p-6 sm:p-7 lg:p-8">
+            <div className="space-y-4">
+              <span className="inline-flex items-center rounded-full border border-border/70 bg-muted px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-section-label">
+                ADA / WCAG Differentiator
+              </span>
 
-                <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-                  ADA / WCAG Differentiator
-                </span>
-              </div>
-
-              <div className="space-y-4">
-                <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                   {title}
                 </h2>
 
-                <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+                <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
                   {description}
                 </p>
               </div>
 
-              <ul className="space-y-4" aria-label={`${title} highlights`}>
+              <ul className="space-y-3" aria-label={`${title} highlights`}>
                 {highlights.map((highlight) => (
-                  <li key={highlight} className="flex items-start gap-3">
+                  <li key={highlight} className="flex items-start gap-2.5">
                     <CheckCircle2
-                      className="mt-0.5 h-5 w-5 shrink-0 text-primary"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-section-label"
                       aria-hidden="true"
                     />
-                    <span className="text-sm leading-6 text-foreground sm:text-base">
+                    <span className="text-sm leading-6 text-foreground">
                       {highlight}
                     </span>
                   </li>
                 ))}
               </ul>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {stack.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex items-center rounded-full border border-border/70 bg-muted px-3 py-1 text-xs font-medium text-foreground"
+                    className="inline-flex items-center rounded-full border border-border/70 bg-muted px-2.5 py-0.5 text-xs font-medium text-foreground"
                   >
                     {item}
                   </span>
                 ))}
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3">
                 <Button asChild size="lg" className="min-w-48">
                   <Link
                     to={projectHref}

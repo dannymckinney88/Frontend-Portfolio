@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import PageHeader from "@/components/common/PageHeader";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import PageHeader from '@/components/common/PageHeader';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
-import CounterControls from "../components/counter/CounterControls";
-import CounterDisplay from "../components/counter/CounterDisplay";
+import CounterControls from '../components/counter/CounterControls';
+import CounterDisplay from '../components/counter/CounterDisplay';
 
 const Counter = () => {
   const [count, setCount] = useState(0);
@@ -20,7 +20,7 @@ const Counter = () => {
   const isMax = count === MAX_COUNT;
 
   return (
-    <section className="w-full px-4 py-12">
+    <section className="lg:py-32 max-w-6xl md:py-24 mx-auto px-4 py-16 sm:px-6 w-full">
       <div className="w-full space-y-8">
         <PageHeader
           title="Counter App"
