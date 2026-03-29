@@ -91,7 +91,7 @@ function Home() {
 
         <h1
           id="hero-heading"
-          className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl hover:underline hover:-translate-0.5"
+          className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl "
         >
           Danny McKinney
         </h1>
