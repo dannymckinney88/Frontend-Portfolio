@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import { FileText, Github, Linkedin } from 'lucide-react';
 
-import FeaturedProjectCard from '@/components/projects/FeaturedProjectCard';
-import ProjectCard from '@/components/projects/ProjectCard';
-import { projectData } from '@/components/projects/projectData';
 import { Button } from '@/components/ui/button';
+import FeaturedProjectCard from '@/features/homePage/Components/FeaturedProjectCard';
+import ProjectCard from '@/features/homePage/Components/ProjectCard';
+import { projectData } from '@/features/homePage/Components/projectData';
 import { trackEvent } from '@/lib/analytics';
 import type { RouteDefinition } from '@/lib/routes';
 import { routePaths, socialLinks } from '@/lib/routes';
@@ -44,7 +44,10 @@ const strengths = [
 function SectionLabel({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
     <div className="flex items-center gap-4">
-      <p id={id} className="shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
+      <p
+        id={id}
+        className="shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-section-label"
+      >
         {children}
       </p>
       <div className="h-px flex-1 bg-border" />
@@ -78,12 +81,18 @@ function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section aria-labelledby="hero-heading" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 lg:py-32">
+      <section
+        aria-labelledby="hero-heading"
+        className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 lg:py-32"
+      >
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
           Frontend Developer · Accessibility Focused
         </p>
 
-        <h1 id="hero-heading" className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl">
+        <h1
+          id="hero-heading"
+          className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl"
+        >
           Danny McKinney
         </h1>
 
@@ -153,9 +162,7 @@ function Home() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <SectionLabel id="projects-heading">More Work</SectionLabel>
-            <p
-              className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base"
-            >
+            <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
               Additional work showing API-driven UI, reusable components, and practical
               React fundamentals.
             </p>
@@ -215,7 +222,10 @@ function Home() {
       {/* Contact */}
       <section id="contact" className="bg-foreground" aria-labelledby="contact-heading">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-18">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
+          <p
+            className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label-muted"
+            style={{ color: 'var(--section-label-muted)' }}
+          >
             Get in Touch
           </p>
 
