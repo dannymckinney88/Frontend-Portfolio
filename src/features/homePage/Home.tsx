@@ -22,22 +22,22 @@ const strengths = [
   {
     title: 'Accessible UI',
     description:
-      'Experience building interfaces with WCAG awareness, keyboard usability, and clearer interaction patterns.',
+      'Built interfaces with real keyboard support, screen reader usability, and practical WCAG implementation — not just audit compliance.',
   },
   {
     title: 'React + TypeScript',
     description:
-      'Comfortable building component-based applications with predictable state, typed props, and scalable structure.',
+      'Building component-based applications with predictable state, strong typing, and scalable structure.',
   },
   {
     title: 'API-Driven Interfaces',
     description:
-      'Focused on resilient UI flows including loading, error, empty, and success states for real-world data fetching.',
+      'Designing resilient UI flows for real-world data — including loading, error, empty, and success states.',
   },
   {
     title: 'Reusable Components',
     description:
-      'I prefer clean, repeatable UI patterns that make interfaces easier to scale, maintain, and reason about.',
+      'Focused on clean, reusable UI patterns that scale across features and teams.',
   },
 ];
 
@@ -91,14 +91,13 @@ function Home() {
 
         <h1
           id="hero-heading"
-          className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl"
+          className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl hover:underline hover:-translate-0.5"
         >
           Danny McKinney
         </h1>
 
         <p className="mt-6 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">
-          Building accessible, production-ready frontend experiences for real-world
-          products.
+          Building accessible, production-ready frontend systems for real-world products.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -163,8 +162,8 @@ function Home() {
           <div className="flex flex-col gap-3">
             <SectionLabel id="projects-heading">More Work</SectionLabel>
             <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-              Additional work showing API-driven UI, reusable components, and practical
-              React fundamentals.
+              Designed to mirror real audit → remediation workflows used in enterprise
+              accessibility programs.
             </p>
           </div>
 
@@ -191,16 +190,16 @@ function Home() {
                 id="about-heading"
                 className="text-2xl font-semibold tracking-tight sm:text-3xl"
               >
-                Building enterprise frontend systems with accessibility at the core
+                Building enterprise frontend systems with accessibility at the core.
               </h2>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                I'm a frontend developer with 4+ years of experience building enterprise
+                I’m a frontend developer with 4+ years of experience building data-heavy
                 web applications in fintech.
               </p>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                I build interfaces that are resilient, accessible, and designed for
-                real-world use — handling edge cases, managing UI states, and creating
-                components that scale across teams and products.
+                I focus on building interfaces that are resilient, accessible, and usable
+                in real-world conditions — handling edge cases, managing complex UI
+                states, and creating components that scale across teams and products.
               </p>
             </div>
 

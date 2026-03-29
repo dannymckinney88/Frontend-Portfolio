@@ -80,9 +80,7 @@ const FeaturedProjectCard = ({
                       className="mt-0.5 h-4 w-4 shrink-0 text-section-label"
                       aria-hidden="true"
                     />
-                    <span className="text-sm leading-6 text-foreground">
-                      {highlight}
-                    </span>
+                    <span className="text-sm leading-6 text-foreground">{highlight}</span>
                   </li>
                 ))}
               </ul>

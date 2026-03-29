@@ -61,7 +61,8 @@ export const projectLinks: RouteDefinition[] = [
   {
     label: 'Accessibility Audit Tool',
     href: routePaths.accessibilityAudit,
-    externalHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+    externalHref:
+      'https://github.com/dannymckinney88/Frontend-Portfolio/tree/main/src/features/adaScanner',
   },
   {
     label: 'User Management — Accessible Form Handling',
@@ -71,17 +72,14 @@ export const projectLinks: RouteDefinition[] = [
   {
     label: 'GitHub Repository Explorer',
     href: routePaths.githubExplorer,
-    externalHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+    externalHref:
+      'https://github.com/dannymckinney88/Frontend-Portfolio/tree/main/src/features/githubExplorer',
   },
   {
     label: 'Todo App',
     href: routePaths.todoApp,
-    externalHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
-  },
-  {
-    label: 'Counter App',
-    href: routePaths.counterApp,
-    externalHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+    externalHref:
+      'https://github.com/dannymckinney88/Frontend-Portfolio/tree/main/src/features/todoApp',
   },
 ];
 

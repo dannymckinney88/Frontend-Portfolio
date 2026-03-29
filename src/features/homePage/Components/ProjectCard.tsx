@@ -30,7 +30,7 @@ const ProjectCard = ({
       <CardContent className="flex h-full flex-col p-6">
         {index !== undefined && (
           <p
-            className="mb-3 text-3xl font-bold tracking-tight text-muted-foreground/70"
+            className="mb-3 text-2xl font-bold tracking-tight text-muted-foreground/70"
             aria-hidden="true"
           >
             {String(index).padStart(2, '0')}

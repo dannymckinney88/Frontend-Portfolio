@@ -31,9 +31,10 @@ export const projectData: ProjectCardProps[] = [
     description:
       'Full-stack accessibility audit tool using Playwright and axe-core to scan live sites and surface actionable WCAG remediation insights.',
     features: [
-      'Runs real page audits with a Node/Express backend using Playwright and axe-core',
+      'Run accessibility scans on real websites and review WCAG issues in a clear, developer-focused workflow.',
       'Displays violations, severity breakdowns, passed checks, and affected DOM nodes',
       'Built with accessible form flows, live region announcements, focus management, and clear error handling',
+      'Designed to mirror real audit → remediation workflows used in enterprise accessibility programs.',
     ],
     stack: ['React', 'TypeScript', 'Express', 'Playwright', 'axe-core', 'Accessibility'],
     ...getProjectLinks('Accessibility Audit Tool'),
@@ -41,19 +42,19 @@ export const projectData: ProjectCardProps[] = [
   {
     title: 'User Management — Accessible Form Handling',
     description:
-      'A production-minded React + TypeScript app demonstrating WCAG 2.1 compliant form validation, modal focus trapping, and screen reader support. Lighthouse accessibility score: 100, zero axe violations.',
+      'A React + TypeScript app focused on accessible form patterns, including validation, modal focus management, and screen reader support. Achieved Lighthouse accessibility score of 100 with zero axe violations.',
     features: [
       'Accessible modal with focus trap, Escape key handling, and focus return to trigger element',
       'Form validation with aria-invalid, aria-describedby, and role="alert" error announcements',
       'Screen reader tested with NVDA — success messages, loading states, and empty states all announced correctly',
     ],
-    stack: ['React', 'TypeScript', 'Vite', 'WCAG 2.1', 'Accessibility'],
+    stack: ['React', 'TypeScript', 'WCAG 2.1', 'Accessibility'],
     ...getProjectLinks('User Management — Accessible Form Handling'),
   },
   {
     title: 'GitHub Repository Explorer',
     description:
-      'An API-driven interface for repository search, pagination, caching, and resilient UI states.',
+      'API-driven interface for repository search with pagination, caching, and resilient UI states.',
     features: [
       'GitHub REST API integration with username-based repository browsing',
       'Loading, empty, and error states for realistic data-fetching flows',
@@ -65,7 +66,7 @@ export const projectData: ProjectCardProps[] = [
   {
     title: 'Todo App',
     description:
-      'A task management interface focused on CRUD actions, filtering, drag-and-drop, and local persistence.',
+      'Task management interface with filtering, drag-and-drop, and local persistence, focused on clean state handling and UI interaction patterns.',
     features: [
       'Full CRUD interactions for creating and managing tasks',
       'Drag-and-drop reordering with clear visual feedback',
@@ -73,17 +74,5 @@ export const projectData: ProjectCardProps[] = [
     ],
     stack: ['React', 'TypeScript', 'Shadcn UI', 'Accessibility'],
     ...getProjectLinks('Todo App'),
-  },
-  {
-    title: 'Counter App',
-    description:
-      'A lightweight React project demonstrating predictable state updates, component composition, and accessible UI patterns.',
-    features: [
-      'Predictable state updates with clear user feedback',
-      'Reusable components that support clean composition',
-      'Accessible button interactions with keyboard support',
-    ],
-    stack: ['React', 'TypeScript', 'Accessibility'],
-    ...getProjectLinks('Counter App'),
   },
 ];
