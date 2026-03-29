@@ -1,7 +1,8 @@
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext } from '@dnd-kit/sortable';
+import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 
+import type { TodoListProps } from '../types';
 import TodoItem from './TodoItem';
-import type { TodoListProps } from '../../components/todo/types';
 
 const TodoList = ({ todos, toggleTodo, deleteTodo, editTodo }: TodoListProps) => {
   return (
