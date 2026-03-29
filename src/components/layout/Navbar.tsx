@@ -2,8 +2,16 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import { navLinks, routePaths } from '@/lib/routes';
 import { trackEvent } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
+
+const projectPagePaths = [
+  routePaths.todoApp,
+  routePaths.githubExplorer,
+  routePaths.counterApp,
+  routePaths.accessibilityAudit,
+];
 
 const Navbar = () => {
   const location = useLocation();
@@ -27,47 +35,49 @@ const Navbar = () => {
     const yOffset = -10;
     const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
     window.scrollTo({ top: y, behavior: 'smooth' });
-    element.focus({ preventScroll: true }); // ← add this
+    element.focus({ preventScroll: true });
   };
 
   const handleSectionClick =
-    (sectionId: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-      if (location.pathname === '/') {
-        e.preventDefault();
+    (sectionId: string) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+      if (location.pathname === routePaths.home) {
+        event.preventDefault();
         scrollToSection(sectionId);
         return;
       }
 
-      e.preventDefault();
-      navigate(`/#${sectionId}`);
+      event.preventDefault();
+      navigate(`${routePaths.home}#${sectionId}`);
     };
 
   useEffect(() => {
     const hash = location.hash.replace('#', '');
     if (hash) {
-      // gives the DOM time to render before we try to scroll
       requestAnimationFrame(() => scrollToSection(hash));
     }
   }, [location.hash]);
 
-  const isHomeRoute = location.pathname === '/';
+  const isHomeRoute = location.pathname === routePaths.home;
+  const isProjectPage = projectPagePaths.includes(
+    location.pathname as (typeof projectPagePaths)[number],
+  );
 
-  const isProjectPage =
-    location.pathname === '/todos' ||
-    location.pathname === '/github' ||
-    location.pathname === '/counter' ||
-    location.pathname === '/accessibility-audit';
-
-  const isHomeActive = isHomeRoute;
-  const isProjectsActive =
-    isProjectPage || (isHomeRoute && location.hash === '#projects');
-  const isContactActive = isHomeRoute && location.hash === '#contact';
+  const isLinkActive = (scrollTargetId?: string): boolean => {
+    if (!scrollTargetId) {
+      // Home link — active when on the home route with no section hash
+      return isHomeRoute;
+    }
+    if (scrollTargetId === 'featured-project') {
+      return isProjectPage || (isHomeRoute && location.hash === '#featured-project');
+    }
+    return isHomeRoute && location.hash === `#${scrollTargetId}`;
+  };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <nav aria-label="Main navigation" className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <Link
-          to="/"
+          to={routePaths.home}
           aria-label="Danny McKinney - Home"
           className="text-lg font-bold tracking-tight text-foreground"
         >
@@ -75,49 +85,42 @@ const Navbar = () => {
         </Link>
 
         <ul className="flex flex-wrap items-center gap-1 sm:gap-2" role="list">
-          <li>
-            <Link
-              to="/"
-              className={navLinkClass(isHomeActive)}
-              aria-current={isHomeActive ? 'page' : undefined}
-            >
-              Home
-            </Link>
-          </li>
+          {navLinks.map((link) => {
+            const isActive = isLinkActive(link.scrollTargetId);
 
-          <li>
-            <a
-              href="/#featured-project"
-              className={navLinkClass(isProjectsActive)}
-              onClick={(event) => {
-                trackEvent('click_nav_projects', {
-                  location: 'navbar',
-                  target: 'featured_projects',
-                });
+            if (link.scrollTargetId) {
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className={navLinkClass(isActive)}
+                    aria-current={isActive ? 'page' : undefined}
+                    onClick={(event) => {
+                      trackEvent(`click_nav_${link.label.toLowerCase()}`, {
+                        location: 'navbar',
+                        target: link.scrollTargetId,
+                      });
+                      handleSectionClick(link.scrollTargetId!)(event);
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            }
 
-                handleSectionClick('featured-project')(event);
-              }}
-            >
-              Projects
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="/#contact"
-              className={navLinkClass(isContactActive)}
-              onClick={(event) => {
-                trackEvent('click_nav_contact', {
-                  location: 'navbar',
-                  target: 'contact',
-                });
-
-                handleSectionClick('contact')(event);
-              }}
-            >
-              Contact
-            </a>
-          </li>
+            return (
+              <li key={link.href}>
+                <Link
+                  to={link.href}
+                  className={navLinkClass(isActive)}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>

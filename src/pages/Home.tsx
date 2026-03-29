@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import type { LucideIcon } from 'lucide-react';
 import { FileText, Github, Linkedin } from 'lucide-react';
 
 import FeaturedProjectCard from '@/components/projects/FeaturedProjectCard';
@@ -6,6 +7,16 @@ import ProjectCard from '@/components/projects/ProjectCard';
 import { projectData } from '@/components/projects/projectData';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
+import type { RouteDefinition } from '@/lib/routes';
+import { routePaths, socialLinks } from '@/lib/routes';
+
+// Maps each social link label to its icon component.
+// Icons live here rather than in routes.ts to keep the data file free of React imports.
+const socialLinkIcons: Record<string, LucideIcon> = {
+  'View Resume': FileText,
+  LinkedIn: Linkedin,
+  GitHub: Github,
+};
 
 const strengths = [
   {
@@ -30,10 +41,10 @@ const strengths = [
   },
 ];
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
     <div className="flex items-center gap-4">
-      <p className="shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
+      <p id={id} className="shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
         {children}
       </p>
       <div className="h-px flex-1 bg-border" />
@@ -67,23 +78,24 @@ function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 lg:py-32">
+      <section aria-labelledby="hero-heading" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 lg:py-32">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
           Frontend Developer · Accessibility Focused
         </p>
 
-        <h1 className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl">
+        <h1 id="hero-heading" className="mt-5 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl">
           Danny McKinney
         </h1>
 
         <p className="mt-6 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">
-          Building accessible, production-ready frontend experiences for real-world products.
+          Building accessible, production-ready frontend experiences for real-world
+          products.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <Button asChild size="lg">
             <Link
-              to="/accessibility-audit"
+              to={routePaths.accessibilityAudit}
               onClick={() =>
                 trackEvent('click_audit_cta', {
                   project_name: 'ada_audit_tool',
@@ -140,9 +152,8 @@ function Home() {
       >
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
-            <SectionLabel>More Work</SectionLabel>
+            <SectionLabel id="projects-heading">More Work</SectionLabel>
             <p
-              id="projects-heading"
               className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base"
             >
               Additional work showing API-driven UI, reusable components, and practical
@@ -151,9 +162,9 @@ function Home() {
           </div>
 
           <div className="grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {supportingProjects.map((project, i) => (
-              <ProjectCard key={project.title} {...project} index={i + 1} />
-            ))}
+            {supportingProjects.map((project, i) => {
+              return <ProjectCard key={project.title} {...project} index={i + 1} />;
+            })}
           </div>
         </div>
       </section>
@@ -176,13 +187,13 @@ function Home() {
                 Building enterprise frontend systems with accessibility at the core
               </h2>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                I'm a frontend developer with 4+ years of experience building enterprise web
-                applications in fintech.
+                I'm a frontend developer with 4+ years of experience building enterprise
+                web applications in fintech.
               </p>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                I build interfaces that are resilient, accessible, and designed for real-world
-                use — handling edge cases, managing UI states, and creating components that
-                scale across teams and products.
+                I build interfaces that are resilient, accessible, and designed for
+                real-world use — handling edge cases, managing UI states, and creating
+                components that scale across teams and products.
               </p>
             </div>
 
@@ -216,75 +227,46 @@ function Home() {
           </h2>
 
           <p className="mt-4 max-w-lg text-sm leading-7 text-background/60 sm:text-base">
-            I'm looking for frontend opportunities where accessibility, strong UI craft, and
-            production-minded React engineering are genuinely valued.
+            I'm looking for frontend opportunities where accessibility, strong UI craft,
+            and production-minded React engineering are genuinely valued.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild size="lg">
-              <a
-                href="/danny-mckinney-resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View resume PDF"
-                onClick={() =>
-                  trackEvent('click_contact_cta', {
-                    target: 'resume',
-                    location: 'footer',
-                  })
-                }
-              >
-                <FileText aria-hidden="true" />
-                View Resume
-                <span className="sr-only"> (opens in new tab)</span>
-              </a>
-            </Button>
+            {socialLinks.map((link: RouteDefinition, index) => {
+              const Icon = socialLinkIcons[link.label];
+              const destination = link.externalHref ?? link.href;
+              const isPrimary = index === 0;
 
-            <Button
-              variant="ghost"
-              asChild
-              size="lg"
-              className="border border-background/30 text-background hover:bg-background/10 hover:text-background"
-            >
-              <a
-                href="https://www.linkedin.com/in/danny-mckinney/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEvent('click_contact_cta', {
-                    target: 'linkdin',
-                    location: 'footer',
-                  })
-                }
-              >
-                <Linkedin aria-hidden="true" />
-                LinkedIn
-                <span className="sr-only"> (opens in new tab)</span>
-              </a>
-            </Button>
-
-            <Button
-              variant="ghost"
-              asChild
-              size="lg"
-              className="border border-background/30 text-background hover:bg-background/10 hover:text-background"
-            >
-              <a
-                href="https://github.com/dannymckinney88"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEvent('click_contact_cta', {
-                    target: 'github',
-                    location: 'footer',
-                  })
-                }
-              >
-                <Github aria-hidden="true" />
-                GitHub
-                <span className="sr-only"> (opens in new tab)</span>
-              </a>
-            </Button>
+              return (
+                <Button
+                  key={link.label}
+                  asChild
+                  size="lg"
+                  variant={isPrimary ? 'default' : 'ghost'}
+                  className={
+                    isPrimary
+                      ? undefined
+                      : 'border border-background/30 text-background hover:bg-background/10 hover:text-background'
+                  }
+                >
+                  <a
+                    href={destination}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent('click_contact_cta', {
+                        target: link.label,
+                        location: 'footer',
+                      })
+                    }
+                  >
+                    {Icon && <Icon aria-hidden="true" />}
+                    {link.label}
+                    <span className="sr-only"> (opens in new tab)</span>
+                  </a>
+                </Button>
+              );
+            })}
           </div>
         </div>
       </section>

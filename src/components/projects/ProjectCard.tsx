@@ -23,6 +23,8 @@ const ProjectCard = ({
   codeHref,
   index,
 }: ProjectCardProps) => {
+  const isExternal = projectHref.startsWith('http');
+
   return (
     <Card className="flex h-full flex-col border-border/70 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <CardContent className="flex h-full flex-col p-6">
@@ -46,30 +48,55 @@ const ProjectCard = ({
         <div className="mt-auto pt-5">
           <div className="flex flex-wrap gap-1.5">
             {stack.map((item) => (
-              <Badge key={item} variant="secondary" className="px-2.5 py-1 text-xs font-medium">
+              <Badge
+                key={item}
+                variant="secondary"
+                className="px-2.5 py-1 text-xs font-medium"
+              >
                 {item}
               </Badge>
             ))}
           </div>
 
           <div className="mt-4 flex items-center gap-4">
-            <Link
-              to={projectHref}
-              className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline"
-              onClick={() =>
-                trackEvent('click_project_view', {
-                  project_name: title,
-                  location: 'project_card',
-                })
-              }
-            >
-              View <ExternalLink size={12} aria-hidden="true" />
-            </Link>
+            {isExternal ? (
+              <a
+                href={projectHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${title} (opens in new tab)`}
+                className="inline-flex items-center gap-1 rounded text-sm font-medium text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                onClick={() =>
+                  trackEvent('click_project_view', {
+                    project_name: title,
+                    location: 'project_card',
+                  })
+                }
+              >
+                View
+                <ExternalLink size={12} aria-hidden="true" />
+              </a>
+            ) : (
+              <Link
+                to={projectHref}
+                aria-label={`View ${title}`}
+                className="inline-flex items-center gap-1 rounded text-sm font-medium text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                onClick={() =>
+                  trackEvent('click_project_view', {
+                    project_name: title,
+                    location: 'project_card',
+                  })
+                }
+              >
+                View
+              </Link>
+            )}
             <a
               href={codeHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground hover:underline"
+              aria-label={`View source for ${title} (opens in new tab)`}
+              className="inline-flex items-center gap-1 rounded text-sm font-medium text-muted-foreground hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               onClick={() =>
                 trackEvent('click_project_code', {
                   project_name: title,
@@ -78,7 +105,7 @@ const ProjectCard = ({
               }
             >
               Source
-              <span className="sr-only"> (opens in new tab)</span>
+              <ExternalLink size={12} aria-hidden="true" />
             </a>
           </div>
         </div>

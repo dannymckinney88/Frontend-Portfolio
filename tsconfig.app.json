@@ -30,5 +30,10 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "JSDoc Block Comment": {
+    "prefix": "c",
+    "body": ["/**", " * $1", " */"],
+    "description": "JSDoc block comment"
+  }
 }

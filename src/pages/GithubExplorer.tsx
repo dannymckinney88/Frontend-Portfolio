@@ -13,19 +13,10 @@ import {
   type GithubRepo,
 } from '@/lib/githubApi';
 
-/**
- * Default GitHub username shown on initial load
- */
 const DEFAULT_USERNAME = 'dannymckinney88';
 
-/**
- * Local storage key for cached GitHub explorer data
- */
 const GITHUB_CACHE_KEY = 'github-explorer-cache';
 
-/**
- * Number of repositories displayed per page
- */
 const REPOS_PER_PAGE = 6;
 
 function GithubExplorer() {

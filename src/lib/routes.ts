@@ -1,20 +1,5 @@
 /**
- * Centralized route and navigation link definitions.
- *
- * This is the single source of truth for all internal paths and external URLs
- * used across the app. Import from here rather than hardcoding strings in
- * components or data files.
- */
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-/**
  * A navigational link with a primary href and an optional external URL.
- *
- * - href          — the primary destination (internal SPA path or full external URL)
- * - externalHref  — when present, this URL should open in a new browser tab
  */
 export interface RouteDefinition {
   label: string;
@@ -39,13 +24,6 @@ export interface AppRouteDefinition {
   path: string;
 }
 
-// ---------------------------------------------------------------------------
-// Internal route path constants
-//
-// Use these anywhere an internal route path string is needed so a rename
-// only requires a change in one place.
-// ---------------------------------------------------------------------------
-
 export const routePaths = {
   home: '/',
   accessibilityAudit: '/accessibility-audit',
@@ -54,27 +32,13 @@ export const routePaths = {
   counterApp: '/counter',
 } as const;
 
-// ---------------------------------------------------------------------------
-// App-level routes
-//
-// Consumed by AppRoutes.tsx. The page component mapping lives there;
-// this array provides the label and path data.
-// ---------------------------------------------------------------------------
-
 export const appRoutes: AppRouteDefinition[] = [
-  { label: 'Home',                 path: routePaths.home },
-  { label: 'Accessibility Audit',  path: routePaths.accessibilityAudit },
-  { label: 'GitHub Explorer',      path: routePaths.githubExplorer },
-  { label: 'Todo App',             path: routePaths.todoApp },
-  { label: 'Counter App',          path: routePaths.counterApp },
+  { label: 'Home', path: routePaths.home },
+  { label: 'Accessibility Audit', path: routePaths.accessibilityAudit },
+  { label: 'GitHub Explorer', path: routePaths.githubExplorer },
+  { label: 'Todo App', path: routePaths.todoApp },
+  { label: 'Counter App', path: routePaths.counterApp },
 ];
-
-// ---------------------------------------------------------------------------
-// Nav bar links
-//
-// Consumed by Navbar.tsx. scrollTargetId drives same-page anchor scroll
-// when the user is already on the home route.
-// ---------------------------------------------------------------------------
 
 export const navLinks: NavLinkDefinition[] = [
   {
@@ -92,14 +56,6 @@ export const navLinks: NavLinkDefinition[] = [
     scrollTargetId: 'contact',
   },
 ];
-
-// ---------------------------------------------------------------------------
-// Project links
-//
-// href is the primary demo destination (internal SPA route or live URL).
-// externalHref is the source code repository, which opens in a new tab.
-// Consumed by projectData.ts for the projectHref and codeHref fields.
-// ---------------------------------------------------------------------------
 
 export const projectLinks: RouteDefinition[] = [
   {
@@ -128,13 +84,6 @@ export const projectLinks: RouteDefinition[] = [
     externalHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
   },
 ];
-
-// ---------------------------------------------------------------------------
-// Social / contact links
-//
-// All of these open in a new browser tab. externalHref is set on every entry.
-// Consumed by the Contact CTA section in Home.tsx.
-// ---------------------------------------------------------------------------
 
 export const socialLinks: RouteDefinition[] = [
   {

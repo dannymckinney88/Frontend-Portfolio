@@ -1,4 +1,26 @@
+import { projectLinks } from '@/lib/routes';
+
 import type { ProjectCardProps } from './ProjectCard';
+
+/**
+ * Look up a project's link definition by title.
+ * Throws in development if the title drifts out of sync with routes.ts.
+ */
+function getProjectLinks(title: string): { projectHref: string; codeHref: string } {
+  const match = projectLinks.find((link) => link.label === title);
+
+  if (!match) {
+    throw new Error(
+      `projectData: no entry found in projectLinks for "${title}". ` +
+        'Add a matching entry to src/lib/routes.ts.',
+    );
+  }
+
+  return {
+    projectHref: match.href,
+    codeHref: match.externalHref ?? '',
+  };
+}
 
 /**
  * Portfolio project data
@@ -14,8 +36,7 @@ export const projectData: ProjectCardProps[] = [
       'Built with accessible form flows, live region announcements, focus management, and clear error handling',
     ],
     stack: ['React', 'TypeScript', 'Express', 'Playwright', 'axe-core', 'Accessibility'],
-    projectHref: '/accessibility-audit',
-    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+    ...getProjectLinks('Accessibility Audit Tool'),
   },
   {
     title: 'User Management — Accessible Form Handling',
@@ -27,8 +48,7 @@ export const projectData: ProjectCardProps[] = [
       'Screen reader tested with NVDA — success messages, loading states, and empty states all announced correctly',
     ],
     stack: ['React', 'TypeScript', 'Vite', 'WCAG 2.1', 'Accessibility'],
-    projectHref: 'https://react-ts-form-validation.vercel.app/',
-    codeHref: 'https://github.com/dannymckinney88/react-ts-form-validation',
+    ...getProjectLinks('User Management — Accessible Form Handling'),
   },
   {
     title: 'GitHub Repository Explorer',
@@ -40,8 +60,7 @@ export const projectData: ProjectCardProps[] = [
       'Local storage caching scoped by username to reduce redundant API calls',
     ],
     stack: ['React', 'TypeScript', 'REST API', 'Accessibility'],
-    projectHref: '/github',
-    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+    ...getProjectLinks('GitHub Repository Explorer'),
   },
   {
     title: 'Todo App',
@@ -53,8 +72,7 @@ export const projectData: ProjectCardProps[] = [
       'Local storage persistence to preserve state across sessions',
     ],
     stack: ['React', 'TypeScript', 'Shadcn UI', 'Accessibility'],
-    projectHref: '/todos',
-    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+    ...getProjectLinks('Todo App'),
   },
   {
     title: 'Counter App',
@@ -66,7 +84,6 @@ export const projectData: ProjectCardProps[] = [
       'Accessible button interactions with keyboard support',
     ],
     stack: ['React', 'TypeScript', 'Accessibility'],
-    projectHref: '/counter',
-    codeHref: 'https://github.com/dannymckinney88/Frontend-Portfolio',
+    ...getProjectLinks('Counter App'),
   },
 ];
