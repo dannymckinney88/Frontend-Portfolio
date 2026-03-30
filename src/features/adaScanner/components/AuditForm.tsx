@@ -30,6 +30,8 @@ const AuditForm = ({
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (isLoading) return;
+
     const trimmed = url.trim();
     if (!trimmed) return;
 
@@ -57,7 +59,7 @@ const AuditForm = ({
 
             <Input
               id="audit-url"
-              type="text"
+              type="url"
               value={url}
               onChange={(event) => setUrl(event.target.value)}
               placeholder="https://www.example.com"
@@ -74,7 +76,11 @@ const AuditForm = ({
             </p>
 
             {error ? (
-              <p id="audit-url-error" className="text-sm text-red-600 dark:text-red-400">
+              <p
+                id="audit-url-error"
+                role="alert"
+                className="text-sm text-red-600 dark:text-red-400"
+              >
                 {error}
               </p>
             ) : null}
@@ -86,10 +92,11 @@ const AuditForm = ({
             </Button>
           </div>
         </div>
-
         {showLastScan ? (
           <div
             id="audit-last-scan"
+            role="status"
+            aria-live="polite"
             className="min-w-0 rounded-xl border border-border/60 bg-muted/20 px-3 py-2 text-sm"
           >
             <p className="text-[11px] font-medium text-muted-foreground">Last scanned</p>
