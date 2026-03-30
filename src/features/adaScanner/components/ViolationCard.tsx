@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ChevronDown, ExternalLink } from 'lucide-react';
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,12 +12,11 @@ import type { AuditViolation } from '../types';
 
 interface ViolationCardProps {
   violation: AuditViolation;
-  defaultExpanded?: boolean;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-const ViolationCard = ({ violation, defaultExpanded = false }: ViolationCardProps) => {
-  const [open, setOpen] = useState(defaultExpanded);
-
+const ViolationCard = ({ violation, open, onOpenChange }: ViolationCardProps) => {
   const headingId = `violation-${violation.id}`;
   const contentId = `violation-content-${violation.id}`;
 
@@ -26,7 +24,7 @@ const ViolationCard = ({ violation, defaultExpanded = false }: ViolationCardProp
   const impactBadgeClass = IMPACT_STYLES[impact].badge;
 
   return (
-    <Collapsible open={open} onOpenChange={setOpen}>
+    <Collapsible open={open} onOpenChange={onOpenChange}>
       <Card className="border-border/70 shadow-sm" aria-labelledby={headingId}>
         <CardContent className="p-0">
           <CollapsibleTrigger asChild>
