@@ -35,9 +35,9 @@ const strengths = [
       'Designing resilient UI flows for real-world data — including loading, error, empty, and success states.',
   },
   {
-    title: 'Reusable Components',
+    title: 'Complex UI Workflows',
     description:
-      'Focused on clean, reusable UI patterns that scale across features and teams.',
+      'Building interfaces that handle edge cases, multiple states, and real user flows without falling apart under complexity.',
   },
 ];
 
@@ -86,7 +86,7 @@ function Home() {
         className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 lg:py-32"
       >
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
-          Frontend Developer · Accessibility Focused
+          Frontend Engineer · React + TypeScript · Accessible, Data-Heavy UI
         </p>
 
         <h1
@@ -97,7 +97,8 @@ function Home() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">
-          Building accessible, production-ready frontend systems for real-world products.
+          I build production-ready frontend systems designed for accessibility, clarity,
+          and real-world user workflows.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -136,11 +137,11 @@ function Home() {
 
             <FeaturedProjectCard
               title={featuredProject.title}
-              description="Run live accessibility scans on real websites and review WCAG issues in a clear, developer-friendly workflow."
+              description="A live accessibility audit tool that turns raw scan results into a clearer, more usable developer workflow."
               highlights={[
-                'Scans live pages with a Playwright + axe-core backend',
-                'Surfaces violations, severity breakdowns, and actionable guidance',
-                'Built with accessible form flows, live announcements, and focus-aware UI states',
+                'Runs live page audits with a Playwright + axe-core backend',
+                'Surfaces issues with severity context and developer-friendly guidance',
+                'Built with accessible form feedback, status announcements, and focus-aware interactions',
               ]}
               stack={featuredProject.stack}
               projectHref={featuredProject.projectHref}
@@ -162,8 +163,8 @@ function Home() {
           <div className="flex flex-col gap-3">
             <SectionLabel id="projects-heading">More Work</SectionLabel>
             <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-              Designed to mirror real audit → remediation workflows used in enterprise
-              accessibility programs.
+              Additional projects that reflect how I think about frontend architecture,
+              usability, and real product behavior.
             </p>
           </div>
 
@@ -197,9 +198,9 @@ function Home() {
                 web applications in fintech.
               </p>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                I focus on building interfaces that are resilient, accessible, and usable
-                in real-world conditions — handling edge cases, managing complex UI
-                states, and creating components that scale across teams and products.
+                I focus on building interfaces that stay usable under real-world
+                complexity — handling edge cases, supporting keyboard and screen reader
+                workflows, and creating UI patterns that scale across teams and products.
               </p>
             </div>
 
@@ -232,12 +233,12 @@ function Home() {
             id="contact-heading"
             className="mt-4 max-w-xl text-2xl font-semibold tracking-tight text-background sm:text-3xl"
           >
-            Let's build accessible, polished frontend experiences
+            Let’s connect
           </h2>
 
           <p className="mt-4 max-w-lg text-sm leading-7 text-background/60 sm:text-base">
-            I'm looking for frontend opportunities where accessibility, strong UI craft,
-            and production-minded React engineering are genuinely valued.
+            I’m open to frontend roles focused on React, TypeScript, accessibility, and
+            real product UI.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
