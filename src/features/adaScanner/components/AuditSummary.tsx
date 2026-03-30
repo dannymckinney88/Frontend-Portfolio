@@ -73,14 +73,14 @@ const AuditSummary = ({ results }: AuditSummaryProps) => {
       valueClassName: 'text-green-700 dark:text-green-400',
     },
     {
-      label: 'Incomplete',
+      label: 'Needs Review',
       value: results.incomplete,
       className:
         'border-sky-200/70 bg-sky-50/70 dark:border-sky-900/40 dark:bg-sky-950/20',
       valueClassName: 'text-sky-700 dark:text-sky-400',
     },
     {
-      label: 'Inapplicable',
+      label: 'Not Applicable',
       value: results.inapplicable,
       className:
         'border-slate-200/70 bg-slate-50/70 dark:border-slate-800 dark:bg-slate-950/20',
@@ -136,7 +136,8 @@ const AuditSummary = ({ results }: AuditSummaryProps) => {
             <div className="space-y-1">
               <h3 className="text-sm font-semibold text-foreground">Audit Checks</h3>
               <p className="text-sm text-muted-foreground">
-                Additional axe results that were passed, incomplete, or not applicable.
+                Additional axe results, including checks that need manual review or did
+                not apply to this page.
               </p>
             </div>
 
