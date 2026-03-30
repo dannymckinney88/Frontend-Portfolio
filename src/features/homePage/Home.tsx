@@ -225,10 +225,7 @@ function Home() {
       {/* Contact */}
       <section id="contact" className="bg-foreground" aria-labelledby="contact-heading">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-18">
-          <p
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label-muted"
-            style={{ color: 'var(--section-label-muted)' }}
-          >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label-muted">
             Get in Touch
           </p>
 
