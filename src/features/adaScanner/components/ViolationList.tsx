@@ -26,37 +26,44 @@ const FILTER_LABELS: Record<ViolationFilter, string> = {
 };
 
 interface ViolationListProps {
-  violations: AuditViolation[];
+  violation: AuditViolation[];
 }
 
-const ViolationList = ({ violations }: ViolationListProps) => {
+const ViolationList = ({ violation }: ViolationListProps) => {
   const [activeFilter, setActiveFilter] = useState<ViolationFilter>('all');
   const [allExpanded, setAllExpanded] = useState(false);
-  const [expandVersion, setExpandVersion] = useState(0);
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
 
   const sortedViolations = useMemo(
     () =>
-      [...violations].sort((a, b) => {
+      [...violation].sort((a, b) => {
         const aImpact = impactOrder[a.impact ?? 'minor'] ?? 99;
         const bImpact = impactOrder[b.impact ?? 'minor'] ?? 99;
 
         return aImpact - bImpact;
       }),
-    [violations],
+    [violation],
   );
 
-  const filterCounts = useMemo(
-    () => ({
-      all: sortedViolations.length,
-      critical: sortedViolations.filter((v) => (v.impact ?? 'minor') === 'critical')
-        .length,
-      serious: sortedViolations.filter((v) => (v.impact ?? 'minor') === 'serious').length,
-      moderate: sortedViolations.filter((v) => (v.impact ?? 'minor') === 'moderate')
-        .length,
-      minor: sortedViolations.filter((v) => (v.impact ?? 'minor') === 'minor').length,
-    }),
-    [sortedViolations],
-  );
+  const filterCounts = useMemo(() => {
+    return sortedViolations.reduce(
+      (acc, violation) => {
+        const impact = violation.impact ?? 'minor';
+
+        acc.all += 1;
+        acc[impact] += 1;
+
+        return acc;
+      },
+      {
+        all: 0,
+        critical: 0,
+        serious: 0,
+        moderate: 0,
+        minor: 0,
+      } satisfies Record<ViolationFilter, number>,
+    );
+  }, [sortedViolations]);
 
   const filteredViolations = useMemo(() => {
     if (activeFilter === 'all') {
@@ -69,8 +76,21 @@ const ViolationList = ({ violations }: ViolationListProps) => {
   }, [activeFilter, sortedViolations]);
 
   const handleToggleAll = () => {
-    setAllExpanded((prev) => !prev);
-    setExpandVersion((prev) => prev + 1);
+    const nextExpanded = !allExpanded;
+
+    setAllExpanded(nextExpanded);
+
+    /**
+     * Update all visible violations to match the new expand state.
+     */
+    setOpenItems(Object.fromEntries(filteredViolations.map((v) => [v.id, nextExpanded])));
+  };
+
+  const handleOpenChange = (id: string, nextOpen: boolean) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [id]: nextOpen,
+    }));
   };
 
   if (!sortedViolations.length) return null;
@@ -161,9 +181,10 @@ const ViolationList = ({ violations }: ViolationListProps) => {
             <div className="stack gap-4">
               {filteredViolations.map((violation) => (
                 <ViolationCard
-                  key={`${violation.id}-${expandVersion}`}
+                  key={violation.id}
                   violation={violation}
-                  defaultExpanded={allExpanded}
+                  open={openItems[violation.id] ?? false}
+                  onOpenChange={(nextOpen) => handleOpenChange(violation.id, nextOpen)}
                 />
               ))}
             </div>

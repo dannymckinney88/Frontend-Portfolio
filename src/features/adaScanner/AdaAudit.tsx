@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import PageHeader from '@/components/common/PageHeader';
 import AuditForm from '@/features/adaScanner/components/AuditForm';
 import AuditSummary from '@/features/adaScanner/components/AuditSummary';
-import type { AuditResult } from '@/features/adaScanner/types';
 import ViolationList from '@/features/adaScanner/components/ViolationList';
+import type { AuditResult } from '@/features/adaScanner/types';
 import { trackEvent } from '@/lib/analytics';
 import { scanPage } from '@/lib/auditApi';
 
@@ -148,7 +148,7 @@ const AdaAudit = () => {
         </div>
       ) : null}
 
-      <ViolationList violations={results?.violations ?? []} />
+      <ViolationList violation={results?.violations ?? []} />
     </section>
   );
 };
