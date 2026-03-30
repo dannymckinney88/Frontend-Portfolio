@@ -1,9 +1,12 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Moon, Sun } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
 import { navLinks, routePaths } from '@/lib/routes';
+import { useTheme } from '@/lib/theme';
 import { cn } from '@/lib/utils';
 
 const projectPagePaths = [
@@ -16,6 +19,7 @@ const projectPagePaths = [
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { theme, toggle } = useTheme();
 
   const navLinkClass = (isActive = false) =>
     cn(
@@ -76,55 +80,71 @@ const Navbar = () => {
   return (
     <nav
       aria-label="Main navigation"
-      className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 hover:underline"
+      className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80"
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <Link
           to={routePaths.home}
           aria-label="Danny McKinney - Home"
-          className="text-lg font-bold tracking-tight text-foreground"
+          className="text-lg font-bold tracking-tight text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
         >
           Danny McKinney
         </Link>
 
-        <ul className="flex flex-wrap items-center gap-1 sm:gap-2" role="list">
-          {navLinks.map((link) => {
-            const isActive = isLinkActive(link.scrollTargetId);
+        <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+          <ul className="flex flex-wrap items-center gap-1 sm:gap-2" role="list">
+            {navLinks.map((link) => {
+              const isActive = isLinkActive(link.scrollTargetId);
 
-            if (link.scrollTargetId) {
+              if (link.scrollTargetId) {
+                return (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className={navLinkClass(isActive)}
+                      aria-current={isActive ? 'page' : undefined}
+                      onClick={(event) => {
+                        trackEvent(`click_nav_${link.label.toLowerCase()}`, {
+                          location: 'navbar',
+                          target: link.scrollTargetId,
+                        });
+                        handleSectionClick(link.scrollTargetId!)(event);
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              }
+
               return (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className={navLinkClass(isActive)}
                     aria-current={isActive ? 'page' : undefined}
-                    onClick={(event) => {
-                      trackEvent(`click_nav_${link.label.toLowerCase()}`, {
-                        location: 'navbar',
-                        target: link.scrollTargetId,
-                      });
-                      handleSectionClick(link.scrollTargetId!)(event);
-                    }}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               );
-            }
+            })}
+          </ul>
 
-            return (
-              <li key={link.href}>
-                <Link
-                  to={link.href}
-                  className={navLinkClass(isActive)}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-sm"
+            onClick={toggle}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Moon className="h-4 w-4" aria-hidden="true" />
+            )}
+          </Button>
+        </div>
       </div>
     </nav>
   );
