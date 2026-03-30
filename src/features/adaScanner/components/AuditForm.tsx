@@ -59,7 +59,7 @@ const AuditForm = ({
 
             <Input
               id="audit-url"
-              type="url"
+              type="text"
               value={url}
               onChange={(event) => setUrl(event.target.value)}
               placeholder="https://www.example.com"
@@ -69,6 +69,9 @@ const AuditForm = ({
               aria-describedby={
                 error ? 'audit-url-help audit-url-error' : 'audit-url-help'
               }
+              spellCheck={false}
+              autoCapitalize="none"
+              autoCorrect="off"
             />
 
             <p id="audit-url-help" className="text-sm text-muted-foreground">
