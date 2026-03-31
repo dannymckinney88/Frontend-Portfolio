@@ -51,8 +51,8 @@ export const navLinks: NavLinkDefinition[] = [
   },
   {
     label: 'Projects',
-    href: `${routePaths.home}#featured-project`,
-    scrollTargetId: 'featured-project',
+    href: `${routePaths.home}#supporting-projects`,
+    scrollTargetId: 'supporting-projects',
   },
   {
     label: 'Contact',

@@ -71,8 +71,8 @@ const Navbar = () => {
       // Home link — active when on the home route with no section hash
       return isHomeRoute;
     }
-    if (scrollTargetId === 'featured-project') {
-      return isProjectPage || (isHomeRoute && location.hash === '#featured-project');
+    if (scrollTargetId === 'supporting-projects') {
+      return isProjectPage || (isHomeRoute && location.hash === '#supporting-projects');
     }
     return isHomeRoute && location.hash === `#${scrollTargetId}`;
   };
