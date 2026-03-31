@@ -72,13 +72,10 @@ function Home() {
     window.scrollTo({ top: y, behavior: 'smooth' });
   };
 
-  const featuredProject = projectData.find(
-    (project) => project.title === 'Accessibility Audit Tool',
-  );
+  const featuredProject = projectData.find((project) => project.title === 'AccessOps');
 
   const supportingProjects = projectData.filter(
-    (project) =>
-      project.title !== 'Accessibility Audit Tool' && project.title !== 'Counter App',
+    (project) => project.title !== 'AccessOps' && project.title !== 'Counter App',
   );
 
   return (
@@ -86,10 +83,10 @@ function Home() {
       {/* Hero */}
       <section
         aria-labelledby="hero-heading"
-        className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 lg:py-32"
+        className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 md:py-16 lg:py-20"
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label">
-          Frontend Engineer · React + TypeScript · Accessible, Data-Heavy UI
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label ">
+          FRONTEND ENGINEER · ACCESSIBILITY · DATA-HEAVY UI · WORKFLOW SYSTEMS
         </p>
 
         <h1
@@ -105,24 +102,24 @@ function Home() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Button asChild size="lg">
+          <Button
+            asChild
+            size="lg"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
             <Link
-              to={routePaths.accessibilityAudit}
+              target="_blank"
+              rel="noopener noreferrer"
+              to={routePaths.accessOps}
               onClick={() =>
-                trackEvent('click_audit_cta', {
-                  project_name: 'ada_audit_tool',
-                  location: 'homepage',
+                trackEvent('click_accessops_cta', {
+                  project_name: 'access_ops',
+                  location: 'hero',
                 })
               }
             >
-              Launch Audit Tool
+              Explore AccessOps <span aria-hidden="true">→</span>
             </Link>
-          </Button>
-
-          <Button variant="ghost" asChild size="lg">
-            <a href="#featured-project" onClick={handleProjectsClick}>
-              View Portfolio
-            </a>
           </Button>
         </div>
       </section>
@@ -140,17 +137,13 @@ function Home() {
 
             <FeaturedProjectCard
               title={featuredProject.title}
-              description="A live accessibility audit tool that turns raw scan results into a clearer, more usable developer workflow."
-              highlights={[
-                'Runs live page audits with a Playwright + axe-core backend',
-                'Surfaces issues with severity context and developer-friendly guidance',
-                'Built with accessible form feedback, status announcements, and focus-aware interactions',
-              ]}
+              description={featuredProject.description}
+              highlights={featuredProject.features}
               stack={featuredProject.stack}
               projectHref={featuredProject.projectHref}
               codeHref={featuredProject.codeHref}
-              imageSrc="/ada-featured-preview.png"
-              imageAlt="Accessibility audit tool results showing summary metrics, severity filters, and an expanded WCAG violation card"
+              imageSrc="/featured-project.png"
+              imageAlt="Accessibility audit dashboard showing summary metrics, and violation risks"
             />
           </div>
         </section>

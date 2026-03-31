@@ -27,6 +27,30 @@ function getProjectLinks(title: string): { projectHref: string; codeHref: string
  */
 export const projectData: ProjectCardProps[] = [
   {
+    title: 'AccessOps',
+    description:
+      'Accessibility operations platform for managing audit-driven remediation — tracking issues across audits, triaging work, and verifying real fixes.',
+
+    features: [
+      'Surfaces highest-risk properties and unresolved critical issues to drive immediate triage decisions',
+      'Triage workspace built for real remediation workflows — severity, ownership, and status in one view',
+      'Scans view tracks audit history and regressions, showing progress across properties over time',
+      'Issues persist until verified by a human — not auto-closed by a scanner rescan',
+      'Designed for teams where accessibility is ongoing work, not a one-time audit deliverable',
+    ],
+
+    stack: [
+      'React',
+      'TypeScript',
+      'Next.js',
+      'Tailwind',
+      'TanStack Table',
+      'Accessibility',
+    ],
+
+    ...getProjectLinks('AccessOps'),
+  },
+  {
     title: 'Accessibility Audit Tool',
     description:
       'Full-stack accessibility audit tool using Playwright and axe-core to scan live sites and surface actionable WCAG remediation insights.',
@@ -40,7 +64,7 @@ export const projectData: ProjectCardProps[] = [
     ...getProjectLinks('Accessibility Audit Tool'),
   },
   {
-    title: 'User Management — Accessible Form Handling',
+    title: 'Accessible Form Handling',
     description:
       'A React + TypeScript app focused on accessible form patterns, including validation, modal focus management, and screen reader support. Achieved Lighthouse accessibility score of 100 with zero axe violations.',
     features: [
@@ -49,7 +73,7 @@ export const projectData: ProjectCardProps[] = [
       'Screen reader tested with NVDA — success messages, loading states, and empty states all announced correctly',
     ],
     stack: ['React', 'TypeScript', 'WCAG 2.1', 'Accessibility'],
-    ...getProjectLinks('User Management — Accessible Form Handling'),
+    ...getProjectLinks('Accessible Form Handling'),
   },
   {
     title: 'GitHub Repository Explorer',

@@ -26,12 +26,12 @@ const FeaturedProjectCard = ({
   imageSrc,
   imageAlt,
 }: FeaturedProjectCardProps) => {
+  const isExternal = projectHref.startsWith('http');
   return (
-    <Card className="overflow-hidden border-border/70 bg-card shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
+    <Card className="overflow-hidden border-border/70 bg-card shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 p-0">
       <CardContent className="p-0">
         <div className="grid items-stretch lg:grid-cols-[1.2fr_0.8fr]">
-          {/* Screenshot Panel */}
-          <div className="border-b border-border/70 bg-linear-to-br from-muted/40 to-background p-4 sm:p-5 lg:border-r lg:border-b-0 lg:p-6">
+          <div className="border-b border-border/70 bg-linear-to-br from-muted/40 to-background p-4 sm:p-5 lg:border-r lg:border-b-0 lg:p-5">
             <div className="overflow-hidden rounded-[26px] border border-border/70 bg-background shadow-sm">
               <div className="flex items-center justify-between border-b border-border/60 px-4 py-2.5 sm:px-5">
                 <div className="flex items-center gap-2" aria-hidden="true">
@@ -41,7 +41,7 @@ const FeaturedProjectCard = ({
                 </div>
 
                 <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-[11px] font-medium text-muted-foreground sm:text-xs">
-                  live audit results
+                  Audit dashboard
                 </span>
               </div>
 
@@ -60,7 +60,7 @@ const FeaturedProjectCard = ({
           <div className="flex flex-col justify-start p-6 sm:p-7 lg:p-8">
             <div className="space-y-4">
               <span className="inline-flex items-center rounded-full border border-border/70 bg-muted px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-section-label">
-                ADA / WCAG Differentiator
+                ACCESSIBILITY OPERATIONS PLATFORM
               </span>
 
               <div className="space-y-2">
@@ -97,21 +97,38 @@ const FeaturedProjectCard = ({
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <Button asChild size="lg" className="min-w-48">
-                  <Link
-                    to={projectHref}
-                    onClick={() =>
-                      trackEvent('click_project_view', {
-                        project_name: title,
-                        location: 'featured_card',
-                      })
-                    }
-                  >
-                    Run Accessibility Demo
-                    <ArrowRight aria-hidden="true" />
-                  </Link>
-                </Button>
-
+                {isExternal ? (
+                  <Button asChild size="lg" className="min-w-48">
+                    <Link
+                      target="_blank"
+                      to={projectHref}
+                      onClick={() =>
+                        trackEvent('click_project_view', {
+                          project_name: title,
+                          location: 'featured_card',
+                        })
+                      }
+                    >
+                      Live Demo
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button asChild size="lg" className="min-w-48">
+                    <Link
+                      to={projectHref}
+                      onClick={() =>
+                        trackEvent('click_project_view', {
+                          project_name: title,
+                          location: 'featured_card',
+                        })
+                      }
+                    >
+                      Open Dashboard
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                  </Button>
+                )}
                 <Button variant="outline" asChild size="lg">
                   <a
                     href={codeHref}

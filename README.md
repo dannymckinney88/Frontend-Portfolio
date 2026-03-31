@@ -17,17 +17,17 @@ A frontend portfolio built with React and TypeScript, focused on accessible, dat
 
 **Accessibility operations platform for managing audit-driven remediation — tracking issues across audits, triaging work, and verifying real fixes.**
 
-| Dashboard                                           | Issues Table                                        |
-| --------------------------------------------------- | --------------------------------------------------- |
-| ![AccessOps Dashboard](./screenshots/dashboard.png) | ![AccessOps Issues](./screenshots/issues-table.png) |
+| Dashboard                                                | Issues Table                                             |
+| -------------------------------------------------------- | -------------------------------------------------------- |
+| ![AccessOps Dashboard](public/screenshots/dashboard.png) | ![AccessOps Issues](public/screenshots/issues-table.png) |
 
-| Issues Drawer                                     | Scans View                        |
-| ------------------------------------------------- | --------------------------------- |
-| ![Issues Drawer](./screenshots/issues-drawer.png) | ![Scans](./screenshots/scans.png) |
+| Issues Drawer                                          | Scans View                             |
+| ------------------------------------------------------ | -------------------------------------- |
+| ![Issues Drawer](public/screenshots/issues-drawer.png) | ![Scans](public/screenshots/scans.png) |
 
-| Dark Mode                                | Mobile                                             |
-| ---------------------------------------- | -------------------------------------------------- |
-| ![Dark Mode](./screenshots/darkmode.png) | ![Mobile Dashboard](./screenshots/mobile-dash.png) |
+| Dark Mode                                     | Mobile                                                  |
+| --------------------------------------------- | ------------------------------------------------------- |
+| ![Dark Mode](public/screenshots/darkmode.png) | ![Mobile Dashboard](public/screenshots/mobile-dash.png) |
 
 AccessOps is designed around how accessibility work actually gets done in enterprise environments: issues surfaced by audits, triaged by severity and ownership, and tracked until a human verifies the fix — not auto-closed by a scanner rescan.
 

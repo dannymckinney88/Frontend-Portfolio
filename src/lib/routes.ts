@@ -26,7 +26,9 @@ export interface AppRouteDefinition {
 
 export const routePaths = {
   home: '/',
+  accessOps: 'https://accessops.vercel.app/dashboard',
   accessibilityAudit: '/accessibility-audit',
+  formValidation: 'https://react-ts-form-validation.vercel.app/',
   githubExplorer: '/github',
   todoApp: '/todos',
   counterApp: '/counter',
@@ -34,7 +36,9 @@ export const routePaths = {
 
 export const appRoutes: AppRouteDefinition[] = [
   { label: 'Home', path: routePaths.home },
+  { label: 'AccessOps', path: routePaths.accessOps },
   { label: 'Accessibility Audit', path: routePaths.accessibilityAudit },
+  { label: 'Accessible Form Handling', path: routePaths.formValidation },
   { label: 'GitHub Explorer', path: routePaths.githubExplorer },
   { label: 'Todo App', path: routePaths.todoApp },
   { label: 'Counter App', path: routePaths.counterApp },
@@ -59,14 +63,19 @@ export const navLinks: NavLinkDefinition[] = [
 
 export const projectLinks: RouteDefinition[] = [
   {
+    label: 'AccessOps',
+    href: routePaths.accessOps,
+    externalHref: 'https://github.com/dannymckinney88/accessops',
+  },
+  {
     label: 'Accessibility Audit Tool',
     href: routePaths.accessibilityAudit,
     externalHref:
       'https://github.com/dannymckinney88/Frontend-Portfolio/tree/main/src/features/adaScanner',
   },
   {
-    label: 'User Management — Accessible Form Handling',
-    href: 'https://react-ts-form-validation.vercel.app/',
+    label: 'Accessible Form Handling',
+    href: routePaths.formValidation,
     externalHref: 'https://github.com/dannymckinney88/react-ts-form-validation',
   },
   {
