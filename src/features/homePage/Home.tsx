@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import { FileText, Github, Linkedin } from 'lucide-react';
 
@@ -56,22 +56,6 @@ function SectionLabel({ children, id }: { children: React.ReactNode; id?: string
 }
 
 function Home() {
-  const location = useLocation();
-
-  const handleProjectsClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (location.pathname !== '/') return;
-
-    event.preventDefault();
-
-    const section = document.getElementById('featured-project');
-    if (!section) return;
-
-    const yOffset = -10;
-    const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
-
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  };
-
   const featuredProject = projectData.find((project) => project.title === 'AccessOps');
 
   const supportingProjects = projectData.filter(
