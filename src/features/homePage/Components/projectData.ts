@@ -29,14 +29,14 @@ export const projectData: ProjectCardProps[] = [
   {
     title: 'AccessOps',
     description:
-      'Accessibility operations platform for managing audit-driven remediation — tracking issues across audits, triaging work, and verifying real fixes.',
+      'Accessibility operations platform built around a single active audit — helping teams prioritize, triage, and remediate accessibility issues at scale.',
 
     features: [
-      'Surfaces highest-risk properties and unresolved critical issues to drive immediate triage decisions',
-      'Triage workspace built for real remediation workflows — severity, ownership, and status in one view',
-      'Scans view tracks audit history and regressions, showing progress across properties over time',
-      'Issues persist until verified by a human — not auto-closed by a scanner rescan',
-      'Designed for teams where accessibility is ongoing work, not a one-time audit deliverable',
+      'Decision-focused dashboard that surfaces current risk and directs teams to the highest-impact work',
+      'Developer-first remediation workspace designed to handle hundreds of issues with strong filtering and prioritization',
+      'Highlights repeated issues across pages to expose high-leverage fixes and reduce duplicate work',
+      'Issue lifecycle tracks real progress (Open → In Progress → Fixed → Verified) instead of relying on scan resets',
+      'Audit history separated from workflow — current audit drives work, previous audits remain lightweight reference',
     ],
 
     stack: [
