@@ -40,8 +40,6 @@ export const appRoutes: AppRouteDefinition[] = [
   { label: 'Accessibility Audit', path: routePaths.accessibilityAudit },
   { label: 'Accessible Form Handling', path: routePaths.formValidation },
   { label: 'GitHub Explorer', path: routePaths.githubExplorer },
-  { label: 'Todo App', path: routePaths.todoApp },
-  { label: 'Counter App', path: routePaths.counterApp },
 ];
 
 export const navLinks: NavLinkDefinition[] = [
@@ -83,12 +81,6 @@ export const projectLinks: RouteDefinition[] = [
     href: routePaths.githubExplorer,
     externalHref:
       'https://github.com/dannymckinney88/Frontend-Portfolio/tree/main/src/features/githubExplorer',
-  },
-  {
-    label: 'Todo App',
-    href: routePaths.todoApp,
-    externalHref:
-      'https://github.com/dannymckinney88/Frontend-Portfolio/tree/main/src/features/todoApp',
   },
 ];
 

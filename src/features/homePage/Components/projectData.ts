@@ -87,16 +87,4 @@ export const projectData: ProjectCardProps[] = [
     stack: ['React', 'TypeScript', 'REST API', 'Accessibility'],
     ...getProjectLinks('GitHub Repository Explorer'),
   },
-  {
-    title: 'Todo App',
-    description:
-      'Task management interface with filtering, drag-and-drop, and local persistence, focused on clean state handling and UI interaction patterns.',
-    features: [
-      'Full CRUD interactions for creating and managing tasks',
-      'Drag-and-drop reordering with clear visual feedback',
-      'Local storage persistence to preserve state across sessions',
-    ],
-    stack: ['React', 'TypeScript', 'Shadcn UI', 'Accessibility'],
-    ...getProjectLinks('Todo App'),
-  },
 ];
