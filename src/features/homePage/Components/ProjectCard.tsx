@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { trackEvent } from '@/lib/analytics';
 
@@ -58,55 +59,63 @@ const ProjectCard = ({
             ))}
           </div>
 
-          <div className="mt-4 flex items-center gap-4">
+          <div className="mt-4 flex items-center gap-2.5">
             {isExternal ? (
+              <Button asChild size="sm" variant="outline">
+                <a
+                  href={projectHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${title} (opens in new tab)`}
+                  onClick={() =>
+                    trackEvent('click_project_view', {
+                      project_name: title,
+                      location: 'project_card',
+                    })
+                  }
+                >
+                  <span className="inline-flex items-center gap-1">
+                    View Project
+                    <ExternalLink size={12} aria-hidden="true" />
+                  </span>
+                </a>
+              </Button>
+            ) : (
+              <Button asChild size="sm" variant="outline">
+                <Link
+                  to={projectHref}
+                  aria-label={`View ${title}`}
+                  onClick={() =>
+                    trackEvent('click_project_view', {
+                      project_name: title,
+                      location: 'project_card',
+                    })
+                  }
+                >
+                  View Project
+                </Link>
+              </Button>
+            )}
+
+            <Button asChild variant="ghost" size="sm">
               <a
-                href={projectHref}
+                href={codeHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`View ${title} (opens in new tab)`}
-                className="inline-flex items-center gap-1 rounded text-sm font-medium text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                aria-label={`View source for ${title} (opens in new tab)`}
                 onClick={() =>
-                  trackEvent('click_project_view', {
+                  trackEvent('click_project_code', {
                     project_name: title,
                     location: 'project_card',
                   })
                 }
               >
-                View
-                <ExternalLink size={12} aria-hidden="true" />
+                <span className="inline-flex items-center gap-1">
+                  Source
+                  <ExternalLink size={12} aria-hidden="true" />
+                </span>
               </a>
-            ) : (
-              <Link
-                to={projectHref}
-                aria-label={`View ${title}`}
-                className="inline-flex items-center gap-1 rounded text-sm font-medium text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                onClick={() =>
-                  trackEvent('click_project_view', {
-                    project_name: title,
-                    location: 'project_card',
-                  })
-                }
-              >
-                View
-              </Link>
-            )}
-            <a
-              href={codeHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View source for ${title} (opens in new tab)`}
-              className="inline-flex items-center gap-1 rounded text-sm font-medium text-muted-foreground hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              onClick={() =>
-                trackEvent('click_project_code', {
-                  project_name: title,
-                  location: 'project_card',
-                })
-              }
-            >
-              Source
-              <ExternalLink size={12} aria-hidden="true" />
-            </a>
+            </Button>
           </div>
         </div>
       </CardContent>
