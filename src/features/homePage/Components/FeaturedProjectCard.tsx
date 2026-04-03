@@ -14,6 +14,7 @@ type FeaturedProjectCardProps = {
   codeHref: string;
   imageSrc: string;
   imageAlt: string;
+  scope?: string;
 };
 
 const FeaturedProjectCard = ({
@@ -25,6 +26,7 @@ const FeaturedProjectCard = ({
   codeHref,
   imageSrc,
   imageAlt,
+  scope,
 }: FeaturedProjectCardProps) => {
   const isExternal = projectHref.startsWith('http');
   return (
@@ -58,12 +60,12 @@ const FeaturedProjectCard = ({
 
           {/* Content */}
           <div className="flex flex-col justify-start p-6 sm:p-7 lg:p-8">
-            <div className="space-y-4">
+            <div className="space-y-5">
               <span className="inline-flex items-center rounded-full border border-border/70 bg-muted px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-section-label">
-                ACCESSIBILITY OPERATIONS PLATFORM
+                Accessibility Operations Platform
               </span>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                   {title}
                 </h2>
@@ -71,6 +73,10 @@ const FeaturedProjectCard = ({
                 <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
                   {description}
                 </p>
+
+                {scope && (
+                  <p className="max-w-xl text-sm leading-6 text-foreground/80">{scope}</p>
+                )}
               </div>
 
               <ul className="space-y-3" aria-label={`${title} highlights`}>
@@ -109,7 +115,7 @@ const FeaturedProjectCard = ({
                         })
                       }
                     >
-                      Live Demo
+                      View Live System
                       <ArrowRight aria-hidden="true" />
                     </Link>
                   </Button>
@@ -124,11 +130,12 @@ const FeaturedProjectCard = ({
                         })
                       }
                     >
-                      Open Dashboard
+                      Open Live System
                       <ArrowRight aria-hidden="true" />
                     </Link>
                   </Button>
                 )}
+
                 <Button variant="outline" asChild size="lg">
                   <a
                     href={codeHref}

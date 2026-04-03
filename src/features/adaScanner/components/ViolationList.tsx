@@ -9,14 +9,8 @@ import { IMPACT_ORDER as impactOrder, IMPACT_STYLES } from '../constants';
 import type { AuditImpact, AuditViolation } from '../types';
 import ViolationCard from './ViolationCard';
 
-/**
- * Violation filter options
- */
 type ViolationFilter = 'all' | Exclude<AuditImpact, null>;
 
-/**
- * Filter labels
- */
 const FILTER_LABELS: Record<ViolationFilter, string> = {
   all: 'All',
   critical: 'Critical',

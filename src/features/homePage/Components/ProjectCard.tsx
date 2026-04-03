@@ -14,6 +14,7 @@ export interface ProjectCardProps {
   projectHref: string;
   codeHref: string;
   index?: number;
+  scope?: string;
 }
 
 const ProjectCard = ({

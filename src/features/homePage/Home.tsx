@@ -67,7 +67,7 @@ function Home() {
       {/* Hero */}
       <section
         aria-labelledby="hero-heading"
-        className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 md:py-16 lg:py-20"
+        className="mx-auto w-full max-w-6xl px-4 pt-12 pb-20 sm:px-6 md:pt-16 md:pb-28 lg:pt-20 lg:pb-32"
       >
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label ">
           FRONTEND ENGINEER · ACCESSIBILITY · DATA-HEAVY UI · WORKFLOW SYSTEMS
@@ -109,56 +109,60 @@ function Home() {
       </section>
 
       {/* Featured ADA Project */}
-      {featuredProject ? (
-        <section
-          id="featured-project"
-          className="mx-auto w-full max-w-6xl px-4 pb-14 sm:px-6 md:pb-18"
-          aria-label="Featured project: Accessibility Audit Tool"
-          tabIndex={-1}
-        >
-          <div className="flex flex-col gap-6">
-            <SectionLabel>Featured Work</SectionLabel>
+      {/* Projects Zone */}
+      <section className="bg-surface-subtle">
+        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 md:py-16">
+          {featuredProject ? (
+            <section
+              id="featured-project"
+              aria-label="Featured project: AccessOps"
+              tabIndex={-1}
+            >
+              <div className="flex flex-col gap-8 ">
+                <SectionLabel>Flagship Project</SectionLabel>
 
-            <FeaturedProjectCard
-              title={featuredProject.title}
-              description={featuredProject.description}
-              highlights={featuredProject.features}
-              stack={featuredProject.stack}
-              projectHref={featuredProject.projectHref}
-              codeHref={featuredProject.codeHref}
-              imageSrc="/featured-project.png"
-              imageAlt="Accessibility audit dashboard showing summary metrics, and violation risks"
-            />
-          </div>
-        </section>
-      ) : null}
+                <FeaturedProjectCard
+                  title={featuredProject.title}
+                  description={featuredProject.description}
+                  scope={featuredProject.scope}
+                  highlights={featuredProject.features}
+                  stack={featuredProject.stack}
+                  projectHref={featuredProject.projectHref}
+                  codeHref={featuredProject.codeHref}
+                  imageSrc="/featured-project.png"
+                  imageAlt="Accessibility operations dashboard showing summary metrics, issue risk, and remediation progress"
+                />
+              </div>
+            </section>
+          ) : null}
 
-      {/* Supporting Projects */}
-      <section
-        id="supporting-projects"
-        className="mx-auto w-full max-w-6xl px-4 pb-14 sm:px-6 md:pb-18"
-        aria-labelledby="projects-heading"
-      >
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-3">
-            <SectionLabel id="projects-heading">More Work</SectionLabel>
-            <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-              Additional projects that reflect how I think about frontend architecture,
-              usability, and real product behavior.
-            </p>
-          </div>
+          <section
+            id="supporting-projects"
+            className="mx-auto w-full max-w-6xl px-4 pt-20 pb-14 sm:px-6 md:pt-24 md:pb-18"
+            aria-labelledby="projects-heading"
+          >
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
+                <SectionLabel id="projects-heading">More Work</SectionLabel>
+                <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+                  Additional projects that reflect how I think about frontend
+                  architecture, usability, and real product behavior.
+                </p>
+              </div>
 
-          <div className="grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {supportingProjects.map((project, i) => {
-              return <ProjectCard key={project.title} {...project} index={i + 1} />;
-            })}
-          </div>
+              <div className="grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {supportingProjects.map((project, i) => (
+                  <ProjectCard key={project.title} {...project} index={i + 1} />
+                ))}
+              </div>
+            </div>
+          </section>
         </div>
       </section>
 
       {/* About + Strengths */}
       <section
-        className="mx-auto w-full max-w-6xl px-4 pb-14 sm:px-6 md:pb-18"
+        className="mx-auto w-full max-w-6xl px-4 pt-20 pb-14 sm:px-6 md:pt-24 md:pb-18"
         aria-labelledby="about-heading"
       >
         <div className="flex flex-col gap-8">

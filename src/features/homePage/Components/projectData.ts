@@ -29,14 +29,15 @@ export const projectData: ProjectCardProps[] = [
   {
     title: 'AccessOps',
     description:
-      'Accessibility operations platform built around a single active audit — helping teams prioritize, triage, and remediate accessibility issues at scale.',
+      'Workflow system for managing accessibility remediation at scale — helping teams triage hundreds of issues, prioritize high-impact fixes, and track real progress across audits.',
+
+    scope:
+      'Dashboard, triage workspace, grouped issue views, audit history, and remediation detail drawer.',
 
     features: [
-      'Decision-focused dashboard that surfaces current risk and directs teams to the highest-impact work',
-      'Developer-first remediation workspace designed to handle hundreds of issues with strong filtering and prioritization',
-      'Highlights repeated issues across pages to expose high-leverage fixes and reduce duplicate work',
-      'Issue lifecycle tracks real progress (Open → In Progress → Fixed → Verified) instead of relying on scan resets',
-      'Audit history separated from workflow — current audit drives work, previous audits remain lightweight reference',
+      'Decision-focused dashboard that surfaces current accessibility risk and directs teams to the highest-impact remediation work',
+      'Table-first triage workspace designed to handle large issue sets with filtering, grouping, and assignment workflows',
+      'Lifecycle model tracks real progress from Open → Verified instead of resetting work on each scan',
     ],
 
     stack: [
@@ -53,14 +54,17 @@ export const projectData: ProjectCardProps[] = [
   {
     title: 'Accessibility Audit Tool',
     description:
-      'Full-stack accessibility audit tool using Playwright and axe-core to scan live sites and surface actionable WCAG remediation insights.',
+      'Full-stack audit tool that scans live websites and surfaces actionable WCAG issues — designed to support real audit-to-remediation workflows, not just detection.',
+
     features: [
-      'Run accessibility scans on real websites and review WCAG issues in a clear, developer-focused workflow.',
-      'Displays violations, severity breakdowns, passed checks, and affected DOM nodes',
-      'Built with accessible form flows, live region announcements, focus management, and clear error handling',
-      'Designed to mirror real audit → remediation workflows used in enterprise accessibility programs.',
+      'Runs automated accessibility scans on live sites using Playwright and axe-core, returning structured, actionable violation data',
+      'Surfaces severity, affected elements, and pass/fail results in a developer-focused review interface',
+      'Implements accessible form patterns, live region announcements, and focus management for real-world usability',
+      'Bridges detection and remediation by presenting results in a workflow aligned with enterprise accessibility audits',
     ],
+
     stack: ['React', 'TypeScript', 'Express', 'Playwright', 'axe-core', 'Accessibility'],
+
     ...getProjectLinks('Accessibility Audit Tool'),
   },
   {
