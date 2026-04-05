@@ -24,6 +24,7 @@ const ProjectCard = ({
   projectHref,
   codeHref,
   index,
+  scope,
 }: ProjectCardProps) => {
   const isExternal = projectHref.startsWith('http');
 
@@ -45,6 +46,9 @@ const ProjectCard = ({
 
         <CardDescription className="mt-2 text-sm leading-6 text-muted-foreground">
           {description}
+          {scope && (
+            <p className="max-w-xl text-sm leading-6 text-foreground/80">{scope}</p>
+          )}
         </CardDescription>
 
         <div className="mt-auto pt-5">
@@ -76,7 +80,7 @@ const ProjectCard = ({
                   }
                 >
                   <span className="inline-flex items-center gap-1">
-                    View Project
+                    View Live Demo
                     <ExternalLink size={12} aria-hidden="true" />
                   </span>
                 </a>
@@ -93,7 +97,7 @@ const ProjectCard = ({
                     })
                   }
                 >
-                  View Project
+                  View Live Demo
                 </Link>
               </Button>
             )}
@@ -112,7 +116,7 @@ const ProjectCard = ({
                 }
               >
                 <span className="inline-flex items-center gap-1">
-                  Source
+                  View Code
                   <ExternalLink size={12} aria-hidden="true" />
                 </span>
               </a>

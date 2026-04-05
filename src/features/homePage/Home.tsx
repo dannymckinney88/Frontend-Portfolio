@@ -20,24 +20,24 @@ const socialLinkIcons: Record<string, LucideIcon> = {
 
 const strengths = [
   {
-    title: 'Accessible UI',
+    title: 'Data-Heavy UI',
     description:
-      'Built interfaces with real keyboard support, screen reader usability, and practical WCAG implementation — not just audit compliance.',
+      'Designing and building dense table interfaces, complex filter systems, and workflow-driven layouts that stay performant and usable at scale.',
   },
   {
     title: 'React + TypeScript',
     description:
-      'Building component-based applications with predictable state, strong typing, and scalable structure.',
+      'Component architecture with explicit types, predictable state, and patterns that hold up as codebases grow — not just working code, but maintainable code.',
+  },
+  {
+    title: 'Accessible UI',
+    description:
+      'Keyboard navigation, screen reader workflows, and WCAG implementation built into the architecture — not retrofitted after the fact.',
   },
   {
     title: 'API-Driven Interfaces',
     description:
-      'Designing resilient UI flows for real-world data — including loading, error, empty, and success states.',
-  },
-  {
-    title: 'Complex UI Workflows',
-    description:
-      'Building interfaces that handle edge cases, multiple states, and real user flows without falling apart under complexity.',
+      'Resilient UI flows that handle loading, error, empty, and success states correctly — because real data is never clean or predictable.',
   },
 ];
 
@@ -67,10 +67,10 @@ function Home() {
       {/* Hero */}
       <section
         aria-labelledby="hero-heading"
-        className="mx-auto w-full max-w-6xl px-4 pt-12 pb-20 sm:px-6 md:pt-16 md:pb-28 lg:pt-20 lg:pb-32"
+        className="mx-auto w-full max-w-6xl px-4 pt-12 pb-20 sm:px-6 md:pt-16 md:pb-28 lg:pt-20 "
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-section-label ">
-          FRONTEND ENGINEER · ACCESSIBILITY · DATA-HEAVY UI · WORKFLOW SYSTEMS
+        <p className="text-xs font-semibold tracking-[0.2em] text-section-label ">
+          Frontend Engineer · Accessibility · Data-Heavy UI · Workflow Systems
         </p>
 
         <h1
@@ -178,13 +178,20 @@ function Home() {
                 Building enterprise frontend systems with accessibility at the core.
               </h2>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                I’m a frontend developer with 4+ years of experience building data-heavy
-                web applications in fintech.
+                I spent five years as the accessibility SME for a 30-page enterprise
+                wealth platform, leading remediation of 900+ violations and reducing audit
+                findings by two thirds.
               </p>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                I focus on building interfaces that stay usable under real-world
-                complexity — handling edge cases, supporting keyboard and screen reader
-                workflows, and creating UI patterns that scale across teams and products.
+                I build interfaces that hold up under real complexity — dense tables,
+                complex filter states, keyboard and screen reader workflows — and I treat
+                accessibility as an architecture decision, not a QA pass.
+              </p>
+              <p className="text-sm leading-7 text-muted-foreground sm:text-base">
+                On the engineering side, I specialize in the frontend work that's hardest
+                to get right — data-heavy tables, complex filter state, async data flows,
+                and component architecture that scales without becoming a maintenance
+                problem.
               </p>
             </div>
 
@@ -218,8 +225,8 @@ function Home() {
           </h2>
 
           <p className="mt-4 max-w-lg text-sm leading-7 text-background/60 sm:text-base">
-            I’m open to frontend roles focused on React, TypeScript, accessibility, and
-            real product UI.
+            Currently looking for frontend roles where accessibility and complex UI are
+            first-class concerns, not afterthoughts.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">

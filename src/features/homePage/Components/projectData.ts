@@ -29,7 +29,7 @@ export const projectData: ProjectCardProps[] = [
   {
     title: 'AccessOps',
     description:
-      'Workflow system for managing accessibility remediation at scale — helping teams triage hundreds of issues, prioritize high-impact fixes, and track real progress across audits.',
+      'System for managing accessibility remediation at scale, designed to turn audit results into actionable workflows across teams and scan cycles.',
 
     scope:
       'Dashboard, triage workspace, grouped issue views, audit history, and remediation detail drawer.',
@@ -51,10 +51,14 @@ export const projectData: ProjectCardProps[] = [
 
     ...getProjectLinks('AccessOps'),
   },
+
   {
     title: 'Accessibility Audit Tool',
     description:
-      'Full-stack audit tool that scans live websites and surfaces actionable WCAG issues — designed to support real audit-to-remediation workflows, not just detection.',
+      'Scans live websites and surfaces actionable WCAG issues, designed to support real audit-to-remediation workflows instead of just generating reports.',
+
+    scope:
+      'Built to mirror how accessibility audits actually flow, bridging automated detection with developer-focused remediation.',
 
     features: [
       'Runs automated accessibility scans on live sites using Playwright and axe-core, returning structured, actionable violation data',
@@ -67,28 +71,42 @@ export const projectData: ProjectCardProps[] = [
 
     ...getProjectLinks('Accessibility Audit Tool'),
   },
+
   {
     title: 'Accessible Form Handling',
     description:
-      'A React + TypeScript app focused on accessible form patterns, including validation, modal focus management, and screen reader support. Achieved Lighthouse accessibility score of 100 with zero axe violations.',
+      'Explores production-ready accessible form patterns, including validation, modal focus management, and screen reader behavior, with a focus on real user workflows, not just passing audits.',
+
+    scope:
+      'Focused on real-world accessibility patterns for forms, modals, and validation flows used in production applications.',
+
     features: [
       'Accessible modal with focus trap, Escape key handling, and focus return to trigger element',
       'Form validation with aria-invalid, aria-describedby, and role="alert" error announcements',
       'Screen reader tested with NVDA — success messages, loading states, and empty states all announced correctly',
     ],
+
     stack: ['React', 'TypeScript', 'WCAG 2.1', 'Accessibility'],
+
     ...getProjectLinks('Accessible Form Handling'),
   },
+
   {
     title: 'GitHub Repository Explorer',
     description:
-      'API-driven interface for repository search with pagination, caching, and resilient UI states.',
+      'Data-heavy interface for exploring repositories with pagination, caching, and resilient UI states, focused on handling async data and edge cases cleanly.',
+
+    scope:
+      'Focused on handling async data, caching strategies, and resilient UI states in data-driven interfaces where failure states matter as much as success.',
+
     features: [
       'GitHub REST API integration with username-based repository browsing',
       'Loading, empty, and error states for realistic data-fetching flows',
       'Local storage caching scoped by username to reduce redundant API calls',
     ],
-    stack: ['React', 'TypeScript', 'REST API', 'Accessibility'],
+
+    stack: ['React', 'TypeScript', 'REST API'],
+
     ...getProjectLinks('GitHub Repository Explorer'),
   },
 ];
