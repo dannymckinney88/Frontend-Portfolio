@@ -1,21 +1,25 @@
 # Danny McKinney — Frontend Portfolio
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel)](https://dannymckinney.dev)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/dannymckinney88)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/danny-mckinney88)
 
-A frontend portfolio built with React and TypeScript, focused on accessible, data-heavy UI for real-world enterprise workflows.
+Frontend engineer focused on building data-heavy, accessible UI systems for real-world enterprise workflows.
 
 ---
 
 ## 🌐 Live Site
 
-👉 [dannymckinney.dev](https://dannymckinney.dev)
+👉 https://dannymckinney.dev
 
 ---
 
 ## ⭐ Featured Project — AccessOps
 
-**Accessibility operations platform for managing audit-driven remediation — tracking issues across audits, triaging work, and verifying real fixes.**
+**Accessibility remediation system for triaging, assigning, and verifying issues across audit cycles.**
+
+👉 Live Demo: https://accessops.vercel.app/dashboard
+
+👉 Source Code: https://github.com/dannymckinney88/accessops
 
 | Dashboard                                                | Issues Table                                             |
 | -------------------------------------------------------- | -------------------------------------------------------- |
@@ -29,15 +33,20 @@ A frontend portfolio built with React and TypeScript, focused on accessible, dat
 | --------------------------------------------- | ------------------------------------------------------- |
 | ![Dark Mode](public/screenshots/darkmode.png) | ![Mobile Dashboard](public/screenshots/mobile-dash.png) |
 
-AccessOps is designed around how accessibility work actually gets done in enterprise environments: issues surfaced by audits, triaged by severity and ownership, and tracked until a human verifies the fix — not auto-closed by a scanner rescan.
+AccessOps is built around the part most tools don’t solve — what happens after an audit.
+
+Instead of acting like a scanner UI or report viewer, it treats accessibility as a backlog:
+issues are triaged, assigned, grouped across pages, and tracked through remediation until verified.
+
+The focus is not detection — it’s helping teams work through real remediation workflows.
 
 ### Features
 
-- Dashboard surfaces highest-risk properties and unresolved critical issues to drive immediate triage decisions
-- Triage workspace built for real remediation workflows — severity, ownership, and status in one view
-- Scans view tracks audit history and regressions, showing progress across properties over time
-- Issues persist until verified — not auto-closed by a scanner rescan
-- Designed for teams where accessibility is ongoing work, not a one-time audit deliverable
+- Decision-focused dashboard surfaces highest-risk areas and directs remediation effort
+- Table-first triage workspace built for large issue sets with filtering, grouping, and ownership
+- Issues persist until verified, separating implementation from actual resolution
+- Audit history tracks progress and exposes regressions across scan cycles
+- Designed for teams where accessibility is ongoing operational work, not a one-time audit
 
 ### Tech
 
@@ -47,21 +56,23 @@ AccessOps is designed around how accessibility work actually gets done in enterp
 
 ## 🚀 Projects
 
-| Project                        | Description                                                                                                                                                                                     | Tech                                                 |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| **AccessOps**                  | Accessibility operations platform for audit-driven remediation tracking, triage, and verification                                                                                               | React, TypeScript, Next.js, Tailwind, TanStack Table |
-| **Accessibility Audit Tool**   | Full-stack accessibility scanner using Playwright and axe-core — scans live URLs, surfaces WCAG violations by severity, and delivers actionable remediation insights. Railway-deployed backend. | React, TypeScript, Playwright, axe-core, Express     |
-| **Accessible Form Handling**   | React + TypeScript app focused on accessible form patterns — validation, modal focus management, and screen reader support. Lighthouse score of 100 with zero axe violations                    | React, TypeScript, WCAG 2.1                          |
-| **GitHub Repository Explorer** | Search GitHub users and explore repositories with pagination, caching, and resilient UI states                                                                                                  | React, TypeScript, REST API                          |
-| **Todo App**                   | Task management interface with filtering, drag-and-drop, and local persistence — focused on clean state handling and UI interaction patterns                                                    | React, TypeScript, Shadcn UI                         |
+| Project                        | Description                                                                                                         | Tech                                                 |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **AccessOps**                  | Accessibility remediation system for triaging, assigning, and verifying issues across audit cycles                  | React, TypeScript, Next.js, Tailwind, TanStack Table |
+| **Accessibility Audit Tool**   | Full-stack audit system using Playwright and axe-core to scan live sites and surface actionable WCAG issues         | React, TypeScript, Playwright, axe-core, Express     |
+| **Accessible Form Handling**   | Production-ready accessible form patterns including validation, modal focus management, and screen reader workflows | React, TypeScript, WCAG 2.1                          |
+| **GitHub Repository Explorer** | Data-heavy interface for exploring repositories with pagination, caching, and resilient UI states                   | React, TypeScript, REST API                          |
+| **Todo App**                   | Task management interface with filtering, drag-and-drop, and local persistence focused on UI interaction patterns   | React, TypeScript, Shadcn UI                         |
 
 ---
 
 ## ♿ Accessibility
 
-Accessibility isn't a checklist item here — it's built into how each project is structured. That means semantic HTML, keyboard-navigable interactions, screen reader support, proper focus management, and WCAG-compliant patterns across the board.
+Accessibility is built into how these systems are designed — not added after the fact.
 
-Real-world context: 5+ years leading accessibility work in enterprise fintech, including driving remediation across the Truist portal from non-compliance to contract-ready — resolving 900+ issues and serving as company-wide WCAG SME at InvestCloud.
+That includes semantic HTML, keyboard-first interaction, screen reader workflows, focus management, and WCAG-compliant patterns across real UI scenarios.
+
+Background: 5+ years leading accessibility work in enterprise fintech, including remediation of 900+ issues and supporting production compliance across complex workflows.
 
 ---
 
