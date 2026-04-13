@@ -26,7 +26,7 @@ export interface AppRouteDefinition {
 
 export const routePaths = {
   home: '/',
-  pawPortal: 'https://pawportal-xi.vercel.app/dashboard',
+  pawPortal: 'https://heelflow-xi.vercel.app/',
   accessOps: 'https://accessops.vercel.app/dashboard',
   accessibilityAudit: '/accessibility-audit',
   formValidation: 'https://react-ts-form-validation.vercel.app/',
@@ -65,7 +65,7 @@ export const projectLinks: RouteDefinition[] = [
   {
     label: 'PawPortal',
     href: routePaths.pawPortal,
-    externalHref: 'https://github.com/dannymckinney88/pawportal',
+    externalHref: 'https://github.com/dannymckinney88/heelflow',
   },
   {
     label: 'AccessOps',
