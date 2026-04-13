@@ -26,6 +26,7 @@ export interface AppRouteDefinition {
 
 export const routePaths = {
   home: '/',
+  pawPortal: 'https://pawportal-xi.vercel.app/dashboard',
   accessOps: 'https://accessops.vercel.app/dashboard',
   accessibilityAudit: '/accessibility-audit',
   formValidation: 'https://react-ts-form-validation.vercel.app/',
@@ -36,6 +37,7 @@ export const routePaths = {
 
 export const appRoutes: AppRouteDefinition[] = [
   { label: 'Home', path: routePaths.home },
+  { label: 'PawPortal', path: routePaths.pawPortal },
   { label: 'AccessOps', path: routePaths.accessOps },
   { label: 'Accessibility Audit', path: routePaths.accessibilityAudit },
   { label: 'Accessible Form Handling', path: routePaths.formValidation },
@@ -60,6 +62,11 @@ export const navLinks: NavLinkDefinition[] = [
 ];
 
 export const projectLinks: RouteDefinition[] = [
+  {
+    label: 'PawPortal',
+    href: routePaths.pawPortal,
+    externalHref: 'https://github.com/dannymckinney88/pawportal',
+  },
   {
     label: 'AccessOps',
     href: routePaths.accessOps,

@@ -27,6 +27,33 @@ function getProjectLinks(title: string): { projectHref: string; codeHref: string
  */
 export const projectData: ProjectCardProps[] = [
   {
+    title: 'HeelFlow',
+    description:
+      'Mobile-first workflow platform for private dog trainers to manage clients, send structured lesson recaps, and keep homework and follow-up communication connected to each session.',
+
+    scope:
+      'Client management, trainer-facing session workflows, client recap pages, homework tracking, templates, and session messaging.',
+
+    features: [
+      'Trainer workflow for creating structured session recaps with notes, homework, and step-by-step training guidance',
+      'Secure magic-link recap pages that let clients review lessons and track homework without needing an account',
+      'Per-session messaging threads that reduce off-platform texting and keep follow-up tied to the right context',
+      'Reusable templates for consistent training plans and faster session creation',
+      'Mobile-first UX with accessibility-minded focus management and interaction design across key flows',
+    ],
+
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Supabase',
+      'PostgreSQL',
+      'Accessibility',
+    ],
+
+    ...getProjectLinks('PawPortal'),
+  },
+  {
     title: 'AccessOps',
     description:
       'System for managing accessibility remediation at scale, designed to turn audit results into actionable workflows across teams and scan cycles.',

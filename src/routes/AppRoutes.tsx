@@ -9,7 +9,6 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path={routePaths.home} element={<Home />} />
-
       <Route path={routePaths.githubExplorer} element={<GithubExplorer />} />
       <Route path={routePaths.accessibilityAudit} element={<AdaAudit />} />
     </Routes>
