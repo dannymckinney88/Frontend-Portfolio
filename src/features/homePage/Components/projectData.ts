@@ -51,7 +51,7 @@ export const projectData: ProjectCardProps[] = [
       'Accessibility',
     ],
 
-    ...getProjectLinks('PawPortal'),
+    ...getProjectLinks('HeelFlow'),
   },
   {
     title: 'AccessOps',

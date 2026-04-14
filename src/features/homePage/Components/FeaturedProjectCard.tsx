@@ -14,7 +14,17 @@ type FeaturedProjectCardProps = {
   codeHref: string;
   imageSrc: string;
   imageAlt: string;
+  eyebrow: string;
+  imageBadge?: string;
+  ctaLabel?: string;
   scope?: string;
+  /** Controls how the screenshot is presented. Defaults to 'browser'. */
+  imageVariant?: 'browser' | 'plain';
+  showDemoAccess?: boolean;
+  demoCredentials?: {
+    email: string;
+    password: string;
+  };
 };
 
 const FeaturedProjectCard = ({
@@ -26,43 +36,65 @@ const FeaturedProjectCard = ({
   codeHref,
   imageSrc,
   imageAlt,
+  eyebrow,
+  imageBadge,
+  ctaLabel = 'View Live System',
   scope,
+  imageVariant = 'browser',
+  showDemoAccess,
+  demoCredentials,
 }: FeaturedProjectCardProps) => {
   const isExternal = projectHref.startsWith('http');
+
   return (
     <Card className="overflow-hidden border-border/70 bg-card shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 p-0">
       <CardContent className="p-0">
         <div className="grid items-stretch lg:grid-cols-[1.2fr_0.8fr]">
+          {/* Image area */}
           <div className="border-b border-border/70 bg-linear-to-br from-muted/40 to-background p-4 sm:p-5 lg:border-r lg:border-b-0 lg:p-5">
-            <div className="overflow-hidden rounded-[26px] border border-border/70 bg-background shadow-sm">
-              <div className="flex items-center justify-between border-b border-border/60 px-4 py-2.5 sm:px-5">
-                <div className="flex items-center gap-2" aria-hidden="true">
-                  <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
+            {imageVariant === 'browser' ? (
+              /* Browser chrome frame — used for dashboard/desktop screenshots */
+              <div className="overflow-hidden rounded-[26px] border border-border/70 bg-background shadow-sm">
+                <div className="flex items-center justify-between border-b border-border/60 px-4 py-2.5 sm:px-5">
+                  <div className="flex items-center gap-2" aria-hidden="true">
+                    <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
+                  </div>
+
+                  {imageBadge && (
+                    <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-[11px] font-medium text-muted-foreground sm:text-xs">
+                      {imageBadge}
+                    </span>
+                  )}
                 </div>
 
-                <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-[11px] font-medium text-muted-foreground sm:text-xs">
-                  Audit dashboard
-                </span>
+                <div className="overflow-hidden">
+                  <img
+                    src={imageSrc}
+                    alt={imageAlt}
+                    className="block h-auto w-full"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-
-              <div className="bg-background p-2 sm:p-3">
+            ) : (
+              /* Plain frame — used for mobile-first / product screenshots */
+              <div className="overflow-hidden rounded-2xl border border-border/70 shadow-sm">
                 <img
                   src={imageSrc}
                   alt={imageAlt}
-                  className="block h-auto w-full rounded-xl"
-                  loading="lazy"
+                  className="h-full w-full object-cover object-top"
                 />
               </div>
-            </div>
+            )}
           </div>
 
           {/* Content */}
-          <div className="flex flex-col justify-start p-6 sm:p-7 lg:p-8">
+          <div className="flex h-full flex-col justify-between p-6 sm:p-7 lg:p-8">
             <div className="space-y-5">
               <span className="inline-flex items-center rounded-full border border-border/70 bg-muted px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-section-label">
-                Accessibility Operations Platform
+                {eyebrow}
               </span>
 
               <div className="space-y-3">
@@ -101,59 +133,72 @@ const FeaturedProjectCard = ({
                   </span>
                 ))}
               </div>
+            </div>
 
-              <div className="flex flex-wrap items-center gap-3">
-                {isExternal ? (
-                  <Button asChild size="lg" className="min-w-48">
-                    <Link
-                      target="_blank"
-                      to={projectHref}
-                      onClick={() =>
-                        trackEvent('click_project_view', {
-                          project_name: title,
-                          location: 'featured_card',
-                        })
-                      }
-                    >
-                      View Live System
-                      <ArrowRight aria-hidden="true" />
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button asChild size="lg" className="min-w-48">
-                    <Link
-                      to={projectHref}
-                      onClick={() =>
-                        trackEvent('click_project_view', {
-                          project_name: title,
-                          location: 'featured_card',
-                        })
-                      }
-                    >
-                      Open Live System
-                      <ArrowRight aria-hidden="true" />
-                    </Link>
-                  </Button>
-                )}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              {showDemoAccess && demoCredentials && (
+                <div className="mt-4 rounded-lg border border-border/70 bg-muted/50 p-3 text-xs">
+                  <p className="mb-2 font-medium text-foreground">Demo access</p>
 
-                <Button variant="outline" asChild size="lg">
-                  <a
-                    href={codeHref}
+                  <div className="grid grid-cols-[70px_1fr] gap-y-1 text-muted-foreground">
+                    <span className="text-foreground">Email:</span>
+                    <span className="font-mono">demo@heelflow.app</span>
+
+                    <span className="text-foreground">Password:</span>
+                    <span className="font-mono">HeelflowDemo1!</span>
+                  </div>
+                </div>
+              )}
+              {isExternal ? (
+                <Button asChild size="lg" className="min-w-48">
+                  <Link
                     target="_blank"
-                    rel="noopener noreferrer"
+                    to={projectHref}
                     onClick={() =>
-                      trackEvent('click_project_code', {
+                      trackEvent('click_project_view', {
                         project_name: title,
                         location: 'featured_card',
                       })
                     }
                   >
-                    View Code
-                    <ExternalLink aria-hidden="true" />
-                    <span className="sr-only"> (opens in new tab)</span>
-                  </a>
+                    {ctaLabel}
+                    <ArrowRight aria-hidden="true" />
+                  </Link>
                 </Button>
-              </div>
+              ) : (
+                <Button asChild size="lg" className="min-w-48">
+                  <Link
+                    to={projectHref}
+                    onClick={() =>
+                      trackEvent('click_project_view', {
+                        project_name: title,
+                        location: 'featured_card',
+                      })
+                    }
+                  >
+                    {ctaLabel}
+                    <ArrowRight aria-hidden="true" />
+                  </Link>
+                </Button>
+              )}
+
+              <Button variant="outline" asChild size="lg">
+                <a
+                  href={codeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent('click_project_code', {
+                      project_name: title,
+                      location: 'featured_card',
+                    })
+                  }
+                >
+                  View Code
+                  <ExternalLink aria-hidden="true" />
+                  <span className="sr-only"> (opens in new tab)</span>
+                </a>
+              </Button>
             </div>
           </div>
         </div>
