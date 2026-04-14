@@ -160,6 +160,65 @@
   }
 }
 
+/*
+ * Article prose — styles for rendered markdown HTML.
+ * Replace this block with `@plugin "@tailwindcss/typography"` + the `prose`
+ * classes if you install @tailwindcss/typography later.
+ */
+@layer components {
+  .article-prose {
+    @apply max-w-none leading-relaxed text-foreground;
+  }
+
+  .article-prose h1 {
+    @apply mt-8 mb-4 text-3xl font-semibold;
+  }
+
+  .article-prose h2 {
+    @apply mt-8 mb-3 text-2xl font-semibold;
+  }
+
+  .article-prose h3 {
+    @apply mt-6 mb-2 text-xl font-semibold;
+  }
+
+  .article-prose p {
+    @apply mb-4 leading-7;
+  }
+
+  .article-prose a {
+    @apply text-primary underline underline-offset-4 hover:opacity-80;
+  }
+
+  .article-prose code {
+    @apply rounded bg-muted px-1 py-0.5 font-mono text-sm;
+  }
+
+  .article-prose pre {
+    @apply my-4 overflow-x-auto rounded-xl bg-muted p-4;
+  }
+
+  .article-prose pre code {
+    @apply bg-transparent px-0 py-0;
+  }
+
+  .article-prose ul {
+    @apply mb-4 list-disc space-y-1 pl-6;
+  }
+
+  .article-prose ol {
+    @apply mb-4 list-decimal space-y-1 pl-6;
+  }
+
+  .article-prose blockquote {
+    @apply my-4 border-l-4 border-border pl-4 italic text-muted-foreground;
+  }
+
+  .article-prose hr {
+    @apply my-8 border-border;
+  }
+}
+
 @layer components {
   .page-shell {
     @apply w-full py-10 md:py-12;
