@@ -13,7 +13,7 @@ Frontend engineer focused on building data-heavy, accessible UI systems for real
 
 ---
 
-## ⭐ Featured Project — AccessOps
+## ⭐ Flagship Project — AccessOps
 
 **Accessibility remediation system for triaging, assigning, and verifying issues across audit cycles.**
 
@@ -51,6 +51,49 @@ The focus is not detection — it’s helping teams work through real remediatio
 ### Tech
 
 - React · TypeScript · Next.js · Tailwind CSS · TanStack Table
+
+---
+
+## 🐾 Featured Project — HeelFlow
+
+**Mobile-first workflow platform for private dog trainers to manage clients, deliver structured recaps, and track homework between sessions.**
+
+👉 Live Demo: https://heelflow-xi.vercel.app
+👉 Source Code: https://github.com/dannymckinney88/heelflow
+
+| Trainer Dashboard                                               |
+| --------------------------------------------------------------- |
+| ![Trainer Dashboard](public/screenshots/heelflow-dashboard.png) |
+
+| Client Sessions                                              |
+| ------------------------------------------------------------ |
+| ![Client Sessions](public/screenshots/heelflow-sessions.png) |
+
+| Client Recap                                           |
+| ------------------------------------------------------ |
+| ![Client Recap](public/screenshots/heelflow-recap.png) |
+
+HeelFlow focuses on the part of training that usually breaks down — what happens between sessions.
+
+Instead of relying on memory or scattered notes, it gives trainers a structured way to:
+
+- deliver clear, actionable homework
+- track progress over time
+- keep communication tied to each session
+
+The experience is designed mobile-first, since most clients engage with training content on their phone.
+
+### Features
+
+- Structured session recaps with step-by-step training guidance
+- Homework tracking with progress indicators
+- Magic-link client pages (no login required for clients)
+- Per-session messaging to keep follow-up contextual
+- Reusable templates for faster session creation
+
+### Tech
+
+- Next.js · TypeScript · Tailwind CSS · Supabase · PostgreSQL
 
 ---
 
