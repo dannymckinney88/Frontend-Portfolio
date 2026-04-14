@@ -56,10 +56,11 @@ function SectionLabel({ children, id }: { children: React.ReactNode; id?: string
 }
 
 function Home() {
-  const featuredProject = projectData.find((project) => project.title === 'AccessOps');
+  const accessOpsProject = projectData.find((project) => project.title === 'AccessOps');
+  const heelFlowProject = projectData.find((project) => project.title === 'HeelFlow');
 
   const supportingProjects = projectData.filter(
-    (project) => project.title !== 'AccessOps' && project.title !== 'Counter App',
+    (project) => project.title !== 'AccessOps' && project.title !== 'HeelFlow',
   );
 
   return (
@@ -108,34 +109,71 @@ function Home() {
         </div>
       </section>
 
-      {/* Featured ADA Project */}
       {/* Projects Zone */}
       <section className="bg-surface-subtle">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 md:py-16">
-          {featuredProject ? (
+          {/* Flagship: AccessOps */}
+          {accessOpsProject ? (
             <section
               id="featured-project"
-              aria-label="Featured project: AccessOps"
+              aria-label="Flagship project: AccessOps"
               tabIndex={-1}
             >
-              <div className="flex flex-col gap-8 ">
+              <div className="flex flex-col gap-8">
                 <SectionLabel>Flagship Project</SectionLabel>
 
                 <FeaturedProjectCard
-                  title={featuredProject.title}
-                  description={featuredProject.description}
-                  scope={featuredProject.scope}
-                  highlights={featuredProject.features}
-                  stack={featuredProject.stack}
-                  projectHref={featuredProject.projectHref}
-                  codeHref={featuredProject.codeHref}
+                  title={accessOpsProject.title}
+                  description={accessOpsProject.description}
+                  scope={accessOpsProject.scope}
+                  highlights={accessOpsProject.features}
+                  stack={accessOpsProject.stack}
+                  projectHref={accessOpsProject.projectHref}
+                  codeHref={accessOpsProject.codeHref}
+                  eyebrow="Accessibility Operations Platform"
+                  imageBadge="Audit dashboard"
+                  ctaLabel="View Live System"
                   imageSrc="/featured-project.png"
-                  imageAlt="Accessibility operations dashboard showing summary metrics, issue risk, and remediation progress"
+                  imageAlt="AccessOps dashboard showing accessibility issue risk levels, remediation status, and scan cycle summary"
                 />
               </div>
             </section>
           ) : null}
 
+          {/* Second featured: HeelFlow */}
+          {heelFlowProject ? (
+            <section
+              id="featured-project-heelflow"
+              aria-label="Featured project: HeelFlow"
+              className="mt-16 md:mt-20"
+            >
+              <div className="flex flex-col gap-8">
+                <SectionLabel>Featured Product</SectionLabel>
+
+                <FeaturedProjectCard
+                  title={heelFlowProject.title}
+                  description={heelFlowProject.description}
+                  scope={heelFlowProject.scope}
+                  highlights={heelFlowProject.features}
+                  stack={heelFlowProject.stack}
+                  projectHref={heelFlowProject.projectHref}
+                  codeHref={heelFlowProject.codeHref}
+                  eyebrow="Client Recap & Training Workflow"
+                  ctaLabel="Try Live Demo →"
+                  imageSrc="/heelflow-recap.png"
+                  imageAlt="HeelFlow client recap page showing a dog photo, session summary, homework steps, and training progress"
+                  imageVariant="plain"
+                  showDemoAccess
+                  demoCredentials={{
+                    email: 'demo@heelflow.app',
+                    password: 'HeelflowDemo1!',
+                  }}
+                />
+              </div>
+            </section>
+          ) : null}
+
+          {/* More Work grid */}
           <section
             id="supporting-projects"
             className="mx-auto w-full max-w-6xl px-4 pt-20 pb-14 sm:px-6 md:pt-24 md:pb-18"
