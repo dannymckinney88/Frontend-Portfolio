@@ -66,10 +66,13 @@ const Navbar = () => {
     location.pathname as (typeof projectPagePaths)[number],
   );
 
-  const isLinkActive = (scrollTargetId?: string): boolean => {
+  const isLinkActive = (href: string, scrollTargetId?: string): boolean => {
     if (!scrollTargetId) {
-      // Home link — active when on the home route with no section hash
-      return isHomeRoute;
+      if (href === routePaths.home) {
+        // Active only when on home with no section hash
+        return isHomeRoute && !location.hash;
+      }
+      return location.pathname === href;
     }
     if (scrollTargetId === 'supporting-projects') {
       return isProjectPage || (isHomeRoute && location.hash === '#supporting-projects');
@@ -94,7 +97,7 @@ const Navbar = () => {
         <div className="flex flex-wrap items-center gap-1 sm:gap-2">
           <ul className="flex flex-wrap items-center gap-1 sm:gap-2" role="list">
             {navLinks.map((link) => {
-              const isActive = isLinkActive(link.scrollTargetId);
+              const isActive = isLinkActive(link.href, link.scrollTargetId);
 
               if (link.scrollTargetId) {
                 return (

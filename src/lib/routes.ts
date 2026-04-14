@@ -33,6 +33,7 @@ export const routePaths = {
   githubExplorer: '/github',
   todoApp: '/todos',
   counterApp: '/counter',
+  writing: '/writing',
 } as const;
 
 export const appRoutes: AppRouteDefinition[] = [
@@ -53,6 +54,10 @@ export const navLinks: NavLinkDefinition[] = [
     label: 'Projects',
     href: `${routePaths.home}#supporting-projects`,
     scrollTargetId: 'supporting-projects',
+  },
+  {
+    label: 'Writing',
+    href: routePaths.writing,
   },
   {
     label: 'Contact',
