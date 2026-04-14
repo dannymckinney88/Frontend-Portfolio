@@ -1,21 +1,8 @@
 ---
 title: 'I Did the "Right Thing" with :focus-visible and the UX Was Still Wrong'
 description: "A debugging story about route transitions, programmatic focus, and what accessibility advice doesn't tell you."
-date: '2025-03-15'
+date: '2026-04-14'
 coverImage: '/writing/modality-aware-landing-focus/cover.png'
----
-
-## TL;DR
-
-`:focus-visible` is not reliable once you introduce `.focus()` during route transitions.
-If you want predictable landing focus, you need to make intent explicit.
-
----
-
-## The flow that finally made it coherent
-
-![Focus Flow](/writing/modality-aware-landing-focus/focus-flow-diagram.png)
-
 ---
 
 ## The problem
@@ -147,6 +134,8 @@ What this meant practically: programmatic focus placement doesn't move the scree
 ---
 
 ## The Architecture I Moved Toward
+
+![Focus Flow](/writing/modality-aware-landing-focus/focus-flow-diagram.png)
 
 The more robust model has three pieces. I want to be clear about the framing here: this is the pattern I now believe is correct based on what I learned, not a fully battle-hardened system with months of production data behind it. The snippets below are trimmed from the actual HeelFlow implementation for readability, but they reflect the real focus model and file structure in the project.
 
@@ -382,11 +371,5 @@ The bug was never "focus not moving." The bug was moving focus without intent.
 The spec gives you tools. Product judgment comes from debugging what the browser actually does.
 
 ---
-
-## What I’d do differently
-
-- I would not rely on `:focus-visible` for programmatic focus
-- I would treat focus as part of navigation, not styling
-- I would make modality explicit instead of inferred
 
 _HeelFlow is a Next.js 15 / Supabase / Tailwind CSS project. The public client recap page is a token-based, unauthenticated route serving as the primary dog owner-facing surface for session summaries, homework, and follow-up._
