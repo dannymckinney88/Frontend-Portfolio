@@ -37,7 +37,6 @@ const FeaturedProjectCard = ({
   imageSrc,
   imageAlt,
   eyebrow,
-  imageBadge,
   ctaLabel = 'View Live System',
   scope,
   imageVariant = 'browser',
@@ -61,20 +60,13 @@ const FeaturedProjectCard = ({
                     <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
                     <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
                   </div>
-
-                  {imageBadge && (
-                    <span className="rounded-full border border-border/70 bg-muted px-3 py-1 text-[11px] font-medium text-muted-foreground sm:text-xs">
-                      {imageBadge}
-                    </span>
-                  )}
                 </div>
 
-                <div className="overflow-hidden">
+                <div className="overflow-hidden rounded-2xl border border-border/70 shadow-sm">
                   <img
                     src={imageSrc}
                     alt={imageAlt}
-                    className="block h-auto w-full"
-                    loading="lazy"
+                    className="h-full w-full object-cover object-top"
                   />
                 </div>
               </div>

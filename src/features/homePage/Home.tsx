@@ -135,6 +135,7 @@ function Home() {
                   ctaLabel="View Live System"
                   imageSrc="/featured-project.png"
                   imageAlt="AccessOps dashboard showing accessibility issue risk levels, remediation status, and scan cycle summary"
+                  imageVariant="browser"
                 />
               </div>
             </section>
@@ -159,7 +160,7 @@ function Home() {
                   projectHref={heelFlowProject.projectHref}
                   codeHref={heelFlowProject.codeHref}
                   eyebrow="Client Recap & Training Workflow"
-                  ctaLabel="Try Live Demo →"
+                  ctaLabel="Try Live Demo "
                   imageSrc="/heelflow-recap.png"
                   imageAlt="HeelFlow client recap page showing a dog photo, session summary, homework steps, and training progress"
                   imageVariant="plain"

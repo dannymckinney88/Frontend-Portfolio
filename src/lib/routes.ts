@@ -27,7 +27,7 @@ export interface AppRouteDefinition {
 export const routePaths = {
   home: '/',
   heelFlow: 'https://heelflow-xi.vercel.app/',
-  accessOps: 'https://accessops.vercel.app/dashboard',
+  accessOps: 'https://accessops.vercel.app/',
   accessibilityAudit: '/accessibility-audit',
   formValidation: 'https://react-ts-form-validation.vercel.app/',
   githubExplorer: '/github',
