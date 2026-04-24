@@ -1,101 +1,119 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '@fontsource-variable/geist';
+/* @import '@fontsource-variable/geist/wght.css'; */
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.985 0.003 255);
-  --foreground: oklch(0.22 0.02 255);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1408 0.0044 285.82);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 255);
+  --card: oklch(0.9851 0 0);
+  --card-foreground: oklch(0.1408 0.0044 285.82);
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 255);
+  --popover: oklch(0.9851 0 0);
+  --popover-foreground: oklch(0.1408 0.0044 285.82);
 
-  --primary: oklch(0.54 0.08 255);
-  --primary-foreground: oklch(0.985 0.01 255);
+  /* Primary should match the B1 accent direction, not app-blue */
+  --primary: oklch(0.5534 0.1739 38.4);
+  --primary-foreground: oklch(0.9851 0 0);
 
-  --secondary: oklch(0.96 0.008 255);
-  --secondary-foreground: oklch(0.22 0.02 255);
+  --secondary: oklch(0.9674 0.0013 286.38);
+  --secondary-foreground: oklch(0.1408 0.0044 285.82);
 
-  --muted: oklch(0.955 0.006 255);
-  --muted-foreground: oklch(0.5 0.1 255);
+  --muted: oklch(0.9674 0.0013 286.38);
+  --muted-foreground: oklch(0.4419 0.0146 285.79);
 
-  --accent: oklch(0.955 0.012 255);
-  --accent-foreground: oklch(0.26 0.025 255);
+  --accent: oklch(0.9674 0.0013 286.38);
+  --accent-foreground: oklch(0.1408 0.0044 285.82);
 
-  --surface-subtle: oklch(0.972 0.004 255);
+  --surface-subtle: oklch(0.9851 0 0);
 
-  --destructive: oklch(0.577 0.245 27.325);
-  --red-400: oklch(0.7 0.08 35);
+  --destructive: oklch(0.5771 0.2152 27.33);
+  --red-400: oklch(0.7106 0.1661 22.22);
 
-  --border: oklch(0.9 0.008 255);
-  --input: oklch(0.88 0.01 255);
-  --ring: oklch(0.68 0.08 255);
+  --border: oklch(0.9197 0.004 286.32);
+  --input: oklch(0.9197 0.004 286.32);
+  --ring: oklch(0.5534 0.1739 38.4);
 
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.1408 0.0044 285.82);
+  --sidebar-primary: oklch(0.5534 0.1739 38.4);
+  --sidebar-primary-foreground: oklch(0.9851 0 0);
+  --sidebar-accent: oklch(0.9674 0.0013 286.38);
+  --sidebar-accent-foreground: oklch(0.1408 0.0044 285.82);
+  --sidebar-border: oklch(0.9197 0.004 286.32);
+  --sidebar-ring: oklch(0.5534 0.1739 38.4);
 
-  --radius: 0.75rem;
+  --section-label: oklch(0.534 0.1739 38.4);
+  --section-label-muted: oklch(0.7517 0.0138 285.94);
 
-  --sidebar: oklch(0.985 0.003 255);
-  --sidebar-foreground: oklch(0.22 0.02 255);
-  --sidebar-primary: oklch(0.5 0.11 255);
-  --sidebar-primary-foreground: oklch(0.985 0.01 255);
-  --sidebar-accent: oklch(0.955 0.012 255);
-  --sidebar-accent-foreground: oklch(0.26 0.025 255);
-  --sidebar-border: oklch(0.9 0.008 255);
-  --sidebar-ring: oklch(0.63 0.11 255);
-
-  --section-label: oklch(0.38 0.08 35);
-  --section-label-muted: var(--red-400);
+  /* Hero-specific */
+  --hero-bg: oklch(0.9699 0.0013 106.42);
+  --hero-panel-bg: oklch(0.9851 0 0);
+  --hero-border: oklch(0.8711 0.0055 286.29);
+  --hero-divider: oklch(0.9197 0.004 286.32);
+  --hero-accent: oklch(0.5534 0.1739 38.4);
 }
+
 .dark {
-  --background: oklch(0.16 0.01 255);
-  --foreground: oklch(0.96 0.01 255);
+  --background: oklch(0.1408 0.0044 285.82);
+  --foreground: oklch(0.9851 0 0);
 
-  --card: oklch(0.2 0.012 255);
-  --card-foreground: oklch(0.96 0.01 255);
+  --card: oklch(0.1785 0.0041 285.98);
+  --card-foreground: oklch(0.9851 0 0);
 
-  --popover: oklch(0.2 0.012 255);
-  --popover-foreground: oklch(0.96 0.01 255);
+  --popover: oklch(0.1785 0.0041 285.98);
+  --popover-foreground: oklch(0.9851 0 0);
 
-  --primary: oklch(0.72 0.1 255);
-  --primary-foreground: oklch(0.18 0.015 255);
+  /* Keep primary warm in dark too */
+  --primary: oklch(0.5534 0.1739 38.4);
+  --primary-foreground: oklch(0.9851 0 0);
 
-  --secondary: oklch(0.28 0.015 255);
-  --secondary-foreground: oklch(0.96 0.01 255);
+  --secondary: oklch(0.2059 0.0059 285.87);
+  --secondary-foreground: oklch(0.9851 0 0);
 
-  --muted: oklch(0.27 0.012 255);
-  --muted-foreground: oklch(0.74 0.015 255);
+  --muted: oklch(0.2059 0.0059 285.87);
+  --muted-foreground: oklch(0.7118 0.0129 286.07);
 
-  --accent: oklch(0.29 0.02 255);
-  --accent-foreground: oklch(0.96 0.01 255);
+  --accent: oklch(0.2059 0.0059 285.87);
+  --accent-foreground: oklch(0.9851 0 0);
 
-  --surface-subtle: oklch(0.22 0.012 255);
+  --surface-subtle: oklch(0.1785 0.0041 285.98);
 
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: oklch(0.7106 0.1661 22.22);
 
-  --border: oklch(1 0 0 / 18%);
-  --input: oklch(1 0 0 / 24%);
-  --ring: oklch(0.68 0.1 255);
+  --border: oklch(0.2739 0.0055 286.03);
+  --input: oklch(0.2739 0.0055 286.03);
+  --ring: oklch(0.5534 0.1739 38.4);
 
-  --sidebar: oklch(0.2 0.012 255);
-  --sidebar-foreground: oklch(0.96 0.01 255);
-  --sidebar-primary: oklch(0.72 0.1 255);
-  --sidebar-primary-foreground: oklch(0.18 0.015 255);
-  --sidebar-accent: oklch(0.29 0.02 255);
-  --sidebar-accent-foreground: oklch(0.96 0.01 255);
-  --sidebar-border: oklch(1 0 0 / 18%);
-  --sidebar-ring: oklch(0.68 0.1 255);
+  --sidebar: oklch(0.1785 0.0041 285.98);
+  --sidebar-foreground: oklch(0.9851 0 0);
+  --sidebar-primary: oklch(0.5534 0.1739 38.4);
+  --sidebar-primary-foreground: oklch(0.9851 0 0);
+  --sidebar-accent: oklch(0.2059 0.0059 285.87);
+  --sidebar-accent-foreground: oklch(0.9851 0 0);
+  --sidebar-border: oklch(0.2739 0.0055 286.03);
+  --sidebar-ring: oklch(0.5534 0.1739 38.4);
 
-  --section-label: oklch(0.68 0.16 35);
+  --section-label: oklch(0.6461 0.1943 41.12);
+  --section-label-muted: oklch(0.3517 0.0138 285.84);
+
+  /* Hero-specific */
+  --hero-bg: oklch(0.1408 0.0044 285.82);
+  --hero-panel-bg: oklch(0.1785 0.0041 285.98);
+  --hero-border: oklch(0.2739 0.0055 286.03);
+  --hero-divider: oklch(0.2277 0.0057 285.93);
+  --hero-accent: oklch(0.6534 0.1739 38.4);
+}
+
+@font-face {
+  font-family: 'Geist Variable';
+  src: url('/fonts/geist-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme inline {
@@ -133,6 +151,11 @@
   --color-background: var(--background);
   --color-section-label: var(--section-label);
   --color-section-label-muted: var(--section-label-muted);
+  --color-hero-bg: var(--hero-bg);
+  --color-hero-panel-bg: var(--hero-panel-bg);
+  --color-hero-border: var(--hero-border);
+  --color-hero-divider: var(--hero-divider);
+  --color-hero-accent: var(--hero-accent);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -165,6 +188,7 @@
  * Replace this block with `@plugin "@tailwindcss/typography"` + the `prose`
  * classes if you install @tailwindcss/typography later.
  */
+
 @layer components {
   .article-prose {
     @apply max-w-none leading-relaxed text-foreground;
