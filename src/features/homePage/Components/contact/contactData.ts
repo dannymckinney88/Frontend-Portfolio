@@ -1,7 +1,7 @@
 export const contactChannels = [
   {
     label: 'Email',
-    href: 'mailto:hello@dannymckinney.dev',
+    href: 'mailto:hello@dannymckinney.dev?subject=Portfolio%20inquiry',
     display: 'hello@dannymckinney.dev',
   },
   {

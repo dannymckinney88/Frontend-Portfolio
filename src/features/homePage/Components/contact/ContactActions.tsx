@@ -8,7 +8,7 @@ export const ContactActions = () => {
     <div className="flex flex-wrap items-center gap-3">
       <Button asChild size="lg">
         <a
-          href="mailto:hello@dannymckinney.dev"
+          href="mailto:hello@dannymckinney.dev?subject=Portfolio%20inquiry"
           onClick={() =>
             trackEvent('click_contact_cta', {
               target: 'email',
