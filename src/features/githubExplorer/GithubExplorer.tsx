@@ -13,10 +13,9 @@ import {
   type GithubRepo,
 } from '@/lib/githubApi';
 
+import { readGithubCache, writeGithubCache } from './githubCache';
+
 const DEFAULT_USERNAME = 'dannymckinney88';
-
-const GITHUB_CACHE_KEY = 'github-explorer-cache';
-
 const REPOS_PER_PAGE = 6;
 
 function GithubExplorer() {
@@ -35,9 +34,6 @@ function GithubExplorer() {
   const endIndex = startIndex + REPOS_PER_PAGE;
   const paginatedRepos = repos.slice(startIndex, endIndex);
 
-  /**
-   * Load GitHub profile and repositories for a user
-   */
   const loadGithubUserData = async (targetUsername: string) => {
     try {
       setLoading(true);
@@ -52,14 +48,11 @@ function GithubExplorer() {
       setRepos(repoData);
       setCurrentPage(1);
 
-      localStorage.setItem(
-        GITHUB_CACHE_KEY,
-        JSON.stringify({
-          username: targetUsername,
-          profile: profileData,
-          repos: repoData,
-        }),
-      );
+      writeGithubCache({
+        username: targetUsername,
+        profile: profileData,
+        repos: repoData,
+      });
     } catch (err) {
       console.error(err);
       setProfile(null);
@@ -76,9 +69,6 @@ function GithubExplorer() {
     }
   };
 
-  /**
-   * Load data for the entered GitHub username
-   */
   const handleSearch = () => {
     const trimmedUsername = username.trim();
 
@@ -96,27 +86,15 @@ function GithubExplorer() {
   };
 
   useEffect(() => {
-    const cachedData = localStorage.getItem(GITHUB_CACHE_KEY);
+    const cachedData = readGithubCache();
 
     if (cachedData) {
-      try {
-        const parsedCache = JSON.parse(cachedData);
-
-        if (
-          parsedCache.username &&
-          parsedCache.profile &&
-          Array.isArray(parsedCache.repos)
-        ) {
-          setUsername(parsedCache.username);
-          setProfile(parsedCache.profile);
-          setRepos(parsedCache.repos);
-          setCurrentPage(1);
-          setLoading(false);
-          return;
-        }
-      } catch (cacheError) {
-        console.error('Failed to parse GitHub cache:', cacheError);
-      }
+      setUsername(cachedData.username);
+      setProfile(cachedData.profile);
+      setRepos(cachedData.repos);
+      setCurrentPage(1);
+      setLoading(false);
+      return;
     }
 
     loadGithubUserData(DEFAULT_USERNAME);

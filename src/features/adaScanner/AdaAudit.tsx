@@ -8,21 +8,8 @@ import type { AuditResult } from '@/features/adaScanner/types';
 import { trackEvent } from '@/lib/analytics';
 import { scanPage } from '@/lib/auditApi';
 
-const LAST_SCAN_STORAGE_KEY = 'ada:last-scan';
-
-const getStoredScan = (): AuditResult | null => {
-  try {
-    const stored = localStorage.getItem(LAST_SCAN_STORAGE_KEY);
-
-    if (!stored) {
-      return null;
-    }
-
-    return JSON.parse(stored) as AuditResult;
-  } catch {
-    return null;
-  }
-};
+import { normalizeAuditUrl } from './lib/normalizeAuditUrl';
+import { readStoredScan, writeStoredScan } from './lib/scanStorage';
 
 const AdaAudit = () => {
   const [results, setResults] = useState<AuditResult | null>(null);
@@ -31,7 +18,7 @@ const AdaAudit = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedScan = getStoredScan();
+    const storedScan = readStoredScan();
 
     if (storedScan) {
       setResults(storedScan);
@@ -42,35 +29,15 @@ const AdaAudit = () => {
   const handleSubmit = async (url: string) => {
     setError(null);
 
-    let normalizedUrl = url.trim();
+    const normalized = normalizeAuditUrl(url);
 
-    if (!normalizedUrl.startsWith('http://') && !normalizedUrl.startsWith('https://')) {
-      normalizedUrl = `https://${normalizedUrl}`;
-    }
-
-    let parsedUrl: URL;
-
-    try {
-      parsedUrl = new URL(normalizedUrl);
-
-      if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
-        setError('Please enter a valid http or https URL.');
-        setResults(null);
-
-        trackEvent('audit_scan_error', {
-          location: 'audit_form',
-          error_type: 'invalid_protocol',
-        });
-
-        return;
-      }
-    } catch {
-      setError('Please enter a valid URL.');
+    if (!normalized.ok) {
+      setError(normalized.message);
       setResults(null);
 
       trackEvent('audit_scan_error', {
         location: 'audit_form',
-        error_type: 'invalid_url',
+        error_type: normalized.errorType,
       });
 
       return;
@@ -79,11 +46,11 @@ const AdaAudit = () => {
     setIsLoading(true);
 
     try {
-      const response = await scanPage(parsedUrl.toString());
+      const response = await scanPage(normalized.url);
 
       setResults(response);
       setInitialUrl(response.url);
-      localStorage.setItem(LAST_SCAN_STORAGE_KEY, JSON.stringify(response));
+      writeStoredScan(response);
 
       trackEvent('audit_scan_success', {
         location: 'audit_results',
@@ -109,8 +76,12 @@ const AdaAudit = () => {
         ? `Audit complete. ${results.violations.length} violations found for ${results.url}.`
         : '';
 
+  const lastScannedAt = results
+    ? new Date(results.scannedAt).toLocaleString()
+    : undefined;
+
   return (
-    <section className="section-stack lg:py-32 max-w-6xl md:py-24 mx-auto px-4 py-16 sm:px-6 w-full">
+    <section className="section-stack mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 lg:py-32">
       <PageHeader
         title="Accessibility Audit"
         description="Run a live page audit and review accessibility issues in a clear, developer-friendly workflow."
@@ -122,7 +93,7 @@ const AdaAudit = () => {
         error={error}
         initialUrl={initialUrl}
         lastScannedUrl={results?.url}
-        lastScannedAt={results ? new Date(results.scannedAt).toLocaleString() : undefined}
+        lastScannedAt={lastScannedAt}
       />
 
       <div aria-live="polite" aria-atomic="true" className="sr-only">
