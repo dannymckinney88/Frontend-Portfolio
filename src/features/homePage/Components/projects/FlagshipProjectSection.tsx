@@ -1,5 +1,3 @@
-import { routePaths } from '@/lib/routes';
-
 import { FlagshipCard } from './FlagshipCard';
 import type { ProjectCardProps } from './ProjectCard';
 
@@ -40,8 +38,6 @@ const accessOpsMetrics = [
 const accessOpsCardContent = {
   eyebrow: 'ACCESSIBILITY REMEDIATION PLATFORM · 2026',
   ctaPrimary: 'View live system',
-  ctaSecondary: 'Read case study',
-  ctaSecondaryHref: routePaths.writing,
   imageSrc: '/featured-project.png',
   imageAlt:
     'AccessOps dashboard showing accessibility issue risk levels, remediation status, and scan cycle summary',

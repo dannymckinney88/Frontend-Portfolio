@@ -64,14 +64,14 @@ const ProjectCard = ({
             ))}
           </div>
 
-          <div className="mt-4 flex items-center gap-2.5">
+          <div className="mt-4 flex flex-wrap items-center gap-2.5">
             {isExternal ? (
-              <Button asChild size="sm" variant="outline">
+              <Button asChild size="sm" variant="outline" className="h-9 px-3.5">
                 <a
                   href={projectHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`View ${title} (opens in new tab)`}
+                  aria-label={`View ${title} live demo (opens in new tab)`}
                   onClick={() =>
                     trackEvent('click_project_view', {
                       project_name: title,
@@ -80,16 +80,16 @@ const ProjectCard = ({
                   }
                 >
                   <span className="inline-flex items-center gap-1">
-                    View Live Demo
+                    View live demo
                     <ExternalLink size={12} aria-hidden="true" />
                   </span>
                 </a>
               </Button>
             ) : (
-              <Button asChild size="sm" variant="outline">
+              <Button asChild size="sm" variant="outline" className="h-9 px-3.5">
                 <Link
                   to={projectHref}
-                  aria-label={`View ${title}`}
+                  aria-label={`View ${title} live demo`}
                   onClick={() =>
                     trackEvent('click_project_view', {
                       project_name: title,
@@ -97,17 +97,17 @@ const ProjectCard = ({
                     })
                   }
                 >
-                  View Live Demo
+                  View live demo
                 </Link>
               </Button>
             )}
 
-            <Button asChild variant="ghost" size="sm">
+            <Button asChild variant="ghost" size="sm" className="h-9 px-2.5">
               <a
                 href={codeHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`View source for ${title} (opens in new tab)`}
+                aria-label={`View source code for ${title} (opens in new tab)`}
                 onClick={() =>
                   trackEvent('click_project_code', {
                     project_name: title,
@@ -116,7 +116,7 @@ const ProjectCard = ({
                 }
               >
                 <span className="inline-flex items-center gap-1">
-                  View Code
+                  View code
                   <ExternalLink size={12} aria-hidden="true" />
                 </span>
               </a>

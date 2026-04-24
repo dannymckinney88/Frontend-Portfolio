@@ -198,7 +198,11 @@ export const FlagshipCard = ({
                 </Button>
               ) : null}
 
-              <Button asChild variant="ghost" size="lg">
+              <Button
+                asChild
+                variant={!ctaSecondary && !ctaSecondaryHref ? 'outline' : 'ghost'}
+                size="lg"
+              >
                 <a
                   href={codeHref}
                   target="_blank"
