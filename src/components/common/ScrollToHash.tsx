@@ -1,23 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
- * Scrolls to a hash element after route navigation completes.
- * Only runs when a hash is present in the URL.
+ * Scrolls smoothly to a hash element after cross-route navigation completes.
+ * Same-page hash changes are handled by the Navbar's useEffect instead.
  */
 const ScrollToHash = () => {
   const { pathname, hash } = useLocation();
+  const prevPathnameRef = useRef(pathname);
 
   useEffect(() => {
+    const prevPathname = prevPathnameRef.current;
+    prevPathnameRef.current = pathname;
+
     if (!hash) return;
+    if (prevPathname === pathname) return; // same-page: Navbar handles it
 
     const id = hash.slice(1);
 
-    // Wait for the new route's DOM to render before scrolling
     const timer = setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'auto', block: 'start' });
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
 

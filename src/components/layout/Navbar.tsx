@@ -32,6 +32,17 @@ const Navbar = () => {
         : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
     );
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleHomeClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isHomeRoute) {
+      event.preventDefault();
+      scrollToTop();
+    }
+  };
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (!element) return;
@@ -44,22 +55,23 @@ const Navbar = () => {
 
   const handleSectionClick =
     (sectionId: string) => (event: React.MouseEvent<HTMLAnchorElement>) => {
-      if (location.pathname === routePaths.home) {
-        event.preventDefault();
-        scrollToSection(sectionId);
-        return;
-      }
-
       event.preventDefault();
-      navigate(`${routePaths.home}#${sectionId}`);
+      const target = `${routePaths.home}#${sectionId}`;
+      if (location.pathname === routePaths.home) {
+        navigate(target, { replace: true });
+      } else {
+        navigate(target);
+      }
     };
 
   useEffect(() => {
     const hash = location.hash.replace('#', '');
     if (hash) {
       requestAnimationFrame(() => scrollToSection(hash));
+    } else if (location.pathname === routePaths.home) {
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
-  }, [location.hash]);
+  }, [location.pathname, location.hash]);
 
   const isHomeRoute = location.pathname === routePaths.home;
   const isProjectPage = projectPagePaths.includes(
@@ -83,13 +95,14 @@ const Navbar = () => {
   return (
     <nav
       aria-label="Main navigation"
-      className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80"
+      className="min-w-0 sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80"
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <Link
           to={routePaths.home}
           aria-label="Danny McKinney - Home"
           className="text-lg font-bold tracking-tight text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+          onClick={handleHomeClick}
         >
           Danny McKinney
         </Link>
