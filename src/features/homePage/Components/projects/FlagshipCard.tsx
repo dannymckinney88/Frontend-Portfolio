@@ -19,39 +19,41 @@ interface FlagshipMetric {
 interface FlagshipCardProps {
   eyebrow: string;
   title: string;
-  lede: string;
-  highlights: FlagshipHighlight[];
-  stack: string[];
-  metrics: FlagshipMetric[];
+  description: string;
   projectHref: string;
   codeHref: string;
   ctaPrimary: string;
   imageSrc: string;
   imageAlt: string;
+  highlights: FlagshipHighlight[];
+  metrics: FlagshipMetric[];
+  stack: string[];
   ctaSecondary?: string;
   ctaSecondaryHref?: string;
 }
 
-// Border classes for 2-col mobile / 4-col desktop metric grid
-const metricCellBorder = (i: number): string => {
-  if (i === 0) return '';
-  if (i === 1) return 'border-l border-border/40';
-  if (i === 2) return 'border-t border-border/40 sm:border-t-0 sm:border-l';
+const metricCellBorder = (index: number): string => {
+  if (index === 0) return '';
+  if (index === 1) return 'border-l border-border/40';
+  if (index === 2) return 'border-t border-border/40 sm:border-t-0 sm:border-l';
+
   return 'border-t border-l border-border/40 sm:border-t-0';
 };
 
-const FlagshipCard = ({
+export const FlagshipCard = ({
   eyebrow,
   title,
-  lede,
-  highlights,
-  stack,
-  metrics,
+  description,
   projectHref,
   codeHref,
   ctaPrimary,
   imageSrc,
   imageAlt,
+  highlights,
+  metrics,
+  stack,
+  ctaSecondary,
+  ctaSecondaryHref,
 }: FlagshipCardProps) => {
   const isProjectExternal = projectHref.startsWith('http');
 
@@ -59,10 +61,8 @@ const FlagshipCard = ({
     <Card className="overflow-hidden border-border/60 bg-card p-0 shadow-sm motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-lg">
       <CardContent className="p-0">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Left: screenshot */}
           <div className="min-w-0 border-b border-border/60 bg-linear-to-br from-muted/40 to-background p-3 sm:p-4 lg:border-r lg:border-b-0 lg:p-5">
             <div className="overflow-hidden rounded-xl border border-border/60 bg-background shadow-md">
-              {/* Browser chrome */}
               <div
                 className="flex items-center gap-1.5 border-b border-border/50 bg-muted/50 px-4 py-2.5"
                 aria-hidden="true"
@@ -71,6 +71,7 @@ const FlagshipCard = ({
                 <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
                 <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
               </div>
+
               <img
                 src={imageSrc}
                 alt={imageAlt}
@@ -79,7 +80,6 @@ const FlagshipCard = ({
             </div>
           </div>
 
-          {/* Right: content */}
           <div className="flex min-w-0 flex-col justify-between p-6 sm:p-7 lg:p-8">
             <div className="flex flex-col gap-5">
               <span className="inline-flex w-fit items-center rounded-full border border-border/60 bg-muted px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-section-label">
@@ -90,36 +90,35 @@ const FlagshipCard = ({
                 <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                   {title}
                 </h2>
+
                 <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                  {lede}
+                  {description}
                 </p>
               </div>
 
-              {/* Numbered highlights */}
               <ol className="flex flex-col gap-5" aria-label={`${title} highlights`}>
-                {highlights.map((h) => (
-                  <li key={h.n} className="flex gap-4">
+                {highlights.map((highlight) => (
+                  <li key={highlight.n} className="flex gap-4">
                     <span
                       className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border/70 bg-muted/40 font-mono text-[11px] font-semibold text-muted-foreground"
                       aria-hidden="true"
                     >
-                      {h.n}
+                      {highlight.n}
                     </span>
 
                     <div className="min-w-0">
                       <p className="text-sm font-semibold leading-5 text-foreground">
-                        {h.title}
+                        {highlight.title}
                       </p>
                       <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                        {h.body}
+                        {highlight.body}
                       </p>
                     </div>
                   </li>
                 ))}
               </ol>
 
-              {/* Stack pills */}
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5" aria-label={`${title} tech stack`}>
                 {stack.map((item) => (
                   <span
                     key={item}
@@ -130,25 +129,23 @@ const FlagshipCard = ({
                 ))}
               </div>
 
-              {/* Metrics */}
               <dl className="grid grid-cols-2 overflow-hidden rounded-lg border border-border/60 bg-muted/20 sm:grid-cols-4">
-                {metrics.map((m, i) => (
+                {metrics.map((metric, index) => (
                   <div
-                    key={m.label}
-                    className={`min-w-0 px-4 py-3.5 text-left ${metricCellBorder(i)}`}
+                    key={metric.label}
+                    className={`min-w-0 px-4 py-3.5 text-left ${metricCellBorder(index)}`}
                   >
                     <dt className="text-[11px] font-medium uppercase leading-4 tracking-wide text-muted-foreground">
-                      {m.label}
+                      {metric.label}
                     </dt>
                     <dd className="mt-1 text-lg font-bold tracking-tight text-foreground sm:text-xl">
-                      {m.value}
+                      {metric.value}
                     </dd>
                   </div>
                 ))}
               </dl>
             </div>
 
-            {/* CTAs */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {isProjectExternal ? (
                 <Button asChild size="lg" className="min-w-44">
@@ -165,7 +162,7 @@ const FlagshipCard = ({
                   >
                     {ctaPrimary}
                     <ArrowRight aria-hidden="true" />
-                    <span className="sr-only"> (opens in new tab)</span>
+                    <span className="sr-only"> opens in a new tab</span>
                   </a>
                 </Button>
               ) : (
@@ -185,7 +182,23 @@ const FlagshipCard = ({
                 </Button>
               )}
 
-              <Button variant="outline" asChild size="lg">
+              {ctaSecondary && ctaSecondaryHref ? (
+                <Button asChild variant="outline" size="lg">
+                  <Link
+                    to={ctaSecondaryHref}
+                    onClick={() =>
+                      trackEvent('click_project_case_study', {
+                        project_name: title,
+                        location: 'flagship_card',
+                      })
+                    }
+                  >
+                    {ctaSecondary}
+                  </Link>
+                </Button>
+              ) : null}
+
+              <Button asChild variant="ghost" size="lg">
                 <a
                   href={codeHref}
                   target="_blank"
@@ -198,8 +211,8 @@ const FlagshipCard = ({
                   }
                 >
                   View code
-                  <ExternalLink aria-hidden="true" className="h-3.5 w-3.5" />
-                  <span className="sr-only"> (opens in new tab)</span>
+                  <ExternalLink aria-hidden="true" />
+                  <span className="sr-only"> opens in a new tab</span>
                 </a>
               </Button>
             </div>
@@ -209,5 +222,3 @@ const FlagshipCard = ({
     </Card>
   );
 };
-
-export default FlagshipCard;

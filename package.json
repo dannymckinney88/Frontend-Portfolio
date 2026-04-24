@@ -16,7 +16,6 @@
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/react": "^0.3.2",
     "@dnd-kit/sortable": "^10.0.0",
-    "@fontsource-variable/geist": "^5.2.8",
     "@tailwindcss/postcss": "^4.2.1",
     "@vercel/analytics": "^2.0.1",
     "class-variance-authority": "^0.7.1",
